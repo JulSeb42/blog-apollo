@@ -7,14 +7,14 @@ import { uuid } from "../../utils"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
+import Search from "./Search"
+
 import siteData from "../../data/site-data"
 
 import { NavItemType } from "../../types"
 
-const Header = () => {
-    const { isLoggedIn, logoutUser } = useContext(
-        AuthContext
-    ) as AuthContextType
+const Header = ({ isTransparent }: Props) => {
+    const { isLoggedIn } = useContext(AuthContext) as AuthContextType
 
     const baseLinks: NavItemType[] = [
         {
@@ -23,30 +23,23 @@ const Header = () => {
             end: true,
         },
         {
-            text: "Users",
-            to: "/users",
+            text: "Posts",
+            to: "/posts",
+        },
+        {
+            text: "About",
+            to: "/about",
+        },
+        {
+            text: "Contact",
+            to: "/contact",
         },
     ]
 
     const protectedLinks: NavItemType[] = [
         {
-            text: "My account",
-            to: "/my-account",
-        },
-        {
-            text: "Logout",
-            onClick: logoutUser,
-        },
-    ]
-
-    const anonLinks: NavItemType[] = [
-        {
-            text: "Sign up",
-            to: "/signup",
-        },
-        {
-            text: "Login",
-            to: "/login",
+            text: "Dashboard",
+            to: "/dashboard",
         },
     ]
 
@@ -64,12 +57,23 @@ const Header = () => {
         )
 
     return (
-        <Container logo={{ text: siteData.name }}>
+        <Container
+            logo={{ text: siteData.name }}
+            hideOnScroll={400}
+            position="fixed"
+            backgroundColor={isTransparent ? "transparent" : "primary"}
+        >
             {navLinks(baseLinks)}
 
-            {isLoggedIn ? navLinks(protectedLinks) : navLinks(anonLinks)}
+            {isLoggedIn && navLinks(protectedLinks)}
+
+            <Search />
         </Container>
     )
 }
 
 export default Header
+
+interface Props {
+    isTransparent?: boolean
+}

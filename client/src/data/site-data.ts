@@ -1,11 +1,12 @@
 /*=============================================== Site data ===============================================*/
 
 const siteData = {
-    name: "Apollo React app",
+    name: "Blog Apollo",
     favicon: "/favicon.ico",
-    email: "",
-    author: "",
-    year: "",
+    email: "julien.sebag@me.com",
+    author: "Julien Sebag",
+    year: "2022",
+    baseline: "Baseline",
 
     // Meta
     description: "",
@@ -13,6 +14,10 @@ const siteData = {
     type: "",
     language: "en_EN",
     keywords: [],
+
+    // Contact
+    contactId: "6244a281685c12ebc4ac6deb",
+    thankYouId: "6244a38a0b0d58c80e6cf1d8",
 }
 
 export default siteData

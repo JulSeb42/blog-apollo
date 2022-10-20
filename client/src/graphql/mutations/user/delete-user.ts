@@ -3,8 +3,8 @@
 import { gql } from "@apollo/client"
 
 const DELETE_USER = gql`
-    mutation deleteUser($id: ID!) {
-        deleteUser(_id: $id)
+    mutation ($_id: ID!) {
+        deleteUser(_id: $_id)
     }
 `
 

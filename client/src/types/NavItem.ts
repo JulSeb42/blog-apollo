@@ -15,6 +15,4 @@ interface PossibleItem2 extends NavItem {
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-type NavItemType = PossibleItem1 | PossibleItem2
-
-export type { NavItemType }
+export type NavItemType = PossibleItem1 | PossibleItem2

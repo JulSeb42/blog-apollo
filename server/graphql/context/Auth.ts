@@ -82,7 +82,7 @@ const AuthContext = {
         if (foundUser) {
             if (await bcrypt.compare(password, foundUser.password)) {
                 // @ts-expect-error
-                const token = jwt.sign(user._doc, TOKEN_SECRET, JWT_CONFIG)
+                const token = jwt.sign(foundUser._doc, TOKEN_SECRET, JWT_CONFIG)
 
                 foundUser.token = token
 

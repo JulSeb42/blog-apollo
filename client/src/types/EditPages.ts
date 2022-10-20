@@ -1,8 +1,6 @@
 /*=============================================== EditPages types ===============================================*/
 
-type EditPagesTypes = {
+export type EditPagesTypes = {
     edited: boolean
     setEdited: (edited: boolean) => void
 }
-
-export type { EditPagesTypes }

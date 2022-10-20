@@ -1,14 +1,21 @@
 /*=============================================== User type ===============================================*/
 
-type UserType = {
+import { PostType } from "."
+
+export type UserType = {
+    _id: string
     fullName: string
     email: string
     password: string
-    exp: number | string
-    token: string
-    _id: string
-    verified: boolean
     verifyToken: string
+    resetToken?: string
+    token: string
+    bio: string
+    imageUrl: string
+    verified: boolean
+    role: "admin" | "writer" | "moderator"
+    approved: boolean
+    featured: boolean
+    posts: PostType[]
+    exp?: string | number
 }
-
-export type { UserType }

@@ -3,6 +3,12 @@
 import { gql } from "apollo-server"
 
 const typeDefs = gql`
+    enum UserRoles {
+        admin
+        writer
+        moderator
+    }
+
     input SignupInput {
         fullName: String!
         email: String!
@@ -40,6 +46,14 @@ const typeDefs = gql`
         newPassword: String!
     }
 
+    input FilterPostsInput {
+        featured: Boolean
+    }
+
+    input FilterUsersInput {
+        featured: Boolean
+    }
+
     type User {
         _id: ID!
         fullName: String!
@@ -50,6 +64,11 @@ const typeDefs = gql`
         resetToken: String
         token: String!
         posts: [Post!]
+        bio: String
+        imageUrl: String
+        role: UserRoles!
+        approved: Boolean
+        featured: Boolean
     }
 
     type Category {
@@ -87,7 +106,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        users: [User!]
+        users(filters: FilterUsersInput): [User!]
         user(_id: ID!): User!
 
         categories: [Category!]
@@ -96,7 +115,7 @@ const typeDefs = gql`
         comments: [Comment!]
         comment(_id: ID!): Comment!
 
-        posts: [Post!]
+        posts(filters: FilterPostsInput): [Post!]
         post(_id: ID!): Post!
     }
 

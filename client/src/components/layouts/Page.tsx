@@ -1,11 +1,11 @@
 /*=============================================== Page ===============================================*/
 
 import React from "react"
-import { Helmet, Wrapper, Main } from "tsx-library-julseb"
+import { Wrapper, Main } from "tsx-library-julseb"
 
+import Helmet from "./Helmet"
 import Header from "./Header"
-
-import siteData from "../../data/site-data"
+import Footer from "./Footer"
 
 const Page = ({
     title,
@@ -19,15 +19,10 @@ const Page = ({
     return (
         <>
             <Helmet
-                title={`${title} | ${siteData.name}`}
+                title={title}
                 description={description}
-                keywords={[...siteData.keywords, keywords]}
-                favicon={siteData.favicon}
-                author={siteData.author}
-                type={siteData.type}
-                cover={cover || siteData.cover}
-                siteName={siteData.name}
-                language={siteData.language}
+                keywords={keywords}
+                cover={cover}
             />
 
             <Header />
@@ -39,6 +34,8 @@ const Page = ({
                     <Main size={mainWidth}>{children}</Main>
                 )}
             </Wrapper>
+
+            <Footer />
         </>
     )
 }

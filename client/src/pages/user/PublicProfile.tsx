@@ -21,7 +21,7 @@ const PublicProfile = () => {
         },
     })
 
-    const user: UserType = data?.getUser
+    const user: UserType = data?.user
 
     if (loading) return <PageLoading />
 

@@ -1,23 +1,53 @@
 /*=============================================== Homepage ===============================================*/
 
-import React, { useContext } from "react"
-import { Text } from "tsx-library-julseb"
+import React from "react"
+import { Wrapper, Main, Aside, Grid, Button } from "tsx-library-julseb"
+import { useQuery } from "@apollo/client"
 
-import { AuthContext, AuthContextType } from "../context/auth"
+import FullPage from "../components/layouts/FullPage"
+import ErrorPage from "../components/layouts/ErrorPage"
+import FeaturedPosts from "../components/posts/FeaturedPosts"
+import CardPost from "../components/posts/CardPost"
+import ListAside from "../components/ListAside"
 
-import Page from "../components/layouts/Page"
+import { ALL_POSTS } from "../graphql/queries"
+
+import { PostType } from "../types"
 
 const Homepage = () => {
-    const { isLoggedIn, user } = useContext(AuthContext) as AuthContextType
+    const { data, error, loading } = useQuery(ALL_POSTS)
+    const posts: PostType[] = data?.posts.slice(0, 10)
+
+    if (error) return <ErrorPage error={error.message} />
 
     return (
-        <Page title="Homepage">
-            <Text tag="h1">Hello World!</Text>
+        <FullPage
+            title="Homepage"
+            cover="https://res.cloudinary.com/dyfxmafvr/image/upload/v1648719726/blog-new/brtgxjfi96rvxbzpjqw0.jpg"
+            isHomepage
+            isLoading={loading}
+        >
+            <FeaturedPosts />
 
-            {isLoggedIn && (
-                <Text>Hello {user?.fullName}, you are logged in!</Text>
-            )}
-        </Page>
+            <Wrapper template="2cols">
+                <Main position={1}>
+                    <Grid col={2} gap="xl">
+                        {posts?.map(post => (
+                            <CardPost post={post} key={post._id} />
+                        ))}
+                    </Grid>
+
+                    <Grid>
+                        <Button to="/posts">See all posts</Button>
+                    </Grid>
+                </Main>
+
+                <Aside position={2}>
+                    <ListAside content="categories" />
+                    <ListAside content="authors" />
+                </Aside>
+            </Wrapper>
+        </FullPage>
     )
 }
 

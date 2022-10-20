@@ -1,7 +1,7 @@
 /*=============================================== Login ===============================================*/
 
 import React, { useState, useContext } from "react"
-import { Text, Form, Input } from "tsx-library-julseb"
+import { Text, Form, Input, Grid, Button, Section } from "tsx-library-julseb"
 import { Link, useNavigate } from "react-router-dom"
 import { useMutation } from "@apollo/client"
 import { GraphQLErrors } from "@apollo/client/errors"
@@ -20,8 +20,8 @@ const Login = () => {
     const [login, { loading }] = useMutation(LOGIN)
 
     const [inputs, setInputs] = useState({
-        email: "",
-        password: "",
+        email: "b@c.com",
+        password: "Password42",
     })
     const [errorMessages, setErrorMessages] = useState<
         undefined | GraphQLErrors
@@ -41,6 +41,26 @@ const Login = () => {
                 loginInput: inputs,
             },
 
+            onError: ({ graphQLErrors }) => {
+                setErrorMessages(graphQLErrors)
+            },
+        }).then(res => {
+            loginUser(res.data.login)
+            navigate(-1)
+        })
+    }
+
+    // Demo accounts
+    const handleLogin = (role: "admin" | "moderator" | "writer") => {
+        const request = {
+            email: `julien@${role}.com`,
+            password: "Password42",
+        }
+
+        login({
+            variables: {
+                loginInput: request,
+            },
             onError: ({ graphQLErrors }) => {
                 setErrorMessages(graphQLErrors)
             },
@@ -85,6 +105,22 @@ const Login = () => {
             <Text>
                 You don't have an account? <Link to="/signup">Sign up</Link>.
             </Text>
+
+            <Section gap="small">
+                <Text tag="h4">Demo accounts</Text>
+
+                <Grid col={3} gap="xs">
+                    <Button onClick={() => handleLogin("admin")}>
+                        Login as admin
+                    </Button>
+                    <Button onClick={() => handleLogin("moderator")}>
+                        Login as moderator
+                    </Button>
+                    <Button onClick={() => handleLogin("writer")}>
+                        Login as writer
+                    </Button>
+                </Grid>
+            </Section>
         </Page>
     )
 }
