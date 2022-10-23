@@ -1,11 +1,13 @@
 /*=============================================== FullPage ===============================================*/
 
 import React from "react"
-import { Cover, Text, PageLoading } from "tsx-library-julseb"
+import { Cover, Text, Wrapper, Main, Aside } from "tsx-library-julseb"
+import styled from "styled-components/macro"
 
-import Helmet from "./Helmet"
+import DefaultLayout from "./DefaultLayout"
 import Header from "./Header"
-import Footer from "./Footer"
+import FeaturedPosts from "../posts/FeaturedPosts"
+import ListAside from "./ListAside"
 
 import siteData from "../../data/site-data"
 
@@ -19,42 +21,41 @@ const FullPage = ({
     isLoading,
 }: Props) => {
     return (
-        <>
-            <Helmet
-                title={title}
-                description={description}
-                keywords={keywords}
-                cover={cover}
-            />
+        <DefaultLayout
+            title={title}
+            description={description}
+            keywords={keywords}
+            cover={cover}
+            isLoading={isLoading}
+        >
+            <Header isTransparent />
 
-            {isLoading ? (
-                <PageLoading loaderVariant={4} />
-            ) : (
-                <>
-                    <Header isTransparent />
+            <Cover
+                src={cover}
+                alt={`Cover ${title}`}
+                align="bottom"
+                overlay="gradient-black"
+                height="70vh"
+            >
+                <Text tag="h1">{isHomepage ? siteData.name : title}</Text>
 
-                    <Cover
-                        src={cover}
-                        alt={`Cover ${title}`}
-                        align="bottom"
-                        overlay="gradient-black"
-                        height="70vh"
-                    >
-                        <Text tag="h1">
-                            {isHomepage ? siteData.name : title}
-                        </Text>
+                {isHomepage && <Text tag="h2">{siteData.baseline}</Text>}
+            </Cover>
 
-                        {isHomepage && (
-                            <Text tag="h2">{siteData.baseline}</Text>
-                        )}
-                    </Cover>
+            {isHomepage && <FeaturedPosts />}
 
+            <Wrapper template="2cols">
+                <StyledMain position={1} $isHomepage={isHomepage}>
                     {children}
+                </StyledMain>
 
-                    <Footer />
-                </>
-            )}
-        </>
+                <StyledAside position={2} $isHomepage={isHomepage}>
+                    {!isHomepage && <ListAside content="posts" />}
+                    <ListAside content="categories" />
+                    <ListAside content="authors" />
+                </StyledAside>
+            </Wrapper>
+        </DefaultLayout>
     )
 }
 
@@ -69,3 +70,11 @@ interface Props {
     isHomepage?: boolean
     isLoading?: boolean
 }
+
+const StyledMain = styled(Main)<{ $isHomepage?: boolean }>`
+    padding-top: ${({ $isHomepage }) => $isHomepage && 0};
+`
+
+const StyledAside = styled(Aside)<{ $isHomepage?: boolean }>`
+    padding-top: ${({ $isHomepage }) => $isHomepage && 0};
+`

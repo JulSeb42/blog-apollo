@@ -2,7 +2,16 @@
 
 import styled from "styled-components/macro"
 import { Link } from "react-router-dom"
-import { Spacers, Mixins, ThemeLight, Radiuses, Text, Overlays, Transitions } from "tsx-library-julseb"
+import {
+    Spacers,
+    Mixins,
+    ThemeLight,
+    Radiuses,
+    Text,
+    Overlays,
+    Transitions,
+    Breakpoints,
+} from "tsx-library-julseb"
 
 const StyledFeaturedPosts = styled.div`
     padding: ${Spacers.XXL} 5%;
@@ -41,8 +50,10 @@ const Card = styled(Link)`
         transition: ${Transitions.Short};
     }
 
-    &:hover img {
-        transform: scale(1.05)
+    @media ${Breakpoints.Hover} {
+        &:hover img {
+            transform: scale(1.05);
+        }
     }
 `
 

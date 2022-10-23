@@ -1,11 +1,27 @@
 /*=============================================== Page ===============================================*/
 
 import React from "react"
-import { Wrapper, Main } from "tsx-library-julseb"
+import {
+    Wrapper,
+    Main,
+    Aside,
+    ComponentProps,
+    Breadcrumbs,
+    Text
+} from "tsx-library-julseb"
+import styled from "styled-components/macro"
 
-import Helmet from "./Helmet"
+import DefaultLayout from "./DefaultLayout"
 import Header from "./Header"
-import Footer from "./Footer"
+import ListAside from "./ListAside"
+
+const StyledMain = styled(Main)`
+    margin-top: 56px;
+`
+
+const StyledAside = styled(Aside)`
+    margin-top: 56px;
+`
 
 const Page = ({
     title,
@@ -15,28 +31,61 @@ const Page = ({
     template = "1col",
     children,
     mainWidth = "default",
+    aside,
+    breadcrumbs,
+    isLoading,
+    author,
 }: Props) => {
-    return (
-        <>
-            <Helmet
-                title={title}
-                description={description}
-                keywords={keywords}
-                cover={cover}
-            />
+    const baseBreadcrumbs: ComponentProps.BreadcrumbsItemProps[] = [
+        {
+            text: "Home",
+            to: "/",
+        },
+    ]
 
+    return (
+        <DefaultLayout
+            title={title}
+            description={description}
+            keywords={keywords}
+            cover={cover}
+            isLoading={isLoading}
+        >
             <Header />
 
-            <Wrapper template={template}>
-                {template !== "1col" ? (
+            <Wrapper template={aside ? "2cols" : template}>
+                {template !== "1col" && !aside ? (
                     children
+                ) : aside ? (
+                    <>
+                        <StyledMain size={mainWidth} position={1}>
+                            {breadcrumbs && (
+                                <Breadcrumbs
+                                    items={[...baseBreadcrumbs, ...breadcrumbs]}
+                                    separator="icon"
+                                />
+                            )}
+
+                            {!author && <Text tag="h1">{title}</Text>}
+
+                            {children}
+                        </StyledMain>
+
+                        <StyledAside position={2}>
+                            {aside.posts && <ListAside content="posts" />}
+
+                            {aside.categories && (
+                                <ListAside content="categories" />
+                            )}
+
+                            {aside.authors && <ListAside content="authors" />}
+                        </StyledAside>
+                    </>
                 ) : (
-                    <Main size={mainWidth}>{children}</Main>
+                    <StyledMain size={mainWidth}>{children}</StyledMain>
                 )}
             </Wrapper>
-
-            <Footer />
-        </>
+        </DefaultLayout>
     )
 }
 
@@ -50,4 +99,12 @@ interface Props {
     template?: "1col" | "2cols" | "3cols"
     children?: any
     mainWidth?: "default" | "large" | "form" | number
+    aside?: {
+        posts?: boolean
+        authors?: boolean
+        categories?: boolean
+    }
+    breadcrumbs?: ComponentProps.BreadcrumbsItemProps[]
+    isLoading?: boolean
+    author?: boolean
 }

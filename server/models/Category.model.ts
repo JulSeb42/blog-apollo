@@ -4,7 +4,10 @@ import { Schema, model } from "mongoose"
 
 const categorySchema = new Schema(
     {
-        name: String,
+        name: {
+            type: String,
+            unique: true,
+        },
     },
     { timestamps: true }
 )

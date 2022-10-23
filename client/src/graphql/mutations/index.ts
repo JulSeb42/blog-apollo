@@ -9,3 +9,5 @@ export * from "./auth/reset-password"
 export * from "./user/edit-user"
 export * from "./user/edit-password"
 export * from "./user/delete-user"
+
+export * from "./comments/new-comment"

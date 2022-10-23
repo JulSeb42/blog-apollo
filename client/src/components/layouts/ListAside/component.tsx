@@ -2,7 +2,7 @@
 
 import React from "react"
 import { Text, Flexbox, Loader } from "tsx-library-julseb"
-import { capitalize, slugify, unslugify } from "../../utils"
+import { capitalize, slugify, unslugify } from "../../../utils"
 import { useQuery } from "@apollo/client"
 import { Link } from "react-router-dom"
 
@@ -13,9 +13,9 @@ import {
     ALL_CATEGORIES,
     ALL_POSTS,
     FEATURED_AUTHORS,
-} from "../../graphql/queries"
+} from "../../../graphql/queries"
 
-import { UserType, CategoryType, PostType } from "../../types"
+import { UserType, CategoryType, PostType } from "../../../types"
 
 const ListAside = ({ content }: ListAsideProps) => {
     const {
@@ -96,7 +96,7 @@ const ListAside = ({ content }: ListAsideProps) => {
                 postsData &&
                 posts.map(post => (
                     <Styles.Text icon="chevron-right" key={post._id}>
-                        <Link to={`/posts/${post.slug}`}>{post.title}</Link>
+                        <Link to={`/posts/${post.category.name}/${post.slug}`}>{post.title}</Link>
                     </Styles.Text>
                 ))
             )}

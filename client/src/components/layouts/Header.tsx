@@ -1,9 +1,10 @@
 /*=============================================== Header ===============================================*/
 
 import React, { useContext } from "react"
-import { Header as Container } from "tsx-library-julseb"
+import { Header as Container, ThemeLight, Breakpoints } from "tsx-library-julseb"
 import { NavLink } from "react-router-dom"
 import { uuid } from "../../utils"
+import styled from "styled-components/macro"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
@@ -57,7 +58,7 @@ const Header = ({ isTransparent }: Props) => {
         )
 
     return (
-        <Container
+        <StyledHeader
             logo={{ text: siteData.name }}
             hideOnScroll={400}
             position="fixed"
@@ -68,7 +69,7 @@ const Header = ({ isTransparent }: Props) => {
             {isLoggedIn && navLinks(protectedLinks)}
 
             <Search />
-        </Container>
+        </StyledHeader>
     )
 }
 
@@ -77,3 +78,18 @@ export default Header
 interface Props {
     isTransparent?: boolean
 }
+
+const StyledHeader = styled(Container)`
+    @media ${Breakpoints.Hover} {
+        nav > a,
+        nav > button {
+            &:hover {
+                color: ${ThemeLight.ColorsHoverHover({ $color: "primary" })};
+            }
+
+            &:active {
+                color: ${ThemeLight.ColorsHoverActive({ $color: "primary" })};
+            }
+        }
+    }
+`

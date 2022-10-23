@@ -3,10 +3,23 @@
 import { gql } from "@apollo/client"
 
 export const GET_USER = gql`
-    query ($_id: ID!) {
-        user(_id: $_id) {
+    query ($fullName: String!) {
+        user(fullName: $fullName) {
             fullName
-            email
+            bio
+            imageUrl
+            posts {
+                _id
+                category {
+                    name
+                }
+                date
+                title
+                imageUrl
+                body
+                slug
+                metaDescription
+            }
         }
     }
 `

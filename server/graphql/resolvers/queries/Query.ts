@@ -1,5 +1,7 @@
 /*=============================================== Queries ===============================================*/
 
+import { ApolloError } from "apollo-server"
+
 const Query = {
     users: async (_: any, { filters }: any, { users }: any) => {
         let usersArr = await users()
@@ -18,7 +20,10 @@ const Query = {
 
         return sortedUsers
     },
-    user: async (_: any, { _id }: any, { user }: any) => await user({ _id }),
+    user: async (_: any, { fullName }: any, { user }: any) =>
+        await user({ fullName }),
+    userById: async (_: any, { _id }: any, { userById }: any) =>
+        await userById({ _id }),
 
     posts: async (_: any, { filters }: any, { posts }: any) => {
         let postsArr = await posts()
@@ -42,7 +47,15 @@ const Query = {
 
         return sorted
     },
-    post: async (_: any, { _id }: any, { post }: any) => await post({ _id }),
+    post: async (_: any, { slug }: any, { post }: any) => {
+        const foundPost = await post({ slug })
+
+        if (foundPost) {
+            return foundPost
+        } else {
+            throw new ApolloError("Post not found", "POST_NOT_FOUND")
+        }
+    },
 
     categories: async (_: any, __: any, { categories }: any) => {
         let categoriesArr = await categories()
@@ -53,8 +66,25 @@ const Query = {
 
         return sortedCategories
     },
-    category: async (_: any, { _id }: any, { category }: any) =>
-        await category({ _id }),
+    category: async (_: any, { name }: any, { category }: any) =>
+        await category({ name }),
+
+    comments: async (_: any, __: any, { comments }: any) => {
+        let commentsArr = await comments()
+
+        let sortedComments = commentsArr.sort((a: any, b: any) => {
+            if (a.date === b.date) {
+                return new Date(b.time).getTime() - new Date(a.time).getTime()
+            }
+
+            // @ts-expect-error
+            return new Date(b.date) - new Date(a.date)
+        })
+
+        return sortedComments
+    },
+    comment: async (_: any, { _id }: any, { comment }: any) =>
+        await comment({ _id }),
 }
 
 export { Query }

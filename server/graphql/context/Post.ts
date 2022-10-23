@@ -8,7 +8,9 @@ import { PostType } from "../../types"
 
 const PostContext = {
     posts: async () => await Post.find(),
-    post: async ({ _id }: PostType) => await Post.findById(_id),
+    post: async ({ slug }: PostType) => await Post.findOne({ slug }),
+    postById: async ({ _id }: PostType) => await Post.findById(_id),
+
     categoryPosts: async ({ _id }: any) => await Post.find({ category: _id }),
     userPosts: async ({ _id }: any) => await Post.find({ author: _id }),
 

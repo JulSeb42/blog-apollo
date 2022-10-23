@@ -23,6 +23,8 @@ const FeaturedPosts = () => {
                 <Styles.Content tag="h4">{title}</Styles.Content>
             </Styles.Card>
         ))
+    
+    console.log(error)
 
     return (
         <Styles.StyledFeaturedPosts>

@@ -2,7 +2,7 @@
 
 import styled from "styled-components/macro"
 import { Link } from "react-router-dom"
-import { Mixins, Text, ThemeLight, Transitions, Radiuses } from "tsx-library-julseb"
+import { Mixins, Text, ThemeLight, Transitions, Radiuses, Breakpoints } from "tsx-library-julseb"
 
 const ImgContainer = styled.span`
     overflow: hidden;
@@ -19,9 +19,11 @@ const StyledCardPost = styled(Link)`
     })};
     color: ${ThemeLight.Font};
     text-decoration: none;
-    
-    &:hover img {
-        transform: scale(1.02);
+
+    @media ${Breakpoints.Hover} {
+        &:hover img {
+            transform: scale(1.02);
+        }
     }
 `
 

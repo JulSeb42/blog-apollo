@@ -18,5 +18,5 @@ export type PostType = {
     slug: string
     category: CategoryType
     author: UserType
-    comments?: CommentType[]
+    comments: CommentType[]
 }

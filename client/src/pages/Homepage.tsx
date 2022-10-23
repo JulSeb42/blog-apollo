@@ -1,14 +1,11 @@
 /*=============================================== Homepage ===============================================*/
 
 import React from "react"
-import { Wrapper, Main, Aside, Grid, Button } from "tsx-library-julseb"
 import { useQuery } from "@apollo/client"
 
 import FullPage from "../components/layouts/FullPage"
 import ErrorPage from "../components/layouts/ErrorPage"
-import FeaturedPosts from "../components/posts/FeaturedPosts"
-import CardPost from "../components/posts/CardPost"
-import ListAside from "../components/ListAside"
+import ListPosts from "../components/ListPosts"
 
 import { ALL_POSTS } from "../graphql/queries"
 
@@ -27,26 +24,7 @@ const Homepage = () => {
             isHomepage
             isLoading={loading}
         >
-            <FeaturedPosts />
-
-            <Wrapper template="2cols">
-                <Main position={1}>
-                    <Grid col={2} gap="xl">
-                        {posts?.map(post => (
-                            <CardPost post={post} key={post._id} />
-                        ))}
-                    </Grid>
-
-                    <Grid>
-                        <Button to="/posts">See all posts</Button>
-                    </Grid>
-                </Main>
-
-                <Aside position={2}>
-                    <ListAside content="categories" />
-                    <ListAside content="authors" />
-                </Aside>
-            </Wrapper>
+            <ListPosts data={posts} pagination={false} />
         </FullPage>
     )
 }

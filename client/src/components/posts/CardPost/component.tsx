@@ -8,10 +8,10 @@ import * as Styles from "./styles"
 import { CardPostProps } from "./types"
 
 const CardPost = ({
-    post: { category, date, title, imageUrl, body, slug, metaDescription },
+    post: { category, date, title, imageUrl, slug, metaDescription },
 }: CardPostProps) => {
     return (
-        <Styles.StyledCardPost to={`/posts/${slug}`}>
+        <Styles.StyledCardPost to={`/posts/${category.name}/${slug}`}>
             <Styles.ImgContainer>
                 <Image
                     src={imageUrl}

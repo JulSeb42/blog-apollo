@@ -6,5 +6,7 @@ export * from "./users/featured-authors"
 
 export * from "./posts/all-posts"
 export * from "./posts/featured-posts"
+export * from "./posts/get-post"
 
 export * from "./categories/all-categories"
+export * from "./categories/category"

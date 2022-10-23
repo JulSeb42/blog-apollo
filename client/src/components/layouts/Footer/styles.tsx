@@ -1,7 +1,7 @@
 /*=============================================== Footer styles ===============================================*/
 
 import styled from "styled-components/macro"
-import { Mixins, ThemeLight, Spacers } from "tsx-library-julseb"
+import { Mixins, ThemeLight, Spacers, Breakpoints } from "tsx-library-julseb"
 
 const StyledFooter = styled.footer`
     width: 100%;
@@ -13,16 +13,18 @@ const StyledFooter = styled.footer`
     background-color: ${ThemeLight.Primary500};
     color: ${ThemeLight.White};
 
-    a {
-        color: ${ThemeLight.ColorsHoverDefault({ $color: "white" })};
-        text-decoration: none;
+    @media ${Breakpoints.Hover} {
+        a {
+            color: ${ThemeLight.ColorsHoverDefault({ $color: "white" })};
+            text-decoration: none;
 
-        &:hover {
-            color: ${ThemeLight.ColorsHoverHover({ $color: "white" })};
-        }
+            &:hover {
+                color: ${ThemeLight.ColorsHoverHover({ $color: "primary" })};
+            }
 
-        &:hover {
-            color: ${ThemeLight.ColorsHoverActive({ $color: "white" })};
+            &:active {
+                color: ${ThemeLight.ColorsHoverActive({ $color: "primary" })};
+            }
         }
     }
 `

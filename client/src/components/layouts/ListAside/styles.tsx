@@ -1,7 +1,13 @@
 /*=============================================== ListAside styles ===============================================*/
 
 import styled from "styled-components/macro"
-import { TextIcon, Transitions, Mixins, Spacers } from "tsx-library-julseb"
+import {
+    TextIcon,
+    Transitions,
+    Mixins,
+    Spacers,
+    Breakpoints,
+} from "tsx-library-julseb"
 
 const StyledListAside = styled.div`
     ${Mixins.Grid({
@@ -12,8 +18,10 @@ const StyledListAside = styled.div`
 const Text = styled(TextIcon)`
     transition: ${Transitions.Short};
 
-    &:hover {
-        transform: translateX(${Spacers.XXS});
+    @media ${Breakpoints.Hover} {
+        &:hover {
+            transform: translateX(${Spacers.XXS});
+        }
     }
 `
 

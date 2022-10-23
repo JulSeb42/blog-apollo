@@ -1,14 +1,16 @@
 /*=============================================== Post queries ===============================================*/
 
-const Post = {
-    category: async (
-        { category: categoryId }: any,
-        _: any,
-        { category }: any
-    ) => category(categoryId),
+import Comment from "../../../models/Comment.model"
 
-    author: async ({ author }: any, _: any, { user }: any) =>
-        await user(author),
+const Post = {
+    category: async ({ category }: any, _: any, { categoryById }: any) =>
+        categoryById(category),
+
+    author: async ({ author }: any, _: any, { userById }: any) =>
+        await userById(author),
+
+    comments: async ({ _id }: any, _: any, { getPostComments }: any) =>
+        await getPostComments({ postId: _id }),
 }
 
 export { Post }

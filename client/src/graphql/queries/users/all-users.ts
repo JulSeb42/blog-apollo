@@ -7,7 +7,10 @@ export const ALL_USERS = gql`
         users {
             _id
             fullName
-            email
+            imageUrl
+            posts {
+                _id
+            }
         }
     }
 `

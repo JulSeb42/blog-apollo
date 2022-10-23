@@ -11,7 +11,8 @@ import { SALT_ROUNDS } from "../../utils/consts"
 
 const UserContext = {
     users: async () => await User.find(),
-    user: async ({ _id }: any) => await User.findById(_id),
+    user: async ({ fullName }: any) => await User.findOne({ fullName }),
+    userById: async ({ _id }: any) => await User.findById(_id),
 
     editUser: async ({ _id, fullName }: UserType) => {
         if (!fullName) {

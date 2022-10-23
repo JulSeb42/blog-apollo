@@ -54,6 +54,12 @@ const typeDefs = gql`
         featured: Boolean
     }
 
+    input NewCommentInput {
+        post: String!
+        poster: String!
+        body: String!
+    }
+
     type User {
         _id: ID!
         fullName: String!
@@ -102,21 +108,23 @@ const typeDefs = gql`
         slug: String!
         category: Category
         author: User!
-        comments: [Comment]!
+        comments: [Comment!]
     }
 
     type Query {
         users(filters: FilterUsersInput): [User!]
-        user(_id: ID!): User!
+        user(fullName: String!): User!
+        userById(_id: ID!): User!
 
         categories: [Category!]
-        category(_id: ID!): Category!
+        category(name: String!): Category!
 
         comments: [Comment!]
         comment(_id: ID!): Comment!
 
         posts(filters: FilterPostsInput): [Post!]
-        post(_id: ID!): Post!
+        post(slug: String!): Post!
+        postById(_id: ID!): Post!
     }
 
     type Mutation {
@@ -129,6 +137,8 @@ const typeDefs = gql`
         editUser(editUserInput: EditUserInput): User!
         editPassword(editPasswordInput: EditPasswordInput): User!
         deleteUser(_id: ID!): String
+
+        newComment(newCommentInput: NewCommentInput): Comment!
     }
 `
 

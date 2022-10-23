@@ -7,6 +7,9 @@ export const ALL_CATEGORIES = gql`
         categories {
             _id
             name
+            posts {
+                _id
+            }
         }
     }
 `

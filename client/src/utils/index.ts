@@ -65,3 +65,5 @@ export {
     unslugify,
     uuid,
 }
+
+export * from "./unslugify-author"
