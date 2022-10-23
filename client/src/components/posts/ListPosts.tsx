@@ -4,12 +4,12 @@ import React, { useState } from "react"
 import { Grid, Button } from "tsx-library-julseb"
 import { useSearchParams } from "react-router-dom"
 
-import Pagination from "./Pagination"
-import CardPost from "./posts/CardPost"
+import Pagination from "../Pagination"
+import CardPost from "./CardPost"
 
-import { PostType } from "../types"
+import { PostType } from "../../types"
 
-import { dataLimit, pageLimit } from "../config/pagination.config"
+import { dataLimit, pageLimit } from "../../config/pagination.config"
 
 const ListPosts = ({ pagination = true, data }: Props) => {
     const [query] = useSearchParams()

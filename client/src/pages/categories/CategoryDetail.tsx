@@ -8,7 +8,7 @@ import { ComponentProps } from "tsx-library-julseb"
 
 import Page from "../../components/layouts/Page"
 import ErrorPage from "../../components/layouts/ErrorPage"
-import ListPosts from "../../components/ListPosts"
+import ListPosts from "../../components/posts/ListPosts"
 
 import { CATEGORY } from "../../graphql/queries"
 import { PostType } from "../../types"

@@ -20,8 +20,8 @@ const Login = () => {
     const [login, { loading }] = useMutation(LOGIN)
 
     const [inputs, setInputs] = useState({
-        email: "b@c.com",
-        password: "Password42",
+        email: "",
+        password: "",
     })
     const [errorMessages, setErrorMessages] = useState<
         undefined | GraphQLErrors

@@ -11,6 +11,7 @@ import { CardAuthorProps } from "./types"
 const CardAuthor = ({
     author: { bio, imageUrl, fullName },
     profile,
+    dashboard,
 }: CardAuthorProps) => {
     return (
         <Styles.StyledCardAuthor>
@@ -21,15 +22,22 @@ const CardAuthor = ({
                     size={profile ? 32 : 64}
                 />
 
-                <Text tag="h4">{fullName}</Text>
+                <Text tag={dashboard ? "h1" : "h4"}>
+                    {dashboard ? "Hello " : ""}
+                    {fullName}
+                </Text>
             </Flexbox>
 
             <Text>{bio}</Text>
 
-            {profile && (
+            {(profile || dashboard) && (
                 <Text>
-                    <Link to={`/authors/${slugify(fullName)}`}>
-                        Check their profile.
+                    <Link
+                        to={`/authors/${slugify(fullName)}`}
+                        target={dashboard ? "_blank" : ""}
+                        rel={dashboard ? "noreferrer noopener" : ""}
+                    >
+                        Check {dashboard ? "your" : "their"} profile.
                     </Link>
                 </Text>
             )}

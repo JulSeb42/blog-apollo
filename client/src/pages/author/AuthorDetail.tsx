@@ -9,7 +9,7 @@ import { unslugifyAuthor } from "../../utils"
 import Page from "../../components/layouts/Page"
 import ErrorPage from "../../components/layouts/ErrorPage"
 import CardAuthor from "../../components/author/CardAuthor"
-import ListPosts from "../../components/ListPosts"
+import ListPosts from "../../components/posts/ListPosts"
 
 import { GET_USER } from "../../graphql/queries"
 

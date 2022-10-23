@@ -17,16 +17,14 @@ import ForgotSent from "../pages/auth/ForgotSent"
 import ResetPassword from "../pages/auth/ResetPassword"
 import Goodbye from "../pages/auth/Goodbye"
 
-import MyAccount from "../pages/account/MyAccount"
-import EditAccount from "../pages/account/EditAccount"
-import EditPassword from "../pages/account/EditPassword"
-
 import AllPosts from "../pages/posts/AllPosts"
 import PostDetail from "../pages/posts/PostDetail"
 
 import AllCategories from "../pages/categories/AllCategories"
 import CategoryDetail from "../pages/categories/CategoryDetail"
 import RedirectCategory from "../pages/categories/RedirectCategory"
+
+import Dashboard from "../pages/dashboard/Dashboard"
 
 type RouteType = {
     path: string
@@ -87,24 +85,6 @@ const routes: RouteType[] = [
     },
 
     {
-        path: "/my-account",
-        element: MyAccount,
-        protected: true,
-    },
-    {
-        path: "/my-account/edit",
-        element: EditAccount,
-        protected: true,
-        edit: true,
-    },
-    {
-        path: "/my-account/edit-password",
-        element: EditPassword,
-        protected: true,
-        edit: true,
-    },
-
-    {
         path: "/posts",
         element: AllPosts,
     },
@@ -133,6 +113,12 @@ const routes: RouteType[] = [
     {
         path: "/authors/:fullName",
         element: AuthorDetail,
+    },
+
+    {
+        path: "/dashboard",
+        element: Dashboard,
+        protected: true,
     },
 ]
 

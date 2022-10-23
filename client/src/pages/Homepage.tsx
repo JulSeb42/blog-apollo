@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client"
 
 import FullPage from "../components/layouts/FullPage"
 import ErrorPage from "../components/layouts/ErrorPage"
-import ListPosts from "../components/ListPosts"
+import ListPosts from "../components/posts/ListPosts"
 
 import { ALL_POSTS } from "../graphql/queries"
 
