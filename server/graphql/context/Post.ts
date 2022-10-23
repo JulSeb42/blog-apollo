@@ -42,6 +42,11 @@ const PostContext = {
             throw new ApolloError("Category is required.", "CATEGORY_REQUIRED")
         }
 
+        if (!author) {
+            console.log("User not found")
+            throw new ApolloError("Author not found", "AUTHOR_NOT_FOUND")
+        }
+
         const foundPost = await Post.findOne({ slug })
 
         if (!foundPost) {
@@ -61,7 +66,7 @@ const PostContext = {
                 time: getTimeNow(),
             })
 
-            return newPost.save()
+            return await newPost.save()
         } else {
             throw new ApolloError(
                 "This slug already exists, it must be unique",

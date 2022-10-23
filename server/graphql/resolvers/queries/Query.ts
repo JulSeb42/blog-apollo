@@ -41,7 +41,9 @@ const Query = {
             const { featured } = filters
 
             if (featured) {
-                sorted = sorted.filter((post: any) => post.featured === true)
+                sorted = sorted
+                    .filter((post: any) => post.featured === true)
+                    .filter((post: any) => post.draft === false)
             }
         }
 
@@ -68,6 +70,8 @@ const Query = {
     },
     category: async (_: any, { name }: any, { category }: any) =>
         await category({ name }),
+    categoryById: async (_: any, { _id }: any, { categoryById }: any) =>
+        await categoryById({ _id }),
 
     comments: async (_: any, __: any, { comments }: any) => {
         let commentsArr = await comments()

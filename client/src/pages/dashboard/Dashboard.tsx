@@ -51,7 +51,7 @@ const Dashboard = () => {
                     Posts ({length} post{length > 1 ? "s" : ""})
                 </Text>
 
-                <Button>New post</Button>
+                <Button to="/dashboard/posts/new-post">New post</Button>
             </Flexbox>
 
             <Grid col={3}>

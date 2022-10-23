@@ -60,6 +60,19 @@ const typeDefs = gql`
         body: String!
     }
 
+    input NewPostInput {
+        title: String!
+        tags: [String!]!
+        draft: Boolean!
+        body: String!
+        metaDescription: String!
+        featured: Boolean!
+        imageUrl: String!
+        slug: String!
+        category: String!
+        author: String!
+    }
+
     type User {
         _id: ID!
         fullName: String!
@@ -106,7 +119,7 @@ const typeDefs = gql`
         featured: Boolean!
         imageUrl: String!
         slug: String!
-        category: Category
+        category: Category!
         author: User!
         comments: [Comment!]
     }
@@ -118,6 +131,7 @@ const typeDefs = gql`
 
         categories: [Category!]
         category(name: String!): Category!
+        categoryById(_id: ID!): Category!
 
         comments: [Comment!]
         comment(_id: ID!): Comment!
@@ -139,6 +153,8 @@ const typeDefs = gql`
         deleteUser(_id: ID!): String
 
         newComment(newCommentInput: NewCommentInput): Comment!
+
+        newPost(newPostInput: NewPostInput): Post!
     }
 `
 

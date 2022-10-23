@@ -73,7 +73,7 @@ const AddComment = ({ post: { slug, _id } }: AddCommentProps) => {
         setIsOpen(false)
     }
 
-    const [newComment] = useMutation(NEW_COMMENT)
+    const [newComment, { loading }] = useMutation(NEW_COMMENT)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -118,6 +118,7 @@ const AddComment = ({ post: { slug, _id } }: AddCommentProps) => {
                     buttonPrimary="Post your comment"
                     buttonSecondary={{ text: "Cancel", onClick: close }}
                     onSubmit={handleSubmit}
+                    isLoading={loading}
                 >
                     <Input
                         id="poster"

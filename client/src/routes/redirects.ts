@@ -6,10 +6,10 @@ type RedirectRoute = {
 }
 
 const redirects: RedirectRoute[] = [
-    // {
-    //     path: "", // Path of the route to redirect
-    //     to: "", // Path where you want the route to be redirected
-    // },
+    {
+        path: "/dashboard/posts", // Path of the route to redirect
+        to: "/dashboard", // Path where you want the route to be redirected
+    },
 ]
 
 export default redirects

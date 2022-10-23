@@ -10,11 +10,7 @@ import "./db"
 
 import { PORT } from "./utils/consts"
 
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
-    context,
-})
+import "./routes/uploader"
 
 const initServer = async () => {
     const server = new ApolloServer({

@@ -11,3 +11,4 @@ export * from "./posts/posts-dashboard"
 
 export * from "./categories/all-categories"
 export * from "./categories/category"
+export * from "./categories/category-by-id"
