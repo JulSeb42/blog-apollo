@@ -13,3 +13,5 @@ export * from "./user/delete-user"
 export * from "./comments/new-comment"
 
 export * from "./posts/new-post"
+export * from "./posts/edit-post"
+export * from "./posts/delete-post"

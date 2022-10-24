@@ -1,6 +1,7 @@
 /*=============================================== Queries ===============================================*/
 
 import { ApolloError } from "apollo-server"
+import { PostType } from "../../../types"
 
 const Query = {
     users: async (_: any, { filters }: any, { users }: any) => {
@@ -26,11 +27,11 @@ const Query = {
         await userById({ _id }),
 
     posts: async (_: any, { filters }: any, { posts }: any) => {
-        let postsArr = await posts()
+        let postsArr: PostType[] = await posts()
 
         let sorted = postsArr.sort((a: any, b: any) => {
             if (a.date === b.date) {
-                return new Date(b.time).getTime() - new Date(a.time).getTime()
+                return b.time.localeCompare(a.time)
             }
 
             // @ts-expect-error
@@ -38,12 +39,16 @@ const Query = {
         })
 
         if (filters) {
-            const { featured } = filters
+            const { featured, draft } = filters
 
             if (featured) {
                 sorted = sorted
                     .filter((post: any) => post.featured === true)
                     .filter((post: any) => post.draft === false)
+            }
+
+            if (draft === false) {
+                sorted = sorted.filter(post => post.draft === false)
             }
         }
 
@@ -58,6 +63,8 @@ const Query = {
             throw new ApolloError("Post not found", "POST_NOT_FOUND")
         }
     },
+    postById: async (_: any, { _id }: any, { postById }: any) =>
+        await postById({ _id }),
 
     categories: async (_: any, __: any, { categories }: any) => {
         let categoriesArr = await categories()

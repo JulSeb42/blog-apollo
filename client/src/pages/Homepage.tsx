@@ -7,12 +7,12 @@ import FullPage from "../components/layouts/FullPage"
 import ErrorPage from "../components/layouts/ErrorPage"
 import ListPosts from "../components/posts/ListPosts"
 
-import { ALL_POSTS } from "../graphql/queries"
+import { PUBLISHED_POSTS } from "../graphql/queries"
 
 import { PostType } from "../types"
 
 const Homepage = () => {
-    const { data, error, loading } = useQuery(ALL_POSTS)
+    const { data, error, loading } = useQuery(PUBLISHED_POSTS)
     const posts: PostType[] = data?.posts.slice(0, 10)
 
     if (error) return <ErrorPage error={error.message} />

@@ -8,7 +8,7 @@ import Page from "../../components/layouts/Page"
 import ErrorPage from "../../components/layouts/ErrorPage"
 import ListPosts from "../../components/posts/ListPosts"
 
-import { ALL_POSTS } from "../../graphql/queries"
+import { PUBLISHED_POSTS } from "../../graphql/queries"
 import { PostType } from "../../types"
 
 const AllPosts = () => {
@@ -18,7 +18,7 @@ const AllPosts = () => {
         },
     ]
 
-    const { data, loading, error } = useQuery(ALL_POSTS)
+    const { data, loading, error } = useQuery(PUBLISHED_POSTS)
     const posts: PostType[] = data?.posts
 
     if (error) return <ErrorPage error={error.message} />

@@ -12,8 +12,8 @@ import { AuthContext, AuthContextType } from "../../context/auth"
 import ImageUploader from "./ImageUploader"
 import ErrorMessages from "../ErrorMessages"
 
-import { NEW_POST } from "../../graphql/mutations"
-import { ALL_CATEGORIES } from "../../graphql/queries"
+import { NEW_POST, EDIT_POST } from "../../graphql/mutations"
+import { ALL_CATEGORIES, ALL_POSTS } from "../../graphql/queries"
 import { PostType, CategoryType } from "../../types"
 
 const PostForm = ({ post }: Props) => {
@@ -36,12 +36,8 @@ const PostForm = ({ post }: Props) => {
         metaDescription: post ? post.metaDescription : "",
         featured: post ? post.featured : false,
         slug: post ? post.slug : "",
-        category: post
-            ? post.category._id
-            : !categoriesLoading && categories[0]?._id,
-        categoryName: post
-            ? post.category.name
-            : !categoriesLoading && categories[0]?.name,
+        category: post ? `${post.category._id} ${post.tags[1]}` : "none",
+        categoryName: post ? post.category.name : "none",
     })
     const [body, setBody] = useState(post ? post.body : "")
     const [imageUrl, setImageUrl] = useState(post ? post.imageUrl : "")
@@ -73,48 +69,94 @@ const PostForm = ({ post }: Props) => {
             [e.target.id]: e.target.checked,
         })
 
-    const handleCategory = (e: React.ChangeEvent<HTMLSelectElement>) =>
-        setInputs({
-            ...inputs,
-            category: e.target.value,
-            // @ts-expect-error
-            categoryName: e.target.textContent,
-        })
-
     const [newPost, { loading }] = useMutation(NEW_POST)
+    const [editPost, { loading: editLoading }] = useMutation(EDIT_POST)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const inputsTags = inputs.tags.includes(",")
+        let inputsTags = inputs.tags.includes(",")
             ? inputs.tags.split(",")
             : inputs.tags
 
-        const tags = [inputs.title, inputs.categoryName, ...inputsTags]
+        if (!Array.isArray(inputsTags)) {
+            inputsTags = [inputsTags]
+        }
+
+        const categoryId = inputs.category.split(" ")[0]
+        const categoryName = inputs.category.split(" ")[1]
 
         const newPostInput = {
             title: inputs.title,
-            tags: tags,
+            tags: [inputs.title, categoryName, ...inputsTags],
             draft: inputs.draft,
             metaDescription: inputs.metaDescription,
             featured: inputs.featured,
             slug: inputs.slug,
-            category: inputs.category,
+            category: categoryId,
             body,
             imageUrl,
             author: user?._id,
         }
 
-        newPost({
-            variables: {
-                newPostInput: {
-                    ...newPostInput,
+        const editPostInput = {
+            title: inputs.title,
+            tags: [inputs.title, categoryName, ...inputsTags],
+            draft: inputs.draft,
+            metaDescription: inputs.metaDescription,
+            featured: inputs.featured,
+            slug: inputs.slug,
+            category: categoryId,
+            body,
+            imageUrl,
+            _id: post?._id,
+        }
+
+        const saveNewPost = () =>
+            newPost({
+                variables: {
+                    newPostInput: {
+                        ...newPostInput,
+                    },
                 },
-            },
-            onError: ({ graphQLErrors }) => {
-                setErrorMessages(graphQLErrors)
-            },
-        }).then(() => navigate("/dashboard"))
+                refetchQueries: [
+                    {
+                        query: ALL_POSTS,
+                    },
+                ],
+                onError: ({ graphQLErrors }) => {
+                    setErrorMessages(graphQLErrors)
+                    return
+                },
+            }).then(res => {
+                if (!res.errors) {
+                    navigate("/dashboard")
+                }
+            })
+
+        const saveEditPost = () =>
+            editPost({
+                variables: {
+                    editPostInput: {
+                        ...editPostInput,
+                    },
+                },
+                refetchQueries: [
+                    {
+                        query: ALL_POSTS,
+                    },
+                ],
+                onError: ({ graphQLErrors }) => {
+                    setErrorMessages(graphQLErrors)
+                    return
+                },
+            }).then(res => {
+                if (!res.errors) {
+                    navigate("/dashboard")
+                }
+            })
+
+        return post ? saveEditPost() : saveNewPost()
     }
 
     return (
@@ -122,7 +164,9 @@ const PostForm = ({ post }: Props) => {
             <Form
                 buttonPrimary={post ? "Update post" : "Create a new post"}
                 buttonSecondary={{ text: "Cancel", to: "/dashboard" }}
-                isLoading={loading || isLoading || categoriesLoading}
+                isLoading={
+                    loading || isLoading || categoriesLoading || editLoading
+                }
                 onSubmit={handleSubmit}
             >
                 <Input
@@ -143,11 +187,16 @@ const PostForm = ({ post }: Props) => {
                     id="category"
                     label="Category"
                     value={inputs.category}
-                    onChange={handleCategory}
+                    onChange={handleInputs}
                     type="select"
                 >
+                    <option value="none">---</option>
+
                     {categories?.map(category => (
-                        <option value={category._id} key={category._id}>
+                        <option
+                            value={`${category._id} ${category.name}`}
+                            key={category._id}
+                        >
                             {unslugify(category.name)}
                         </option>
                     ))}

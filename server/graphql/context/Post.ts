@@ -9,7 +9,9 @@ import { PostType } from "../../types"
 const PostContext = {
     posts: async () => await Post.find(),
     post: async ({ slug }: PostType) => await Post.findOne({ slug }),
-    postById: async ({ _id }: PostType) => await Post.findById(_id),
+    postById: async ({ _id }: PostType) => {
+        return await Post.findById(_id)
+    },
 
     categoryPosts: async ({ _id }: any) => await Post.find({ category: _id }),
     userPosts: async ({ _id }: any) => await Post.find({ author: _id }),
@@ -30,16 +32,17 @@ const PostContext = {
             throw new ApolloError("Title is required.", "TITLE_REQUIRED")
         }
 
-        if (!body) {
-            throw new ApolloError("Body is required.", "BODY_REQUIRED")
-        }
-
         if (!slug) {
             throw new ApolloError("Slug is required.", "SLUG_REQUIRED")
         }
 
-        if (!category) {
+        // @ts-expect-error
+        if (!category || category === "none") {
             throw new ApolloError("Category is required.", "CATEGORY_REQUIRED")
+        }
+
+        if (!body) {
+            throw new ApolloError("Body is required.", "BODY_REQUIRED")
         }
 
         if (!author) {
@@ -52,7 +55,7 @@ const PostContext = {
         if (!foundPost) {
             const newPost = new Post({
                 title,
-                tags: [slugify(title), category, author, ...tags],
+                tags,
                 draft,
                 body,
                 metaDescription,
@@ -73,6 +76,61 @@ const PostContext = {
                 "SLUG_UNIQUE"
             )
         }
+    },
+
+    editPost: async ({
+        title,
+        tags,
+        draft,
+        body,
+        metaDescription,
+        featured,
+        imageUrl,
+        slug,
+        category,
+        _id,
+    }: PostType) => {
+        if (!title) {
+            throw new ApolloError("Title is required.", "TITLE_REQUIRED")
+        }
+
+        if (!slug) {
+            throw new ApolloError("Slug is required.", "SLUG_REQUIRED")
+        }
+
+        // @ts-expect-error
+        if (!category || category === "none") {
+            throw new ApolloError("Category is required.", "CATEGORY_REQUIRED")
+        }
+
+        if (!body) {
+            throw new ApolloError("Body is required.", "BODY_REQUIRED")
+        }
+
+        const foundPost = await Post.findById(_id)
+
+        if (foundPost) {
+            const updatedPost = {
+                title,
+                tags,
+                draft,
+                body,
+                metaDescription,
+                featured,
+                imageUrl,
+                slug,
+                category,
+            }
+
+            return await Post.findByIdAndUpdate(_id, updatedPost, { new: true })
+        } else {
+            throw new ApolloError("Post not found.", "POST_NOT_FOUND")
+        }
+    },
+
+    deletePost: async ({ _id }: any) => {
+        await Post.findByIdAndDelete(_id)
+        return `Post ${_id} was deleted.`
     },
 }
 

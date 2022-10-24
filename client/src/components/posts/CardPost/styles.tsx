@@ -16,6 +16,8 @@ const ImgContainer = styled.span`
 const StyledCardPost = styled(Link)`
     ${Mixins.Grid({
         $gap: "xxs",
+        $alignItems: "start",
+        $alignContent: "start",
     })};
     color: ${ThemeLight.Font};
     text-decoration: none;

@@ -48,6 +48,7 @@ const typeDefs = gql`
 
     input FilterPostsInput {
         featured: Boolean
+        draft: Boolean
     }
 
     input FilterUsersInput {
@@ -71,6 +72,19 @@ const typeDefs = gql`
         slug: String!
         category: String!
         author: String!
+    }
+
+    input EditPostInput {
+        _id: ID!
+        title: String!
+        tags: [String!]!
+        draft: Boolean!
+        body: String!
+        metaDescription: String!
+        featured: Boolean!
+        imageUrl: String!
+        slug: String!
+        category: String!
     }
 
     type User {
@@ -155,6 +169,8 @@ const typeDefs = gql`
         newComment(newCommentInput: NewCommentInput): Comment!
 
         newPost(newPostInput: NewPostInput): Post!
+        editPost(editPostInput: EditPostInput): Post!
+        deletePost(_id: ID!): String
     }
 `
 

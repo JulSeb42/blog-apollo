@@ -11,7 +11,7 @@ import { ListAsideProps } from "./types"
 
 import {
     ALL_CATEGORIES,
-    ALL_POSTS,
+    PUBLISHED_POSTS,
     FEATURED_AUTHORS,
 } from "../../../graphql/queries"
 
@@ -32,7 +32,7 @@ const ListAside = ({ content }: ListAsideProps) => {
         data: postsData,
         error: postsError,
         loading: postsLoading,
-    } = useQuery(ALL_POSTS)
+    } = useQuery(PUBLISHED_POSTS)
 
     const featuredAuthors: UserType[] = authorsData?.users.slice(0, 5)
     const categories: CategoryType[] = categoriesData?.categories.slice(0, 5)
