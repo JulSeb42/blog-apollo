@@ -6,15 +6,15 @@ import { useParams, useNavigate } from "react-router-dom"
 import { Text } from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
 
-import PageDashboard from "../../components/dashboard/PageDashboard"
-import ErrorPage from "../../components/layouts/ErrorPage"
-import PostForm from "../../components/dashboard/PostForm"
-import DangerZone from "../../components/DangerZone"
-import ErrorMessages from "../../components/ErrorMessages"
+import PageDashboard from "../../../components/dashboard/PageDashboard"
+import ErrorPage from "../../../components/layouts/ErrorPage"
+import PostForm from "../../../components/dashboard/PostForm"
+import DangerZone from "../../../components/DangerZone"
+import ErrorMessages from "../../../components/ErrorMessages"
 
-import { GET_POST_BY_ID, ALL_POSTS } from "../../graphql/queries"
-import { DELETE_POST } from "../../graphql/mutations"
-import { PostType } from "../../types"
+import { GET_POST_BY_ID, ALL_POSTS } from "../../../graphql/queries"
+import { DELETE_POST } from "../../../graphql/mutations"
+import { PostType } from "../../../types"
 
 const EditPost = () => {
     const { id } = useParams()

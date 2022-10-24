@@ -3,8 +3,8 @@
 import React from "react"
 import { Text } from "tsx-library-julseb"
 
-import PageDashboard from "../../components/dashboard/PageDashboard"
-import PostForm from "../../components/dashboard/PostForm"
+import PageDashboard from "../../../components/dashboard/PageDashboard"
+import PostForm from "../../../components/dashboard/PostForm"
 
 const NewPost = () => {
     return (

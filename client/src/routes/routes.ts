@@ -25,8 +25,8 @@ import CategoryDetail from "../pages/categories/CategoryDetail"
 import RedirectCategory from "../pages/categories/RedirectCategory"
 
 import Dashboard from "../pages/dashboard/Dashboard"
-import NewPost from "../pages/dashboard/NewPost"
-import EditPost from "../pages/dashboard/EditPost"
+import NewPost from "../pages/dashboard/posts/NewPost"
+import EditPost from "../pages/dashboard/posts/EditPost"
 
 type RouteType = {
     path: string
