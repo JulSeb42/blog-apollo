@@ -20,6 +20,12 @@ const NavDashboard = () => {
             text: "Dashboard",
             to: "/dashboard",
             icon: "dashboard",
+            end: true,
+        },
+        {
+            text: "Categories",
+            to: "/dashboard/categories",
+            icon: "categories",
         },
         {
             text: "Edit your profile",

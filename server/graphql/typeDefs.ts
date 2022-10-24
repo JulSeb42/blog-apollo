@@ -46,15 +46,6 @@ const typeDefs = gql`
         newPassword: String!
     }
 
-    input FilterPostsInput {
-        featured: Boolean
-        draft: Boolean
-    }
-
-    input FilterUsersInput {
-        featured: Boolean
-    }
-
     input NewCommentInput {
         post: String!
         poster: String!
@@ -85,6 +76,24 @@ const typeDefs = gql`
         imageUrl: String!
         slug: String!
         category: String!
+    }
+
+    input FilterPostsInput {
+        featured: Boolean
+        draft: Boolean
+    }
+
+    input FilterUsersInput {
+        featured: Boolean
+    }
+
+    input NewCategoryInput {
+        name: String!
+    }
+
+    input UpdateCategoryInput {
+        _id: ID!
+        name: String!
     }
 
     type User {
@@ -171,6 +180,10 @@ const typeDefs = gql`
         newPost(newPostInput: NewPostInput): Post!
         editPost(editPostInput: EditPostInput): Post!
         deletePost(_id: ID!): String
+
+        newCategory(newCategoryInput: NewCategoryInput): Category!
+        updateCategory(updateCategoryInput: UpdateCategoryInput): Category!
+        deleteCategory(_id: ID!): String
     }
 `
 

@@ -27,6 +27,7 @@ import RedirectCategory from "../pages/categories/RedirectCategory"
 import Dashboard from "../pages/dashboard/Dashboard"
 import NewPost from "../pages/dashboard/posts/NewPost"
 import EditPost from "../pages/dashboard/posts/EditPost"
+import Categories from "../pages/dashboard/Categories"
 
 type RouteType = {
     path: string
@@ -130,6 +131,11 @@ const routes: RouteType[] = [
     {
         path: "/dashboard/posts/:id",
         element: EditPost,
+        protected: true,
+    },
+    {
+        path: "/dashboard/categories",
+        element: Categories,
         protected: true,
     },
 ]

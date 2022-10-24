@@ -1,7 +1,7 @@
 /*=============================================== Dashboard ===============================================*/
 
 import React, { useContext, useState } from "react"
-import { Text, Flexbox, Button, Grid } from "tsx-library-julseb"
+import { Text, Flexbox, Button, Grid, Input } from "tsx-library-julseb"
 import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
@@ -12,18 +12,62 @@ import CardAuthor from "../../components/author/CardAuthor"
 import ErrorPage from "../../components/layouts/ErrorPage"
 import Pagination from "../../components/Pagination"
 import PostLine from "../../components/dashboard/PostLine"
+import FiltersContainer from "../../components/dashboard/FiltersContainer"
 
-import { POSTS_DASHBOARD } from "../../graphql/queries"
-import { PostType } from "../../types"
+import { POSTS_DASHBOARD, ALL_USERS } from "../../graphql/queries"
+import { PostType, UserType } from "../../types"
 import { dataLimit, pageLimit } from "../../config/pagination.config"
 
 const Dashboard = () => {
     const { user } = useContext(AuthContext) as AuthContextType
 
+    const {
+        data: authorsData,
+        error: authorsError,
+        loading: authorsLoading,
+    } = useQuery(ALL_USERS)
+    const authors: UserType[] = authorsData?.users
+
+    const [filters, setFilters] = useState({
+        title: "",
+        author: "all",
+        status: "all",
+    })
+    const handleFilters = (
+        e: React.ChangeEvent<HTMLInputElement & HTMLSelectElement>
+    ) =>
+        setFilters({
+            ...filters,
+            [e.target.id]: e.target.value,
+        })
+    const resetFilters = () =>
+        setFilters({ title: "", author: "all", status: "all" })
+
     const { data, loading, error } = useQuery(POSTS_DASHBOARD)
 
     const posts: PostType[] = data?.posts
-    const length = posts?.length
+
+    let filteredPosts = posts?.filter(post =>
+        post.title.toLowerCase().includes(filters.title.toLowerCase())
+    )
+
+    if (filters.author !== "all") {
+        filteredPosts = filteredPosts.filter(
+            post => post.author._id === filters.author
+        )
+    }
+
+    if (filters.status !== "all") {
+        if (filters.status === "published") {
+            filteredPosts = filteredPosts.filter(post => post.draft === false)
+        }
+
+        if (filters.status === "draft") {
+            filteredPosts = filteredPosts.filter(post => post.draft === true)
+        }
+    }
+
+    const length = filteredPosts?.length
 
     const [query] = useSearchParams()
     const pageNumber = query.get("page") || 1
@@ -35,15 +79,18 @@ const Dashboard = () => {
     const getPaginatedData = () => {
         const startIndex = currentPage * dataLimit - dataLimit
         const endIndex = startIndex + dataLimit
-        return posts?.slice(startIndex, endIndex)
+        return filteredPosts?.slice(startIndex, endIndex)
     }
 
     const numberOfPages = Math.ceil(length / dataLimit)
 
-    if (error) return <ErrorPage error={error.message} />
+    if (error || authorsError)
+        return (
+            <ErrorPage error={error?.message || authorsError?.message || ""} />
+        )
 
     return user ? (
-        <PageDashboard title="Dashboard" isLoading={loading}>
+        <PageDashboard title="Dashboard" isLoading={loading || authorsLoading}>
             <CardAuthor author={user} dashboard />
 
             <Flexbox justifyContent="space-between">
@@ -54,20 +101,65 @@ const Dashboard = () => {
                 <Button to="/dashboard/posts/new-post">New post</Button>
             </Flexbox>
 
-            <Grid col={3}>
-                {/* Search by title */}
-                {/* Filter by author */}
-                {/* Filter by status */}
-            </Grid>
+            <FiltersContainer alignItems="flex-end" gap="s">
+                <Input
+                    id="title"
+                    label="Search by title"
+                    value={filters.title}
+                    onChange={handleFilters}
+                />
+
+                <Input
+                    id="author"
+                    label="Filter by authors"
+                    value={filters.author}
+                    onChange={handleFilters}
+                    type="select"
+                >
+                    <option value="all">All</option>
+
+                    {authors?.map(author => (
+                        <option value={author._id} key={author._id}>
+                            {author.fullName === user?.fullName
+                                ? "Me"
+                                : author.fullName}
+                        </option>
+                    ))}
+                </Input>
+
+                <Input
+                    id="status"
+                    label="Filter by status"
+                    value={filters.status}
+                    onChange={handleFilters}
+                    type="select"
+                >
+                    <option value="all">All</option>
+                    <option value="published">Published</option>
+                    <option value="draft">Draft</option>
+                </Input>
+
+                <Button
+                    onClick={resetFilters}
+                    variant="outline"
+                    style={{ height: 32 }}
+                >
+                    Reset filters
+                </Button>
+            </FiltersContainer>
 
             <Grid gap="s">
-                {getPaginatedData()?.map((post: PostType, i: number) => (
-                    <PostLine
-                        post={post}
-                        noBorder={i === getPaginatedData().length - 1}
-                        key={post._id}
-                    />
-                ))}
+                {getPaginatedData()?.length > 0 ? (
+                    getPaginatedData()?.map((post: PostType, i: number) => (
+                        <PostLine
+                            post={post}
+                            noBorder={i === getPaginatedData().length - 1}
+                            key={post._id}
+                        />
+                    ))
+                ) : (
+                    <Text>No post.</Text>
+                )}
             </Grid>
 
             {numberOfPages > 1 && (

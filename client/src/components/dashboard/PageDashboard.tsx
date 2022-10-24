@@ -3,14 +3,11 @@
 import React from "react"
 import styled from "styled-components/macro"
 import { Wrapper, Main, PageLoading, Button } from "tsx-library-julseb"
-import { useLocation } from "react-router-dom"
 
 import Helmet from "../layouts/Helmet"
 import NavDashboard from "./NavDashboard"
 
-const PageDashboard = ({ title, children, isLoading }: Props) => {
-    const location = useLocation().pathname
-
+const PageDashboard = ({ title, children, isLoading, back }: Props) => {
     return (
         <>
             <Helmet title={title} />
@@ -23,12 +20,11 @@ const PageDashboard = ({ title, children, isLoading }: Props) => {
 
                     <StyledWrapper>
                         <Main size="large">
-                            {location !== "/dashboard" && (
+                            {back && (
                                 <Button
                                     variant="text"
                                     icons={{ left: "chevron-left" }}
-                                    // @ts-expect-error
-                                    to={-1}
+                                    to={back}
                                     noPadding
                                 >
                                     Back
@@ -50,6 +46,7 @@ interface Props {
     title: string
     children?: any
     isLoading?: boolean
+    back?: string
 }
 
 const StyledWrapper = styled(Wrapper)`

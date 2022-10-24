@@ -8,7 +8,7 @@ import PostForm from "../../../components/dashboard/PostForm"
 
 const NewPost = () => {
     return (
-        <PageDashboard title="Add a new post">
+        <PageDashboard title="Add a new post" back="/dashboard">
             <Text tag="h1">Add a new post</Text>
 
             <PostForm />

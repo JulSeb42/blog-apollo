@@ -11,6 +11,7 @@ export const POSTS_DASHBOARD = gql`
             slug
             author {
                 fullName
+                _id
             }
             date
             time

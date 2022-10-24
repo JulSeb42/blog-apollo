@@ -24,10 +24,6 @@ const StyledPostLine = styled.div<{ $noBorder?: boolean }>`
     & > div:last-child {
         margin-top: 2px;
     }
-
-    /* &:not(:last-of-type) {
-        border-bottom: 1px solid ${ThemeLight.Gray200};
-    } */
 `
 
 export { StyledPostLine }

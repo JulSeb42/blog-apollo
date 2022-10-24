@@ -57,7 +57,7 @@ const EditPost = () => {
     if (error) return <ErrorPage error={error.message} />
 
     return (
-        <PageDashboard title={pageTitle} isLoading={loading}>
+        <PageDashboard title={pageTitle} isLoading={loading} back="/dashboard">
             <Text tag="h1">{pageTitle}</Text>
 
             <PostForm post={post} />

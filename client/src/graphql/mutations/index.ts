@@ -15,3 +15,7 @@ export * from "./comments/new-comment"
 export * from "./posts/new-post"
 export * from "./posts/edit-post"
 export * from "./posts/delete-post"
+
+export * from "./categories/new-category"
+export * from "./categories/update-category"
+export * from "./categories/delete-category"
