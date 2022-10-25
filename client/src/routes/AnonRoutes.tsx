@@ -6,7 +6,7 @@ import { PageLoading } from "tsx-library-julseb"
 
 import { AuthContext, AuthContextType } from "../context/auth"
 
-const AnonRoutes = ({ children, redirectTo = "/my-account" }: Props) => {
+const AnonRoutes = ({ children, redirectTo = "/dashboard" }: Props) => {
     const { isLoading, isLoggedIn } = useContext(AuthContext) as AuthContextType
 
     return isLoading ? (

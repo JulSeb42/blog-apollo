@@ -81,7 +81,12 @@ const NavDashboard = () => {
 
     const navLinks = (links: NavItem[]) =>
         links.map(link => (
-            <TextIcon icon={link.icon} iconColor="white" linkColor="white" key={uuid()}>
+            <TextIcon
+                icon={link.icon}
+                iconColor="white"
+                linkColor="white"
+                key={uuid()}
+            >
                 {link.to ? (
                     <NavLink
                         to={link.to}
@@ -101,7 +106,12 @@ const NavDashboard = () => {
         <Styles.StyledNavDashboard>
             <Grid gap="xxs">
                 <Text tag="h4" linkColor="white">
-                    <NavLink to="/" end>
+                    <NavLink
+                        to="/"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        end
+                    >
                         {siteData.name}
                     </NavLink>
                 </Text>

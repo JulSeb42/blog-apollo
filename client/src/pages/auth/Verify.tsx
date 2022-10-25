@@ -72,7 +72,7 @@ const Verify = ({ edited, setEdited }: EditPagesTypes) => {
                     <Text>
                         You can now access all the functionalities on our
                         website.{" "}
-                        <Link to="/my-account">Go to your account</Link>.
+                        <Link to="/dashboard">Go to your account</Link>.
                     </Text>
                 </>
             ) : isLoggedIn && !isVerified ? (

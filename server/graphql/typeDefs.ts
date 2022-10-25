@@ -38,6 +38,8 @@ const typeDefs = gql`
     input EditUserInput {
         _id: ID!
         fullName: String
+        bio: String
+        imageUrl: String
     }
 
     input EditPasswordInput {
@@ -151,6 +153,7 @@ const typeDefs = gql`
         users(filters: FilterUsersInput): [User!]
         user(fullName: String!): User!
         userById(_id: ID!): User!
+        userByToken(token: String!): User
 
         categories: [Category!]
         category(name: String!): Category!

@@ -1,10 +1,10 @@
-/*=============================================== Login ===============================================*/
+/*=============================================== Get user by token ===============================================*/
 
 import { gql } from "@apollo/client"
 
-const LOGIN = gql`
-    mutation login($loginInput: LoginInput) {
-        login(loginInput: $loginInput) {
+export const USER_BY_TOKEN = gql`
+    query ($token: String!) {
+        userByToken(token: $token) {
             _id
             email
             fullName
@@ -21,5 +21,3 @@ const LOGIN = gql`
         }
     }
 `
-
-export { LOGIN }

@@ -14,7 +14,7 @@ const UserContext = {
     user: async ({ fullName }: any) => await User.findOne({ fullName }),
     userById: async ({ _id }: any) => await User.findById(_id),
 
-    editUser: async ({ _id, fullName }: UserType) => {
+    editUser: async ({ _id, fullName, bio, imageUrl }: UserType) => {
         if (!fullName) {
             throw new ApolloError(
                 "Your full name is required",
@@ -24,7 +24,7 @@ const UserContext = {
 
         const user = await User.findByIdAndUpdate(
             _id,
-            { fullName },
+            { fullName, bio, imageUrl },
             {
                 new: true,
             }

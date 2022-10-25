@@ -51,8 +51,8 @@ const ImageUploader = ({
             }}
             onChange={(e: any) => handleImage(e)}
             label={label}
-            width={cover ? "100%" : 48}
-            height={cover ? 250 : 48}
+            width={cover ? "100%" : 64}
+            height={cover ? 250 : 64}
             icons={{
                 empty: cover ? "image-add" : "user",
             }}

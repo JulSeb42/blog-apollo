@@ -13,6 +13,10 @@ import { UserType } from "../../types"
 import { SALT_ROUNDS, JWT_CONFIG, TOKEN_SECRET } from "../../utils/consts"
 
 const AuthContext = {
+    getUserByToken: async ({ token }: UserType) => {
+        return await User.findOne({ token })
+    },
+
     signup: async ({ fullName, email, password }: UserType) => {
         const foundUser = await User.findOne({ email })
         const verifyToken = getRandomString(20)
@@ -85,6 +89,12 @@ const AuthContext = {
                 const token = jwt.sign(foundUser._doc, TOKEN_SECRET, JWT_CONFIG)
 
                 foundUser.token = token
+
+                await User.findByIdAndUpdate(
+                    foundUser._id,
+                    { token: token },
+                    { new: true }
+                )
 
                 return foundUser._doc
             } else {

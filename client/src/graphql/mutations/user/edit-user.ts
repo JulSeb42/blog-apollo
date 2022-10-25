@@ -3,13 +3,21 @@
 import { gql } from "@apollo/client"
 
 const EDIT_USER = gql`
-    mutation editUser($editUserInput: EditUserInput) {
+    mutation ($editUserInput: EditUserInput) {
         editUser(editUserInput: $editUserInput) {
             _id
-            fullName
             email
-            password
+            fullName
             token
+            bio
+            imageUrl
+            password
+            verified
+            verifyToken
+            resetToken
+            role
+            approved
+            featured
         }
     }
 `

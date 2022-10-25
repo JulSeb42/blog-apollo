@@ -14,3 +14,5 @@ export * from "./posts/get-post-by-id"
 export * from "./categories/all-categories"
 export * from "./categories/category"
 export * from "./categories/category-by-id"
+
+export * from "./auth/user-by-token"

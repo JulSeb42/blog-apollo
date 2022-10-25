@@ -25,6 +25,8 @@ const Query = {
         await user({ fullName }),
     userById: async (_: any, { _id }: any, { userById }: any) =>
         await userById({ _id }),
+    userByToken: async (_: any, { token }: any, { getUserByToken }: any) =>
+        await getUserByToken({ token }),
 
     posts: async (_: any, { filters }: any, { posts }: any) => {
         let postsArr: PostType[] = await posts()

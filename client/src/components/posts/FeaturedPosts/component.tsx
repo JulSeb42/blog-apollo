@@ -18,18 +18,27 @@ const FeaturedPosts = () => {
     const cards = (posts: PostType[]) =>
         posts.map(({ _id, slug, title, imageUrl }) => (
             <Styles.Card to={`/posts/${slug}`} key={_id}>
-                <Image src={imageUrl} alt={`Cover ${title}`} height="100%" fit="cover" />
+                <Image
+                    src={imageUrl}
+                    alt={`Cover ${title}`}
+                    height="100%"
+                    fit="cover"
+                />
 
                 <Styles.Content tag="h4">{title}</Styles.Content>
             </Styles.Card>
         ))
-    
-    console.log(error)
+
+    if (error) console.log(error)
 
     return (
         <Styles.StyledFeaturedPosts>
             {loading ? (
-                <Flexbox justifyContent="center" alignItems="center" padding="xxl">
+                <Flexbox
+                    justifyContent="center"
+                    alignItems="center"
+                    padding="xxl"
+                >
                     <Loader variant={4} />
                 </Flexbox>
             ) : error ? (

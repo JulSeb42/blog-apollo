@@ -28,6 +28,7 @@ import Dashboard from "../pages/dashboard/Dashboard"
 import NewPost from "../pages/dashboard/posts/NewPost"
 import EditPost from "../pages/dashboard/posts/EditPost"
 import Categories from "../pages/dashboard/Categories"
+import EditProfile from "../pages/dashboard/users/EditProfile"
 
 type RouteType = {
     path: string
@@ -137,6 +138,12 @@ const routes: RouteType[] = [
         path: "/dashboard/categories",
         element: Categories,
         protected: true,
+    },
+    {
+        path: "/dashboard/edit-profile",
+        element: EditProfile,
+        protected: true,
+        edit: true,
     },
 ]
 

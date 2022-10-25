@@ -46,7 +46,6 @@ const PostContext = {
         }
 
         if (!author) {
-            console.log("User not found")
             throw new ApolloError("Author not found", "AUTHOR_NOT_FOUND")
         }
 
