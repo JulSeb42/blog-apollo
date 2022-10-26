@@ -8,5 +8,5 @@ export type CommentType = {
     body: string
     post: PostType
     date: string
-    time: String
+    time: string
 }

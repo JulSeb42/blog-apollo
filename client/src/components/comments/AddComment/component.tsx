@@ -1,8 +1,10 @@
 /*=============================================== AddComment component ===============================================*/
 
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { Button, Form, Input } from "tsx-library-julseb"
 import { useMutation } from "@apollo/client"
+
+import { AuthContext, AuthContextType } from "../../../context/auth"
 
 import { AddCommentProps } from "./types"
 
@@ -10,13 +12,15 @@ import { NEW_COMMENT } from "../../../graphql/mutations"
 import { GET_POST } from "../../../graphql/queries"
 
 const AddComment = ({ post: { slug, _id } }: AddCommentProps) => {
+    const { isLoggedIn, user } = useContext(AuthContext) as AuthContextType
+
     const [isOpen, setIsOpen] = useState(false)
 
     const errorPoster = "Your name can not be empty."
     const errorBody = "Your comment can not be empty."
 
     const [inputs, setInputs] = useState({
-        poster: "",
+        poster: isLoggedIn ? user?.fullName : "",
         body: "",
     })
     const [errors, setErrors] = useState<any>({
@@ -130,6 +134,7 @@ const AddComment = ({ post: { slug, _id } }: AddCommentProps) => {
                             icon: errors.poster ? "close-circle" : undefined,
                             iconColor: "danger",
                         }}
+                        disabled={isLoggedIn}
                     />
 
                     <Input
