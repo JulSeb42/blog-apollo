@@ -1,6 +1,6 @@
 /*=============================================== Resolvers ===============================================*/
 
-import { Query, Post, Category, User } from "./queries"
+import { Query, Post, Category, User, Comment } from "./queries"
 import {
     AuthMutation,
     UserMutation,
@@ -15,6 +15,7 @@ const resolvers = {
     Post,
     Category,
     User,
+    Comment,
 
     // Mutations
     Mutation: {

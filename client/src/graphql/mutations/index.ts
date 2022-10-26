@@ -11,6 +11,7 @@ export * from "./user/edit-password"
 export * from "./user/delete-user"
 
 export * from "./comments/new-comment"
+export * from "./comments/delete-comment"
 
 export * from "./posts/new-post"
 export * from "./posts/edit-post"

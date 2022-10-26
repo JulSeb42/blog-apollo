@@ -14,6 +14,7 @@ const PostContext = {
     },
 
     categoryPosts: async ({ _id }: any) => await Post.find({ category: _id }),
+    getPostFromComment: async ({ postId }: any) => await Post.findById(postId),
     userPosts: async ({ _id }: any) => await Post.find({ author: _id }),
 
     newPost: async ({

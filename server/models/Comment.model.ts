@@ -21,6 +21,12 @@ const commentSchema = new Schema(
 
         date: String,
         time: String,
+        dateEdit: String,
+        timeEdit: String,
+        editedBy: {
+            type: Schema.Types.ObjectId,
+            ref: "User",
+        },
     },
     {
         timestamps: true,

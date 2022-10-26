@@ -6,4 +6,7 @@ export const CommentMutation = {
         { newCommentInput: { post, poster, body } }: any,
         { newComment }: any
     ) => await newComment({ post, poster, body }),
+
+    deleteComment: async (_: any, { _id }: any, { deleteComment }: any) =>
+        await deleteComment({ _id }),
 }

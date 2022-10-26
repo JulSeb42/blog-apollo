@@ -9,6 +9,9 @@ export const FEATURED_POSTS = gql`
             title
             imageUrl
             slug
+            category {
+                name
+            }
         }
     }
 `

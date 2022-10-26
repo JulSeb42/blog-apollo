@@ -16,3 +16,5 @@ export * from "./categories/category"
 export * from "./categories/category-by-id"
 
 export * from "./auth/user-by-token"
+
+export * from "./comments/all-comments"

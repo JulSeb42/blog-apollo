@@ -16,8 +16,8 @@ const FeaturedPosts = () => {
     const secondRow: PostType[] = data?.posts.slice(2, 5)
 
     const cards = (posts: PostType[]) =>
-        posts.map(({ _id, slug, title, imageUrl }) => (
-            <Styles.Card to={`/posts/${slug}`} key={_id}>
+        posts.map(({ _id, slug, title, imageUrl, category }) => (
+            <Styles.Card to={`/posts/${category.name}/${slug}`} key={_id}>
                 <Image
                     src={imageUrl}
                     alt={`Cover ${title}`}

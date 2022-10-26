@@ -179,6 +179,7 @@ const typeDefs = gql`
         deleteUser(_id: ID!): String
 
         newComment(newCommentInput: NewCommentInput): Comment!
+        deleteComment(_id: ID!): String
 
         newPost(newPostInput: NewPostInput): Post!
         editPost(editPostInput: EditPostInput): Post!

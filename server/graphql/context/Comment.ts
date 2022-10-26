@@ -9,7 +9,8 @@ import { getToday, getTimeNow } from "ts-utils-julseb"
 export const CommentContext = {
     comments: async () => await Comment.find(),
     comment: async ({ _id }: CommentType) => await Comment.findById(_id),
-    getPostComments: async ({ postId }: any) => await Comment.find({ post: postId }),
+    getPostComments: async ({ postId }: any) =>
+        await Comment.find({ post: postId }),
 
     newComment: async ({ post, poster, body }: CommentType) => {
         if (!poster) {
@@ -32,5 +33,10 @@ export const CommentContext = {
         })
 
         return newComment.save()
+    },
+
+    deleteComment: async ({ _id }: CommentType) => {
+        await Comment.findByIdAndDelete(_id)
+        return `Comment ${_id} has been deleted`
     },
 }
