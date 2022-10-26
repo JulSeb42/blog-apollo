@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { useQuery } from "@apollo/client"
-import { ComponentProps, Grid } from "tsx-library-julseb"
+import { ComponentProps, Grid, Text } from "tsx-library-julseb"
 import { useSearchParams } from "react-router-dom"
 
 import Page from "../../components/layouts/Page"
@@ -54,9 +54,13 @@ const AllAuthors = () => {
             isLoading={loading}
         >
             <Grid col={3} gap="l">
-                {getPaginatedData()?.map(author => (
-                    <CardAuthorSmall author={author} key={author._id} />
-                ))}
+                {authors?.length > 0 ? (
+                    getPaginatedData()?.map(author => (
+                        <CardAuthorSmall author={author} key={author._id} />
+                    ))
+                ) : (
+                    <Text>No author</Text>
+                )}
             </Grid>
 
             {numberOfPages > 1 && (

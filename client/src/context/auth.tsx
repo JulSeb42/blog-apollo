@@ -38,6 +38,7 @@ const AuthProviderWrapper = ({ children }: Props) => {
 
     const logoutUser = () => {
         localStorage.removeItem("authToken")
+        setIsLoggedIn(false)
     }
 
     const authToken = localStorage.getItem("authToken") || undefined

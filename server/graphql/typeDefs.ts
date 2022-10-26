@@ -98,6 +98,10 @@ const typeDefs = gql`
         name: String!
     }
 
+    input FilterCategoryInput {
+        withPosts: Boolean
+    }
+
     type User {
         _id: ID!
         fullName: String!
@@ -155,7 +159,7 @@ const typeDefs = gql`
         userById(_id: ID!): User!
         userByToken(token: String!): User
 
-        categories: [Category!]
+        categories(filters: FilterCategoryInput): [Category!]
         category(name: String!): Category!
         categoryById(_id: ID!): Category!
 

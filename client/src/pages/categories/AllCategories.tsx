@@ -22,7 +22,9 @@ const AllCategories = () => {
     ]
 
     const { data, loading, error } = useQuery(ALL_CATEGORIES)
-    const categories: CategoryType[] = data?.categories
+    const categories: CategoryType[] = data?.categories?.filter(
+        (category: CategoryType) => category.posts.length > 0
+    )
 
     const [query] = useSearchParams()
     const pageNumber = query.get("page") || 1

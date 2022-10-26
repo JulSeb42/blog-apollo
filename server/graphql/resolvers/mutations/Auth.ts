@@ -11,7 +11,7 @@ const AuthMutation = {
         _: any,
         { loginInput: { email, password } }: any,
         { login }: any
-    ) => login({ email, password }),
+    ) => await login({ email, password }),
 
     verifyUser: async (
         _: any,

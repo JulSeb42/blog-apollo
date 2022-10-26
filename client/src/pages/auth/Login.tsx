@@ -46,7 +46,7 @@ const Login = () => {
             },
         }).then(res => {
             loginUser(res.data.login)
-            navigate(-1)
+            navigate("/dashboard")
         })
     }
 
@@ -66,7 +66,7 @@ const Login = () => {
             },
         }).then(res => {
             loginUser(res.data.login)
-            navigate(-1)
+            navigate("/dashboard")
         })
     }
 

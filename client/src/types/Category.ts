@@ -5,5 +5,5 @@ import { PostType } from "./"
 export type CategoryType = {
     _id: string
     name: string
-    posts?: PostType[]
+    posts: PostType[]
 }

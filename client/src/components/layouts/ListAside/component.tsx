@@ -23,11 +23,13 @@ const ListAside = ({ content }: ListAsideProps) => {
         error: authorsError,
         loading: authorsLoading,
     } = useQuery(FEATURED_AUTHORS)
+
     const {
         data: categoriesData,
         error: categoryError,
         loading: categoryLoading,
     } = useQuery(ALL_CATEGORIES)
+
     const {
         data: postsData,
         error: postsError,

@@ -1,13 +1,9 @@
 /*=============================================== Apollo client ===============================================*/
 
-import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client"
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 
 const GRAPHQL_URI = process.env.REACT_APP_GRAPHQL_URI
-
-const httpLink = createHttpLink({
-    uri: GRAPHQL_URI,
-})
 
 const authLink = setContext((_, { headers }) => {
     return {
@@ -20,7 +16,10 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
     uri: GRAPHQL_URI,
-    link: authLink.concat(httpLink),
+    link: new HttpLink({
+        ...authLink,
+        uri: GRAPHQL_URI,
+    }),
     cache: new InMemoryCache(),
 })
 

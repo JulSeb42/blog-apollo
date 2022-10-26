@@ -31,13 +31,6 @@ const userSchema = new Schema(
 
         approved: Boolean,
         featured: Boolean,
-
-        posts: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Post",
-            },
-        ],
     },
     { timestamps: true }
 )

@@ -13,17 +13,18 @@
         "express": "^4.18.2",
         "graphql": "^16.6.0",
         "jsonwebtoken": "^8.5.1",
-        "mongoose": "^6.6.7",
+        "mongoose": "^6.7.0",
         "multer": "^1.4.5-lts.1",
         "multer-storage-cloudinary": "^4.0.0",
         "nodemailer": "^6.8.0",
         "ts-utils-julseb": "^2.2.3"
     },
     "devDependencies": {
+        "@faker-js/faker": "^7.6.0",
         "@types/bcryptjs": "^2.4.2",
         "@types/jsonwebtoken": "^8.5.9",
         "@types/multer": "^1.4.7",
-        "@types/node": "^18.11.3",
+        "@types/node": "^18.11.6",
         "@types/nodemailer": "^6.4.6",
         "ts-node-dev": "^2.0.0",
         "typescript": "^4.8.4"

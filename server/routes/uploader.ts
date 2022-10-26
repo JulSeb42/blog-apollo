@@ -7,13 +7,6 @@ import { API_PORT } from "../utils/consts"
 const app = express()
 const router = Router()
 
-app.use(
-    cors({
-        credentials: true,
-        origin: process.env.ORIGIN || "http://localhost:3000",
-    })
-)
-
 router.put(
     "/upload-picture",
     fileUploader.single("imageUrl"),

@@ -1,7 +1,7 @@
 /*=============================================== ListPosts ===============================================*/
 
 import React, { useState } from "react"
-import { Grid, Button } from "tsx-library-julseb"
+import { Grid, Button, Text } from "tsx-library-julseb"
 import { useSearchParams } from "react-router-dom"
 
 import Pagination from "../Pagination"
@@ -34,9 +34,11 @@ const ListPosts = ({ pagination = true, data }: Props) => {
     return (
         <>
             <Grid col={2} gap="l">
-                {arr?.map(post => (
-                    <CardPost post={post} key={post._id} />
-                ))}
+                {arr?.length > 0 ? (
+                    arr?.map(post => <CardPost post={post} key={post._id} />)
+                ) : (
+                    <Text>No post yet.</Text>
+                )}
             </Grid>
 
             {pagination ? (
