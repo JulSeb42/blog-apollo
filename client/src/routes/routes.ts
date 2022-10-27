@@ -31,6 +31,7 @@ import Categories from "../pages/dashboard/Categories"
 import EditProfile from "../pages/dashboard/users/EditProfile"
 import Comments from "../pages/dashboard/Comments"
 import AllPages from "../pages/dashboard/pages/AllPages"
+import NewPage from "../pages/dashboard/pages/NewPage"
 
 type RouteType = {
     path: string
@@ -155,6 +156,11 @@ const routes: RouteType[] = [
     {
         path: "/dashboard/pages",
         element: AllPages,
+        protected: true,
+    },
+    {
+        path: "/dashboard/pages/new-page",
+        element: NewPage,
         protected: true,
     },
 ]

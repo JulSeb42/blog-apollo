@@ -6,7 +6,7 @@ export type PageType = {
     slug: string
     body: string
     metaDescription: string
-    keywords: string[] | string
+    keywords: string
     draft: boolean
     header: boolean
     orderHeader: number

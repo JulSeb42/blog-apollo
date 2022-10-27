@@ -94,7 +94,7 @@ const Dashboard = () => {
         <PageDashboard title="Dashboard" isLoading={loading || authorsLoading}>
             <CardAuthor author={user} dashboard />
 
-            <Flexbox justifyContent="space-between">
+            <Flexbox justifyContent="space-between" alignItems="center">
                 <Text tag="h2">
                     Posts ({length} post{length > 1 ? "s" : ""})
                 </Text>

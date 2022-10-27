@@ -102,6 +102,15 @@ const typeDefs = gql`
         withPosts: Boolean
     }
 
+    input NewPageInput {
+        title: String!
+        slug: String!
+        body: String!
+        metaDescription: String
+        keywords: [String!]
+        draft: Boolean
+    }
+
     type User {
         _id: ID!
         fullName: String!
@@ -210,6 +219,8 @@ const typeDefs = gql`
         newCategory(newCategoryInput: NewCategoryInput): Category!
         updateCategory(updateCategoryInput: UpdateCategoryInput): Category!
         deleteCategory(_id: ID!): String
+
+        newPage(newPageInput: NewPageInput): Page!
     }
 `
 
