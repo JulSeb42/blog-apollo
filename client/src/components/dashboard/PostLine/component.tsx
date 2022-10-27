@@ -9,11 +9,10 @@ import * as Styles from "./styles"
 import { PostLineProps } from "./types"
 
 const PostLine = ({
-    post: { _id, title, draft, slug, author, date, time, category },
-    noBorder,
+    post: { _id, title, draft, slug, author, date, time, category }
 }: PostLineProps) => {
     return (
-        <Styles.StyledPostLine $noBorder={noBorder}>
+        <Styles.StyledPostLine>
             <Badge size={8} color={draft ? "warning" : "success"} />
 
             <Flexbox flexDirection="column" gap="xxs">

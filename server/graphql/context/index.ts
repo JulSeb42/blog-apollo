@@ -5,6 +5,7 @@ import { AuthContext } from "./Auth"
 import { PostContext } from "./Post"
 import { CategoryContext } from "./Category"
 import { CommentContext } from "./Comment"
+import { PageContext } from "./Page"
 
 const context = {
     ...AuthContext,
@@ -12,6 +13,7 @@ const context = {
     ...PostContext,
     ...CategoryContext,
     ...CommentContext,
+    ...PageContext,
 }
 
 export default context

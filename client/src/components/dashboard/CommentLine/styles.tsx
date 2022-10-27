@@ -8,11 +8,6 @@ const StyledCommentLine = styled.div`
         $col: 1,
         $gap: "s",
     })};
-
-    &:not(:last-child) {
-        border-bottom: 1px solid ${ThemeLight.Gray200};
-        padding-bottom: ${Spacers.S};
-    }
 `
 
 export { StyledCommentLine }

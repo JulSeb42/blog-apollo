@@ -84,7 +84,7 @@ const CategoryLine = ({ category: { name, _id } }: CategoryLineProps) => {
 
     return (
         <Styles.StyledCategoryLine>
-            <Styles.Line>
+            <Styles.Content>
                 {editMode ? (
                     <Styles.Form onSubmit={handleSubmit}>
                         <Input
@@ -136,7 +136,7 @@ const CategoryLine = ({ category: { name, _id } }: CategoryLineProps) => {
                         onClick={() => setIsOpen(!isOpen)}
                     />
                 </Flexbox>
-            </Styles.Line>
+            </Styles.Content>
 
             {isOpen && (
                 <Alert color="danger">

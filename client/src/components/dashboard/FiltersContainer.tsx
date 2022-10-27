@@ -1,12 +1,37 @@
 /*=============================================== FiltersContainer ===============================================*/
 
+import React from "react"
 import styled from "styled-components/macro"
-import { Flexbox } from "tsx-library-julseb"
+import { Flexbox, Button } from "tsx-library-julseb"
 
-const FiltersContainer = styled(Flexbox)`
+const FiltersContainer = ({ children, reset }: Props) => {
+    return (
+        <StyledFiltersContainer>
+            {children}
+
+            <Button variant="outline" onClick={reset}>
+                Reset filters
+            </Button>
+        </StyledFiltersContainer>
+    )
+}
+
+export default FiltersContainer
+
+const StyledFiltersContainer = styled(Flexbox).attrs({
+    gap: "s",
+    alignItems: "flex-end",
+})`
     & > div {
         flex-grow: 1;
     }
+
+    & > button {
+        height: 32px;
+    }
 `
 
-export default FiltersContainer
+interface Props {
+    children?: any
+    reset: () => void
+}

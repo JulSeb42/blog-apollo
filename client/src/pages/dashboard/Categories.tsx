@@ -1,7 +1,7 @@
 /*=============================================== Categories ===============================================*/
 
 import React, { useState } from "react"
-import { Text, Grid } from "tsx-library-julseb"
+import { Text } from "tsx-library-julseb"
 import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
@@ -10,6 +10,7 @@ import ErrorPage from "../../components/layouts/ErrorPage"
 import CategoryLine from "../../components/dashboard/CategoryLine"
 import Pagination from "../../components/Pagination"
 import AddCategory from "../../components/dashboard/AddCategory"
+import ListCards from "../../components/dashboard/ListCards"
 
 import { ALL_CATEGORIES } from "../../graphql/queries"
 import { CategoryType } from "../../types"
@@ -46,11 +47,11 @@ const Categories = () => {
             <AddCategory />
 
             {categories?.length > 0 ? (
-                <Grid gap="s">
+                <ListCards>
                     {getPaginatedData().map(category => (
                         <CategoryLine category={category} key={category?._id} />
                     ))}
-                </Grid>
+                </ListCards>
             ) : (
                 <Text>No category yet.</Text>
             )}

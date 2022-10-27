@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { useQuery } from "@apollo/client"
-import { Text, Grid, Input, Button } from "tsx-library-julseb"
+import { Text, Input } from "tsx-library-julseb"
 import { useSearchParams } from "react-router-dom"
 
 import PageDashboard from "../../components/dashboard/PageDashboard"
@@ -10,6 +10,7 @@ import ErrorPage from "../../components/layouts/ErrorPage"
 import CommentLine from "../../components/dashboard/CommentLine"
 import Pagination from "../../components/Pagination"
 import FiltersContainer from "../../components/dashboard/FiltersContainer"
+import ListCards from "../../components/dashboard/ListCards"
 
 import { ALL_COMMENTS } from "../../graphql/queries"
 import { CommentType } from "../../types"
@@ -78,7 +79,7 @@ const Comments = () => {
         <PageDashboard title="Comments" isLoading={loading}>
             <Text tag="h1">All comments</Text>
 
-            <FiltersContainer gap="s" alignItems="flex-end">
+            <FiltersContainer reset={handleReset}>
                 <Input
                     id="search"
                     label="Search by post, name or content"
@@ -95,13 +96,9 @@ const Comments = () => {
                     <option value="desc">Descending</option>
                     <option value="asc">Ascending</option>
                 </Input>
-
-                <Button style={{ height: 32 }} onClick={handleReset}>
-                    Reset filters
-                </Button>
             </FiltersContainer>
 
-            <Grid gap="s">
+            <ListCards>
                 {getPaginatedData()?.length > 0 ? (
                     getPaginatedData()?.map(comment => (
                         <CommentLine comment={comment} key={comment._id} />
@@ -109,16 +106,16 @@ const Comments = () => {
                 ) : (
                     <Text>No comment yet.</Text>
                 )}
+            </ListCards>
 
-                {numberOfPages > 1 && (
-                    <Pagination
-                        currentPage={currentPage}
-                        setCurrentPage={setCurrentPage}
-                        totalPages={numberOfPages}
-                        pageLimit={pageLimit}
-                    />
-                )}
-            </Grid>
+            {numberOfPages > 1 && (
+                <Pagination
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    totalPages={numberOfPages}
+                    pageLimit={pageLimit}
+                />
+            )}
         </PageDashboard>
     )
 }

@@ -153,6 +153,20 @@ const typeDefs = gql`
         comments: [Comment!]
     }
 
+    type Page {
+        _id: ID!
+        title: String!
+        slug: String!
+        body: String
+        metaDescription: String
+        keywords: [String!]
+        draft: Boolean
+        header: Boolean
+        orderHeader: Int
+        footer: Boolean
+        orderFooter: Int
+    }
+
     type Query {
         users(filters: FilterUsersInput): [User!]
         user(fullName: String!): User!
@@ -169,6 +183,10 @@ const typeDefs = gql`
         posts(filters: FilterPostsInput): [Post!]
         post(slug: String!): Post!
         postById(_id: ID!): Post!
+
+        pages: [Page!]
+        page(slug: String!): Page
+        pageById(_id: ID!): Page
     }
 
     type Mutation {

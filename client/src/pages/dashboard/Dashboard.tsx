@@ -1,7 +1,7 @@
 /*=============================================== Dashboard ===============================================*/
 
 import React, { useContext, useState } from "react"
-import { Text, Flexbox, Button, Grid, Input } from "tsx-library-julseb"
+import { Text, Flexbox, Button, Input } from "tsx-library-julseb"
 import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
@@ -13,6 +13,7 @@ import ErrorPage from "../../components/layouts/ErrorPage"
 import Pagination from "../../components/Pagination"
 import PostLine from "../../components/dashboard/PostLine"
 import FiltersContainer from "../../components/dashboard/FiltersContainer"
+import ListCards from "../../components/dashboard/ListCards"
 
 import { POSTS_DASHBOARD, ALL_USERS } from "../../graphql/queries"
 import { PostType, UserType } from "../../types"
@@ -101,7 +102,7 @@ const Dashboard = () => {
                 <Button to="/dashboard/posts/new-post">New post</Button>
             </Flexbox>
 
-            <FiltersContainer alignItems="flex-end" gap="s">
+            <FiltersContainer reset={resetFilters}>
                 <Input
                     id="title"
                     label="Search by title"
@@ -138,29 +139,17 @@ const Dashboard = () => {
                     <option value="published">Published</option>
                     <option value="draft">Draft</option>
                 </Input>
-
-                <Button
-                    onClick={resetFilters}
-                    variant="outline"
-                    style={{ height: 32 }}
-                >
-                    Reset filters
-                </Button>
             </FiltersContainer>
 
-            <Grid gap="s">
+            <ListCards>
                 {getPaginatedData()?.length > 0 ? (
-                    getPaginatedData()?.map((post: PostType, i: number) => (
-                        <PostLine
-                            post={post}
-                            noBorder={i === getPaginatedData().length - 1}
-                            key={post._id}
-                        />
+                    getPaginatedData()?.map(post => (
+                        <PostLine post={post} key={post._id} />
                     ))
                 ) : (
                     <Text>No post.</Text>
                 )}
-            </Grid>
+            </ListCards>
 
             {numberOfPages > 1 && (
                 <Pagination

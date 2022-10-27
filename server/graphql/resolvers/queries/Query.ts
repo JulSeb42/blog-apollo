@@ -98,6 +98,19 @@ const Query = {
     },
     comment: async (_: any, { _id }: any, { comment }: any) =>
         await comment({ _id }),
+
+    pages: async (_: any, __: any, { pages }: any) => {
+        let sortedPages = await pages()
+
+        sortedPages = sortedPages.sort((a: any, b: any) =>
+            a.title < b.title ? -1 : 0
+        )
+
+        return sortedPages
+    },
+    page: async (_: any, { slug }: any, { page }: any) => await page({ slug }),
+    pageById: async (_: any, { _id }: any, { pageById }: any) =>
+        await pageById({ _id }),
 }
 
 export { Query }

@@ -9,7 +9,7 @@ import { AuthContext, AuthContextType } from "../../../context/auth"
 import { AddCommentProps } from "./types"
 
 import { NEW_COMMENT } from "../../../graphql/mutations"
-import { GET_POST } from "../../../graphql/queries"
+import { GET_POST, USER_BY_TOKEN } from "../../../graphql/queries"
 
 const AddComment = ({ post: { slug, _id } }: AddCommentProps) => {
     const { isLoggedIn, user } = useContext(AuthContext) as AuthContextType
@@ -67,7 +67,7 @@ const AddComment = ({ post: { slug, _id } }: AddCommentProps) => {
 
     const close = () => {
         setInputs({
-            poster: "",
+            poster: isLoggedIn ? user?.fullName : "",
             body: "",
         })
         setErrors({

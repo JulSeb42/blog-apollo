@@ -30,6 +30,7 @@ import EditPost from "../pages/dashboard/posts/EditPost"
 import Categories from "../pages/dashboard/Categories"
 import EditProfile from "../pages/dashboard/users/EditProfile"
 import Comments from "../pages/dashboard/Comments"
+import AllPages from "../pages/dashboard/pages/AllPages"
 
 type RouteType = {
     path: string
@@ -149,6 +150,11 @@ const routes: RouteType[] = [
     {
         path: "/dashboard/comments",
         element: Comments,
+        protected: true,
+    },
+    {
+        path: "/dashboard/pages",
+        element: AllPages,
         protected: true,
     },
 ]
