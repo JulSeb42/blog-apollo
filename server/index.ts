@@ -13,7 +13,8 @@ import "./db"
 
 import { PORT } from "./utils/consts"
 
-import app from "./routes/uploader"
+// import app from "./routes/uploader"
+import "./routes/uploader"
 
 const initServer = async () => {
     const server = new ApolloServer({
@@ -21,20 +22,6 @@ const initServer = async () => {
         resolvers,
         context,
     })
-
-    app.use(
-        cors({
-            credentials: true,
-            origin: process.env.ORIGIN || "http://localhost:3000",
-            // allowedHeaders: "*",
-            // @ts-expect-error
-            "Content-Type": "application/json",
-        })
-    )
-    // app.set("trust proxy", 1)
-    // app.use(express.json())
-    // app.use(express.urlencoded({ extended: false }))
-    // app.use(cookieParser())
 
     await server
         .listen({ port: PORT })

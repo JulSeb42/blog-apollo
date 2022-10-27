@@ -111,6 +111,16 @@ const typeDefs = gql`
         draft: Boolean
     }
 
+    input EditPageInput {
+        _id: ID!
+        title: String!
+        slug: String!
+        body: String!
+        metaDescription: String
+        keywords: [String!]
+        draft: Boolean
+    }
+
     type User {
         _id: ID!
         fullName: String!
@@ -221,6 +231,8 @@ const typeDefs = gql`
         deleteCategory(_id: ID!): String
 
         newPage(newPageInput: NewPageInput): Page!
+        editPage(editPageInput: EditPageInput): Page!
+        deletePage(_id: ID!): String
     }
 `
 

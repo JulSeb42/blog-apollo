@@ -6,12 +6,6 @@ const API_URI = process.env.REACT_APP_CLOUDINARY_URI || "http://localhost:4000"
 
 const http = axios.create({
     baseURL: `${API_URI}/api`,
-    withCredentials: true,
-    headers: {
-        // "Access-Control-Allow-Origin": "*",
-        // "Access-Control-Allow-Credentials": "true",
-        "Content-Type": "application/json",
-    },
 })
 
 const errorHandler = (err: any) => {
@@ -25,16 +19,8 @@ const uploadImage = (file: any) => {
         .catch(errorHandler)
 }
 
-// const createImage = (newImage: any) => {
-//     return http
-//         .post("/uploader/edit-picture", newImage)
-//         .then(res => res.data)
-//         .catch(errorHandler)
-// }
-
 const cloudinaryService = {
     uploadImage,
-    // createImage,
 }
 
 export default cloudinaryService

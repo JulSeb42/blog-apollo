@@ -12,7 +12,7 @@ import ErrorMessages from "../ErrorMessages"
 import { PageType } from "../../types"
 
 import { ALL_PAGES } from "../../graphql/queries"
-import { NEW_PAGE } from "../../graphql/mutations"
+import { NEW_PAGE, EDIT_PAGE } from "../../graphql/mutations"
 
 const PageForm = ({ page }: Props) => {
     const navigate = useNavigate()
@@ -47,21 +47,22 @@ const PageForm = ({ page }: Props) => {
     const handleCheckInputs = (e: React.ChangeEvent<HTMLInputElement>) =>
         setInputs({
             ...inputs,
-            [e.target.value]: e.target.checked,
+            [e.target.id]: e.target.checked,
         })
 
     const [newPage, { loading }] = useMutation(NEW_PAGE)
+    const [editPage, { loading: editLoading }] = useMutation(EDIT_PAGE)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-         let inputsKeywords = inputs.keywords.includes(",")
-             ? inputs.keywords.split(",")
-             : inputs.keywords
-        
-         if (!Array.isArray(inputsKeywords)) {
-             inputsKeywords = [inputsKeywords]
-         }
+        let inputsKeywords = inputs.keywords.includes(",")
+            ? inputs.keywords.split(",")
+            : inputs.keywords
+
+        if (!Array.isArray(inputsKeywords)) {
+            inputsKeywords = [inputsKeywords]
+        }
 
         const requestNew = {
             title: inputs.title,
@@ -72,35 +73,51 @@ const PageForm = ({ page }: Props) => {
             draft: inputs.draft,
         }
 
-        // const requestEdit = {
-        //     ...requestNew,
-        //     _id: page?._id,
-        // }
+        const requestEdit = {
+            ...requestNew,
+            _id: page?._id,
+        }
 
-        newPage({
-            variables: {
-                newPageInput: { ...requestNew },
-            },
-            refetchQueries: [{ query: ALL_PAGES }],
-            onError: ({ graphQLErrors }) => {
-                setErrorMessages(graphQLErrors)
-                return
-            },
-        }).then(res => {
-            if (!res.errors) {
-                navigate("/dashboard/pages")
-            }
-        })
+        page
+            ? editPage({
+                  variables: {
+                      editPageInput: {
+                          ...requestEdit,
+                      },
+                  },
+                  refetchQueries: [{ query: ALL_PAGES }],
+                  onError: ({ graphQLErrors }) => {
+                      setErrorMessages(graphQLErrors)
+                      return
+                  },
+              }).then(res => {
+                  if (!res.errors) {
+                      navigate("/dashboard/pages")
+                  }
+              })
+            : newPage({
+                  variables: {
+                      newPageInput: { ...requestNew },
+                  },
+                  refetchQueries: [{ query: ALL_PAGES }],
+                  onError: ({ graphQLErrors }) => {
+                      setErrorMessages(graphQLErrors)
+                      return
+                  },
+              }).then(res => {
+                  if (!res.errors) {
+                      navigate("/dashboard/pages")
+                  }
+              })
     }
 
     return (
         <>
-            {" "}
             <Form
                 buttonPrimary={page ? "Save changes" : "Create a new page"}
                 buttonSecondary={{ text: "Cancel", to: "/dashboard/pages" }}
                 onSubmit={handleSubmit}
-                isLoading={loading}
+                isLoading={loading || editLoading}
             >
                 <Input
                     id="title"
@@ -147,8 +164,8 @@ const PageForm = ({ page }: Props) => {
                     label="Add to drafts"
                     type="checkbox"
                     checkStyle="toggle"
-                    onChange={handleCheckInputs}
                     defaultChecked={inputs.draft}
+                    onChange={handleCheckInputs}
                 />
             </Form>
             {errorMessages && <ErrorMessages errors={errorMessages} />}

@@ -87,11 +87,10 @@ const Query = {
 
         let sortedComments = commentsArr.sort((a: any, b: any) => {
             if (a.date === b.date) {
-                return new Date(b.time).getTime() - new Date(a.time).getTime()
+                return b.time.localeCompare(a.time)
             }
-
-            // @ts-expect-error
-            return new Date(b.date) - new Date(a.date)
+            
+            return new Date(a.date) > new Date(b.date) ? -1 : 9
         })
 
         return sortedComments

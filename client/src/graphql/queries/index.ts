@@ -20,3 +20,4 @@ export * from "./auth/user-by-token"
 export * from "./comments/all-comments"
 
 export * from "./pages/all-pages"
+export * from "./pages/page-by-id"

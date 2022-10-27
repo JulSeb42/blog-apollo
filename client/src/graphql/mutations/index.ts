@@ -22,3 +22,5 @@ export * from "./categories/update-category"
 export * from "./categories/delete-category"
 
 export * from "./pages/new-page"
+export * from "./pages/edit-page"
+export * from "./pages/delete-page"

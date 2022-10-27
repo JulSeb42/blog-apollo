@@ -55,13 +55,14 @@ const Comments = () => {
     )
 
     if (inputs.sort === "asc") {
-        results = results.sort((a, b) => {
-            if (a.date === b.date) {
-                return b.time.localeCompare(a.time)
-            }
+        console.log("ASC")
 
-            // @ts-expect-error
-            return new Date(b.date) - new Date(a.date)
+        results = results.sort((a, b) => {
+             if (a.date === b.date) {
+                 return a.time.localeCompare(b.time)
+             }
+
+             return new Date(a.date) < new Date(b.date) ? -1 : 0
         })
     }
 
