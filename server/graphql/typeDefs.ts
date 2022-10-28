@@ -121,6 +121,18 @@ const typeDefs = gql`
         draft: Boolean
     }
 
+    input GlobalInput {
+        _id: ID!
+        name: String
+        baseline: String
+        metaDescription: String
+        favicon: String
+        email: String
+        cover: String
+        keywords: [String!]
+        language: String
+    }
+
     type User {
         _id: ID!
         fullName: String!
@@ -186,6 +198,18 @@ const typeDefs = gql`
         orderFooter: Int
     }
 
+    type GlobalData {
+        _id: ID!
+        name: String
+        baseline: String
+        metaDescription: String
+        favicon: String
+        email: String
+        cover: String
+        keywords: [String]
+        language: String
+    }
+
     type Query {
         users(filters: FilterUsersInput): [User!]
         user(fullName: String!): User!
@@ -206,6 +230,8 @@ const typeDefs = gql`
         pages: [Page!]
         page(slug: String!): Page
         pageById(_id: ID!): Page
+
+        globalData: GlobalData!
     }
 
     type Mutation {
@@ -233,6 +259,8 @@ const typeDefs = gql`
         newPage(newPageInput: NewPageInput): Page!
         editPage(editPageInput: EditPageInput): Page!
         deletePage(_id: ID!): String
+
+        editGlobal(globalInput: GlobalInput): GlobalData!
     }
 `
 

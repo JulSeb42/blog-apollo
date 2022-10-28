@@ -7,15 +7,15 @@ import { uuid } from "../../utils"
 import styled from "styled-components/macro"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
+import { GlobalContext, GlobalContextType } from "../../context/global"
 
 import Search from "./Search"
-
-import siteData from "../../data/site-data"
 
 import { NavItemType } from "../../types"
 
 const Header = ({ isTransparent }: Props) => {
     const { isLoggedIn } = useContext(AuthContext) as AuthContextType
+    const { globalData } = useContext(GlobalContext) as GlobalContextType
 
     const baseLinks: NavItemType[] = [
         {
@@ -59,7 +59,7 @@ const Header = ({ isTransparent }: Props) => {
 
     return (
         <StyledHeader
-            logo={{ text: siteData.name }}
+            logo={{ text: globalData?.name || "" }}
             hideOnScroll={400}
             position="fixed"
             backgroundColor={isTransparent ? "transparent" : "primary"}

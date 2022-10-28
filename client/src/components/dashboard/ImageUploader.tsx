@@ -11,6 +11,8 @@ const ImageUploader = ({
     setIsLoading,
     label,
     cover,
+    id,
+    setHasEdits,
 }: Props) => {
     const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -41,11 +43,13 @@ const ImageUploader = ({
             // @ts-expect-error
             reader.readAsDataURL(e.target.files[0])
         }
+
+        if (setHasEdits) setHasEdits(true)
     }
 
     return (
         <InputImage
-            id="img-uploader"
+            id={id || "img-uploader"}
             img={{
                 src: imageUrl,
             }}
@@ -69,4 +73,6 @@ interface Props {
     setIsLoading: (isLoading: boolean) => void
     label?: string
     cover?: boolean
+    id?: string
+    setHasEdits?: (hasEdits: boolean) => void
 }

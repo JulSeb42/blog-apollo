@@ -1,7 +1,9 @@
 /*=============================================== Homepage ===============================================*/
 
-import React from "react"
+import React, { useContext } from "react"
 import { useQuery } from "@apollo/client"
+
+import { GlobalContext, GlobalContextType } from "../context/global"
 
 import FullPage from "../components/layouts/FullPage"
 import ErrorPage from "../components/layouts/ErrorPage"
@@ -12,6 +14,8 @@ import { PUBLISHED_POSTS } from "../graphql/queries"
 import { PostType } from "../types"
 
 const Homepage = () => {
+    const { globalData } = useContext(GlobalContext) as GlobalContextType
+    
     const { data, error, loading } = useQuery(PUBLISHED_POSTS)
     const posts: PostType[] = data?.posts.slice(0, 10)
 
@@ -20,7 +24,7 @@ const Homepage = () => {
     return (
         <FullPage
             title="Homepage"
-            cover="https://res.cloudinary.com/dyfxmafvr/image/upload/v1648719726/blog-new/brtgxjfi96rvxbzpjqw0.jpg"
+            cover={globalData?.cover || ""}
             isHomepage
             isLoading={loading}
         >

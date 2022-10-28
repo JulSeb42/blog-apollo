@@ -11,7 +11,7 @@ const siteData = {
     // Meta
     description: "",
     cover: "",
-    type: "",
+    type: "blog",
     language: "en_EN",
     keywords: [],
 

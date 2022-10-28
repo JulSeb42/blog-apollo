@@ -7,6 +7,7 @@ import { ApolloProvider } from "@apollo/client"
 
 import { AuthProviderWrapper } from "./context/auth"
 import client from "./graphql/apollo-client"
+import { GlobalProviderWrapper } from "./context/global"
 
 import App from "./App"
 
@@ -19,9 +20,11 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
     <ApolloProvider client={client}>
         <BrowserRouter>
-                <AuthProviderWrapper>
+            <AuthProviderWrapper>
+                <GlobalProviderWrapper>
                     <App />
-                </AuthProviderWrapper>
+                </GlobalProviderWrapper>
+            </AuthProviderWrapper>
         </BrowserRouter>
     </ApolloProvider>
 )

@@ -89,7 +89,7 @@ const Query = {
             if (a.date === b.date) {
                 return b.time.localeCompare(a.time)
             }
-            
+
             return new Date(a.date) > new Date(b.date) ? -1 : 9
         })
 
@@ -110,6 +110,9 @@ const Query = {
     page: async (_: any, { slug }: any, { page }: any) => await page({ slug }),
     pageById: async (_: any, { _id }: any, { pageById }: any) =>
         await pageById({ _id }),
+
+    globalData: async (_: any, __: any, { globalData }: any) =>
+        await globalData(),
 }
 
 export { Query }

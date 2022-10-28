@@ -33,6 +33,7 @@ import Comments from "../pages/dashboard/Comments"
 import AllPages from "../pages/dashboard/pages/AllPages"
 import NewPage from "../pages/dashboard/pages/NewPage"
 import EditPage from "../pages/dashboard/pages/EditPage"
+import GlobalData from "../pages/dashboard/GlobalData"
 
 type RouteType = {
     path: string
@@ -167,6 +168,11 @@ const routes: RouteType[] = [
     {
         path: "/dashboard/pages/:id",
         element: EditPage,
+        protected: true,
+    },
+    {
+        path: "/dashboard/global-data",
+        element: GlobalData,
         protected: true,
     },
 ]

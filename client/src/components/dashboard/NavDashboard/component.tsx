@@ -6,14 +6,15 @@ import { NavLink } from "react-router-dom"
 import { uuid } from "../../../utils"
 
 import { AuthContext, AuthContextType } from "../../../context/auth"
+import { GlobalContext, GlobalContextType } from "../../../context/global"
 
 import * as Styles from "./styles"
 
-import siteData from "../../../data/site-data"
 import { NavItemType } from "../../../types"
 
 const NavDashboard = () => {
     const { user, logoutUser } = useContext(AuthContext) as AuthContextType
+    const { globalData } = useContext(GlobalContext) as GlobalContextType
 
     const navItems: NavItem[] = [
         {
@@ -112,7 +113,7 @@ const NavDashboard = () => {
                         rel="noreferrer noopener"
                         end
                     >
-                        {siteData.name}
+                        {globalData?.name}
                     </NavLink>
                 </Text>
 

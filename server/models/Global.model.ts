@@ -14,7 +14,6 @@ const globalSchema = new Schema(
         email: String,
         cover: String,
         keywords: Array,
-        type: String,
         language: String,
     },
     {

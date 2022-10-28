@@ -1,6 +1,7 @@
 /*=============================================== Category context ===============================================*/
 
 import { ApolloError } from "apollo-server"
+import {slugify} from "ts-utils-julseb"
 
 import Category from "../../models/Category.model"
 import { CategoryType } from "../../types"
@@ -11,7 +12,7 @@ const CategoryContext = {
     categoryById: async ({ _id }: CategoryType) => Category.findById(_id),
 
     newCategory: async ({ name }: CategoryType) => {
-        const foundCategory = await Category.findOne({ name })
+        const foundCategory = await Category.findOne({ name: slugify(name) })
 
         if (!foundCategory) {
             const newCategory = await Category.create({ name })

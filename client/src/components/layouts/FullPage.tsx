@@ -1,15 +1,15 @@
 /*=============================================== FullPage ===============================================*/
 
-import React from "react"
+import React, { useContext } from "react"
 import { Cover, Text, Wrapper, Main, Aside } from "tsx-library-julseb"
 import styled from "styled-components/macro"
+
+import { GlobalContext, GlobalContextType } from "../../context/global"
 
 import DefaultLayout from "./DefaultLayout"
 import Header from "./Header"
 import FeaturedPosts from "../posts/FeaturedPosts"
 import ListAside from "./ListAside"
-
-import siteData from "../../data/site-data"
 
 const FullPage = ({
     title,
@@ -20,6 +20,8 @@ const FullPage = ({
     isHomepage,
     isLoading,
 }: Props) => {
+    const { globalData } = useContext(GlobalContext) as GlobalContextType
+    
     return (
         <DefaultLayout
             title={title}
@@ -37,9 +39,9 @@ const FullPage = ({
                 overlay="gradient-black"
                 height="70vh"
             >
-                <Text tag="h1">{isHomepage ? siteData.name : title}</Text>
+                <Text tag="h1">{isHomepage ? globalData?.name : title}</Text>
 
-                {isHomepage && <Text tag="h2">{siteData.baseline}</Text>}
+                {isHomepage && globalData?.baseline && <Text tag="h2">{globalData?.baseline}</Text>}
             </Cover>
 
             {isHomepage && <FeaturedPosts />}

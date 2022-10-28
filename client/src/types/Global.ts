@@ -1,6 +1,7 @@
 /*=============================================== Global types ===============================================*/
 
 export type GlobalType = {
+    _id: string
     name: string
     baseline: string
     metaDescription?: string
@@ -8,6 +9,5 @@ export type GlobalType = {
     email?: string
     cover?: string
     keywords?: string[] | string
-    type?: string
     language?: string
 }

@@ -8,6 +8,7 @@ import {
     CommentMutation,
     CategoryMutation,
     PageMutation,
+    GlobalMutation,
 } from "./mutations"
 
 const resolvers = {
@@ -26,6 +27,7 @@ const resolvers = {
         ...CommentMutation,
         ...CategoryMutation,
         ...PageMutation,
+        ...GlobalMutation,
     },
 }
 
