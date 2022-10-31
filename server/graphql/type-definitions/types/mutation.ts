@@ -30,6 +30,7 @@ export const MutationType = gql`
         newPage(newPageInput: NewPageInput): Page!
         editPage(editPageInput: EditPageInput): Page!
         deletePage(_id: ID!): String
+        showPage(showPageInput: ShowPageInput): Page!
 
         editGlobal(globalInput: GlobalInput): GlobalData!
     }

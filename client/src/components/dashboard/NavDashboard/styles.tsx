@@ -1,7 +1,13 @@
 /*=============================================== NavDashboard styles ===============================================*/
 
 import styled from "styled-components/macro"
-import { ThemeLight, Spacers, Mixins, FontWeights } from "tsx-library-julseb"
+import {
+    ThemeLight,
+    Spacers,
+    Mixins,
+    FontWeights,
+    Breakpoints,
+} from "tsx-library-julseb"
 
 const StyledNavDashboard = styled.nav`
     position: fixed;
@@ -26,7 +32,22 @@ const StyledNavDashboard = styled.nav`
 
         &.active {
             font-weight: ${FontWeights.Black};
+            color: ${ThemeLight.Secondary500};
+
+            @media ${Breakpoints.Hover} {
+                &:hover {
+                    color: ${ThemeLight.Primary300};
+                }
+
+                &:active {
+                    color: ${ThemeLight.Primary600};
+                }
+            }
         }
+    }
+
+    button {
+        font-weight: ${FontWeights.Regular};
     }
 `
 

@@ -72,11 +72,13 @@ const NavDashboard = () => {
             to: "/",
             icon: "link-external",
             blank: true,
+            end: true,
         },
         {
             text: "Log out",
             onClick: logoutUser,
             icon: "logout",
+            end: true,
         },
     ]
 

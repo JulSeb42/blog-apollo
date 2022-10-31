@@ -35,6 +35,7 @@ import UsersPage from "../pages/dashboard/users/UsersPage"
 import AddUser from "../pages/dashboard/users/AddUser"
 import ChangePassword from "../pages/dashboard/users/ChangePassword"
 import ThankYou from "../pages/dashboard/users/ThankYou"
+import Navigation from "../pages/dashboard/Navigation"
 
 type RouteType = {
     path: string
@@ -181,6 +182,11 @@ const routes: RouteType[] = [
         path: "/dashboard/thank-you",
         protected: true,
         element: ThankYou,
+    },
+    {
+        path: "/dashboard/navigation",
+        protected: true,
+        element: Navigation,
     },
 ]
 

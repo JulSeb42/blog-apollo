@@ -26,5 +26,6 @@ export * from "./categories/delete-category"
 export * from "./pages/new-page"
 export * from "./pages/edit-page"
 export * from "./pages/delete-page"
+export * from "./pages/show-page"
 
 export * from "./global/edit-global"

@@ -22,5 +22,6 @@ export * from "./comments/all-comments"
 
 export * from "./pages/all-pages"
 export * from "./pages/page-by-id"
+export * from "./pages/pages-navigation"
 
 export * from "./global/global"

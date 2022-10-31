@@ -124,4 +124,29 @@ export const PageContext = {
         await Page.findByIdAndDelete(_id)
         return `Page ${_id} has been deleted.`
     },
+
+    showPage: async ({
+        _id,
+        header,
+        orderHeader,
+        footer,
+        orderFooter,
+    }: PageType) => {
+        const page = await Page.findById(_id)
+
+        if (page) {
+            return await Page.findByIdAndUpdate(
+                _id,
+                {
+                    header,
+                    orderHeader,
+                    footer,
+                    orderFooter,
+                },
+                { new: true }
+            )
+        } else {
+            throw new ApolloError("Page not found", "PAGE_NOT_FOUND")
+        }
+    },
 }

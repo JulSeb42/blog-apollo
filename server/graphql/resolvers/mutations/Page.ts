@@ -7,4 +7,6 @@ export const PageMutation = {
         await editPage(editPageInput),
     deletePage: async (_: any, { _id }: any, { deletePage }: any) =>
         await deletePage({ _id }),
+    showPage: async (_: any, { showPageInput }: any, { showPage }: any) =>
+        await showPage(showPageInput),
 }

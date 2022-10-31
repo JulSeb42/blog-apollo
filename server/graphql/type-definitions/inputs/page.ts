@@ -21,4 +21,12 @@ export const PageInputs = gql`
         keywords: [String!]
         draft: Boolean
     }
+
+    input ShowPageInput {
+        _id: ID!
+        header: Boolean
+        orderHeader: Int
+        footer: Boolean
+        orderFooter: Int
+    }
 `
