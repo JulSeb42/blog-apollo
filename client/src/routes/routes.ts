@@ -5,6 +5,7 @@ import { FC } from "react"
 import Homepage from "../pages/Homepage"
 import NotFound from "../pages/NotFound"
 import GlobalPage from "../pages/GlobalPage"
+import SearchResults from "../pages/SearchResults"
 
 import AllAuthors from "../pages/author/AllAuthors"
 import AuthorDetail from "../pages/author/AuthorDetail"
@@ -59,6 +60,10 @@ const routes: RouteType[] = [
     {
         path: "/:slug",
         element: GlobalPage,
+    },
+    {
+        path: "/search",
+        element: SearchResults,
     },
 
     {

@@ -16,6 +16,9 @@ export const ALL_POSTS = gql`
             slug
             metaDescription
             draft
+            author {
+                fullName
+            }
         }
     }
 `

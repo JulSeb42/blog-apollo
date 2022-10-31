@@ -40,6 +40,8 @@ const Search = () => {
                 page: "1",
             }).toString(),
         })
+
+        close()
     }
 
     useKeyPress(() => {
