@@ -2,14 +2,14 @@
 
 import React, { useContext } from "react"
 import { useQuery } from "@apollo/client"
-import { useParams } from "react-router-dom"
+import { useParams, Navigate } from "react-router-dom"
 import { Text, MarkdownContainer } from "tsx-library-julseb"
-import { Navigate } from "react-router-dom"
 
 import { AuthContext, AuthContextType } from "../context/auth"
 
 import Page from "../components/layouts/Page"
 import ContactForm from "../components/ContactForm"
+import NotFound from "./NotFound"
 
 import { PAGE } from "../graphql/queries"
 import { PageType } from "../types"
@@ -29,6 +29,8 @@ const GlobalPage = () => {
     const page: PageType = data?.page
 
     if (page?.draft && !isLoggedIn) return <Navigate to="/" />
+
+    if (error && error.message === "Page not found") return <NotFound />
 
     return (
         <Page

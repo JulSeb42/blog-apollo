@@ -8,6 +8,7 @@ import { ComponentProps } from "tsx-library-julseb"
 
 import Page from "../../components/layouts/Page"
 import ListPosts from "../../components/posts/ListPosts"
+import NotFound from "../NotFound"
 
 import { CATEGORY } from "../../graphql/queries"
 import { PostType } from "../../types"
@@ -33,6 +34,8 @@ const CategoryDetail = () => {
     })
 
     const posts: PostType[] = data?.category?.posts
+
+    if (data?.category === null) return <NotFound />
 
     return (
         <Page

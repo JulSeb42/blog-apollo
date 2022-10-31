@@ -9,6 +9,7 @@ import { unslugifyAuthor } from "../../utils"
 import Page from "../../components/layouts/Page"
 import CardAuthor from "../../components/author/CardAuthor"
 import ListPosts from "../../components/posts/ListPosts"
+import NotFound from "../NotFound"
 
 import { GET_USER } from "../../graphql/queries"
 
@@ -34,6 +35,9 @@ const AuthorDetail = () => {
         },
     })
     const author: UserType = data?.user
+
+    if (error && error.message === "User not found")
+        return <NotFound />
 
     return (
         <Page

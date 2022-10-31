@@ -2,15 +2,32 @@
 
 import { ApolloError } from "apollo-server"
 import { getToday, getTimeNow, slugify } from "ts-utils-julseb"
+import { GraphQLError } from "graphql"
 
 import Post from "../../models/Post.model"
 import { PostType } from "../../types"
 
 const PostContext = {
     posts: async () => await Post.find(),
-    post: async ({ slug }: PostType) => await Post.findOne({ slug }),
+
+    post: async ({ slug }: PostType) => {
+        const post = await Post.findOne({ slug })
+
+        if (post) {
+            return post
+        } else {
+            throw new ApolloError("Post not found", "POST_NOT_FOUND")
+        }
+    },
+
     postById: async ({ _id }: PostType) => {
-        return await Post.findById(_id)
+        const post = await Post.findById(_id)
+
+        if (post) {
+            return post
+        } else {
+            throw new ApolloError("Post not found", "POST_NOT_FOUND")
+        }
     },
 
     categoryPosts: async ({ _id }: any) => await Post.find({ category: _id }),

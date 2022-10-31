@@ -21,7 +21,9 @@ const AllCategories = () => {
     ]
 
     const { data, loading, error } = useQuery(ALL_CATEGORIES)
-    const categories: CategoryType[] = data?.categories?.filter(
+    const categories: CategoryType[] = data?.categories
+
+    const filteredCategories = categories.filter(
         (category: CategoryType) => category.posts.length > 0
     )
 
@@ -35,10 +37,10 @@ const AllCategories = () => {
     const getPaginatedData = () => {
         const startIndex = currentPage * dataLimit - dataLimit
         const endIndex = startIndex + dataLimit
-        return categories?.slice(startIndex, endIndex)
+        return filteredCategories?.slice(startIndex, endIndex)
     }
 
-    const length = categories?.length || 0
+    const length = filteredCategories?.length || 0
 
     const numberOfPages = Math.ceil(length / dataLimit)
 

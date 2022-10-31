@@ -20,6 +20,7 @@ import FullPage from "../../components/layouts/FullPage"
 import CardAuthor from "../../components/author/CardAuthor"
 import CardComment from "../../components/comments/CardComment"
 import AddComment from "../../components/comments/AddComment"
+import NotFound from "../NotFound"
 
 import { GET_POST } from "../../graphql/queries"
 import { PostType } from "../../types"
@@ -59,6 +60,9 @@ const PostDetail = () => {
     ]
 
     if (post?.draft && !isLoggedIn) return <Navigate to="/" />
+
+    if (error && error.message === "Post not found")
+        return <NotFound />
 
     return (
         <FullPage

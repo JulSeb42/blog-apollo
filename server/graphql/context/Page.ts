@@ -7,7 +7,15 @@ import { PageType } from "../../types"
 
 export const PageContext = {
     pages: async () => await Page.find(),
-    page: async ({ slug }: any) => await Page.findOne({ slug }),
+    page: async ({ slug }: any) => {
+        const foundPage = await Page.findOne({ slug })
+
+        if (foundPage) {
+            return foundPage
+        } else {
+            throw new ApolloError("Page not found", "PAGE_NOT_FOUND")
+        }
+    },
     pageById: async ({ _id }: any) => await Page.findById(_id),
 
     newPage: async ({

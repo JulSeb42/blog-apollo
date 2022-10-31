@@ -1,7 +1,5 @@
 /*=============================================== User query ===============================================*/
 
-import { ApolloError } from "apollo-server"
-
 export const UserQuery = {
     users: async (_: any, { filters }: any, { users }: any) => {
         let usersArr = await users()

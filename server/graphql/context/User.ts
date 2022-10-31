@@ -13,8 +13,24 @@ import sendMail from "../../utils/send-mail"
 
 const UserContext = {
     users: async () => await User.find(),
-    user: async ({ fullName }: UserType) => await User.findOne({ fullName }),
-    userById: async ({ _id }: UserType) => await User.findById(_id),
+    user: async ({ fullName }: UserType) => {
+        const user = await User.findOne({ fullName })
+
+        if (user) {
+            return user
+        } else {
+            throw new ApolloError("User not found", "USER_NOT_FOUND")
+        }
+    },
+    userById: async ({ _id }: UserType) => {
+        const user = await User.findById(_id)
+
+        if (user) {
+            return user
+        } else {
+            throw new ApolloError("User not found", "USER_NOT_FOUND")
+        }
+    },
 
     addUser: async ({ fullName, email, role }: UserType) => {
         if (!fullName) {

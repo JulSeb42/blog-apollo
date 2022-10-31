@@ -26,6 +26,8 @@ const AllAuthors = () => {
 
     const authors: UserType[] = data?.users
 
+    const filteredAuthors = authors?.filter(author => author.posts.length > 0)
+
     const [query] = useSearchParams()
     const pageNumber = query.get("page") || 1
 
@@ -36,10 +38,10 @@ const AllAuthors = () => {
     const getPaginatedData = () => {
         const startIndex = currentPage * dataLimit - dataLimit
         const endIndex = startIndex + dataLimit
-        return authors?.slice(startIndex, endIndex)
+        return filteredAuthors?.slice(startIndex, endIndex)
     }
 
-    const length = authors?.length || 0
+    const length = filteredAuthors?.length || 0
 
     const numberOfPages = Math.ceil(length / dataLimit)
 

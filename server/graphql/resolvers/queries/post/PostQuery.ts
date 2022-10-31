@@ -1,7 +1,7 @@
 /*=============================================== Post query ===============================================*/
 
 import { ApolloError } from "apollo-server"
-import { PostType, PageType } from "../../../../types"
+import { PostType } from "../../../../types"
 
 export const PostQuery = {
     posts: async (_: any, { filters }: any, { posts }: any) => {
@@ -32,15 +32,7 @@ export const PostQuery = {
 
         return sorted
     },
-    post: async (_: any, { slug }: any, { post }: any) => {
-        const foundPost = await post({ slug })
-
-        if (foundPost) {
-            return foundPost
-        } else {
-            throw new ApolloError("Post not found", "POST_NOT_FOUND")
-        }
-    },
+    post: async (_: any, { slug }: any, { post }: any) => await post({ slug }),
     postById: async (_: any, { _id }: any, { postById }: any) =>
         await postById({ _id }),
 }
