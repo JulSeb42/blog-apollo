@@ -38,7 +38,9 @@ const Login = () => {
 
         login({
             variables: {
-                loginInput: inputs,
+                loginInput: {
+                    ...inputs,
+                },
             },
 
             onError: ({ graphQLErrors }) => {
@@ -100,10 +102,6 @@ const Login = () => {
 
             <Text>
                 <Link to="/login/forgot-password">I forgot my password.</Link>
-            </Text>
-
-            <Text>
-                You don't have an account? <Link to="/signup">Sign up</Link>.
             </Text>
 
             <Section gap="small">

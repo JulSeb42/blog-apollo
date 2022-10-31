@@ -1,13 +1,22 @@
 /*=============================================== PageDashboard ===============================================*/
 
-import React from "react"
+import React, { useContext } from "react"
 import styled from "styled-components/macro"
 import { Wrapper, Main, PageLoading, Button } from "tsx-library-julseb"
+import { Navigate } from "react-router-dom"
+
+import { AuthContext, AuthContextType } from "../../context/auth"
 
 import Helmet from "../layouts/Helmet"
 import NavDashboard from "./NavDashboard"
 
 const PageDashboard = ({ title, children, isLoading, back }: Props) => {
+    const { user } = useContext(AuthContext) as AuthContextType
+
+    console.log(user)
+
+    if(user?.password === user?.generatedPassword) return <Navigate to="/dashboard/change-password" />
+    
     return (
         <>
             <Helmet title={title} />

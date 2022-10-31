@@ -17,61 +17,6 @@ const AuthContext = {
         return await User.findOne({ token })
     },
 
-    signup: async ({ fullName, email, password }: UserType) => {
-        const foundUser = await User.findOne({ email })
-        const verifyToken = getRandomString(20)
-
-        if (!emailRegex.test(email)) {
-            throw new ApolloError("Email is not valid.", "EMAIL_NOT_VALID")
-        }
-
-        if (!passwordRegex.test(password)) {
-            throw new ApolloError(
-                "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
-                "PASSWORD_NOT_VALID"
-            )
-        }
-
-        if (!foundUser) {
-            const salt = bcrypt.genSaltSync(SALT_ROUNDS)
-            const hashedPassword = bcrypt.hashSync(password, salt)
-
-            const newUser: any = new User({
-                fullName,
-                email,
-                password: hashedPassword,
-                verified: false,
-                verifyToken,
-            })
-
-            const token = jwt.sign(
-                newUser._doc,
-                TOKEN_SECRET,
-                // @ts-expect-error
-                JWT_CONFIG
-            )
-
-            newUser.token = token
-
-            const res = await newUser.save().then((res: any) => {
-                sendMail(
-                    email,
-                    "Verify your account on our app",
-                    `Hello,<br /><br />Thank you for creating your account on our app! <a href="${process.env.ORIGIN}/verify/${verifyToken}/${res._id}">Click here to verify your account</a>.`
-                )
-
-                return res
-            })
-
-            return res
-        } else {
-            throw new ApolloError(
-                `A user already exists with the email ${email}`,
-                "USER_ALREADY_EXISTS"
-            )
-        }
-    },
-
     login: async ({ email, password }: UserType) => {
         if (!email) {
             throw new ApolloError("Email is required", "EMAIL_REQUIRED")
@@ -108,27 +53,6 @@ const AuthContext = {
                 "This user does not exist.",
                 "USER_NON_EXISTENT"
             )
-        }
-    },
-
-    verifyUser: async ({ _id, verifyToken }: UserType) => {
-        const foundUser = await User.findById(_id)
-
-        if (foundUser) {
-            if (foundUser.verifyToken === verifyToken) {
-                return User.findByIdAndUpdate(
-                    _id,
-                    { verified: true },
-                    { new: true }
-                )
-            } else {
-                throw new ApolloError(
-                    "An error occured with your verify token.",
-                    "TOKEN_NOT_MATCHING"
-                )
-            }
-        } else {
-            throw new ApolloError("User not found.", "USER_NOT_FOUND")
         }
     },
 

@@ -12,8 +12,6 @@ const EDIT_USER = gql`
             bio
             imageUrl
             password
-            verified
-            verifyToken
             resetToken
             role
             approved

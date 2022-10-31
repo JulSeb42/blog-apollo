@@ -8,9 +8,6 @@ import NotFound from "../pages/NotFound"
 import AllAuthors from "../pages/author/AllAuthors"
 import AuthorDetail from "../pages/author/AuthorDetail"
 
-import Signup from "../pages/auth/Signup"
-import ThankYou from "../pages/auth/ThankYou"
-import Verify from "../pages/auth/Verify"
 import Login from "../pages/auth/Login"
 import ForgotPassword from "../pages/auth/ForgotPassword"
 import ForgotSent from "../pages/auth/ForgotSent"
@@ -34,6 +31,10 @@ import AllPages from "../pages/dashboard/pages/AllPages"
 import NewPage from "../pages/dashboard/pages/NewPage"
 import EditPage from "../pages/dashboard/pages/EditPage"
 import GlobalData from "../pages/dashboard/GlobalData"
+import UsersPage from "../pages/dashboard/users/UsersPage"
+import AddUser from "../pages/dashboard/users/AddUser"
+import ChangePassword from "../pages/dashboard/users/ChangePassword"
+import ThankYou from "../pages/dashboard/users/ThankYou"
 
 type RouteType = {
     path: string
@@ -53,20 +54,6 @@ const routes: RouteType[] = [
         element: NotFound,
     },
 
-    {
-        path: "/signup",
-        element: Signup,
-        anon: true,
-    },
-    {
-        path: "/thank-you",
-        element: ThankYou,
-    },
-    {
-        path: "/verify/:token/:id",
-        element: Verify,
-        edit: true,
-    },
     {
         path: "/login",
         element: Login,
@@ -174,6 +161,26 @@ const routes: RouteType[] = [
         path: "/dashboard/global-data",
         element: GlobalData,
         protected: true,
+    },
+    {
+        path: "/dashboard/users",
+        element: UsersPage,
+        protected: true,
+    },
+    {
+        path: "/dashboard/users/new-user",
+        element: AddUser,
+        protected: true,
+    },
+    {
+        path: "/dashboard/change-password",
+        protected: true,
+        element: ChangePassword,
+    },
+    {
+        path: "/dashboard/thank-you",
+        protected: true,
+        element: ThankYou,
     },
 ]
 

@@ -12,8 +12,7 @@ export const USER_BY_TOKEN = gql`
             bio
             imageUrl
             password
-            verified
-            verifyToken
+            generatedPassword
             resetToken
             role
             approved

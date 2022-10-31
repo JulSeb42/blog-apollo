@@ -7,12 +7,11 @@ export type UserType = {
     fullName: string
     email: string
     password: string
-    verifyToken: string
+    generatedPassword: string
     resetToken?: string
     token: string
     bio: string
     imageUrl: string
-    verified: boolean
     role: "admin" | "writer" | "moderator"
     approved: boolean
     featured: boolean

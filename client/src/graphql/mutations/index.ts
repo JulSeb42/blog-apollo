@@ -1,14 +1,16 @@
 /*=============================================== Mutations ===============================================*/
 
 export * from "./auth/login"
-export * from "./auth/signup"
-export * from "./auth/verify-user"
 export * from "./auth/forgot-password"
 export * from "./auth/reset-password"
 
 export * from "./user/edit-user"
 export * from "./user/edit-password"
 export * from "./user/delete-user"
+export * from "./user/set-user-role"
+export * from "./user/feature-user"
+export * from "./user/approve-user"
+export * from "./user/add-user"
 
 export * from "./comments/new-comment"
 export * from "./comments/delete-comment"

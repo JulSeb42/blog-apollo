@@ -20,9 +20,8 @@ const userSchema = new Schema(
         bio: String,
         imageUrl: String,
         password: String,
-        verified: Boolean,
-        verifyToken: String,
         resetToken: String,
+        generatedPassword: String,
 
         role: {
             type: String,

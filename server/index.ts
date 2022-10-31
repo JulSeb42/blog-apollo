@@ -1,11 +1,8 @@
 /*=============================================== Server ===============================================*/
 
 import { ApolloServer } from "apollo-server"
-import cors from "cors"
-import express from "express"
-import cookieParser from "cookie-parser"
 
-import typeDefs from "./graphql/typeDefs"
+import typeDefs from "./graphql/type-definitions"
 import resolvers from "./graphql/resolvers"
 import context from "./graphql/context"
 
@@ -13,7 +10,6 @@ import "./db"
 
 import { PORT } from "./utils/consts"
 
-// import app from "./routes/uploader"
 import "./routes/uploader"
 
 const initServer = async () => {

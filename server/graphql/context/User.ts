@@ -2,17 +2,75 @@
 
 import { ApolloError } from "apollo-server"
 import bcrypt from "bcryptjs"
-import { passwordRegex } from "ts-utils-julseb"
+import { passwordRegex, emailRegex, getRandomString, getRandomAvatar } from "ts-utils-julseb"
+import jwt from "jsonwebtoken"
 
 import User from "../../models/User.model"
 import { UserType } from "../../types"
 
-import { SALT_ROUNDS } from "../../utils/consts"
+import { SALT_ROUNDS, TOKEN_SECRET, JWT_CONFIG } from "../../utils/consts"
+import sendMail from "../../utils/send-mail"
 
 const UserContext = {
     users: async () => await User.find(),
-    user: async ({ fullName }: any) => await User.findOne({ fullName }),
-    userById: async ({ _id }: any) => await User.findById(_id),
+    user: async ({ fullName }: UserType) => await User.findOne({ fullName }),
+    userById: async ({ _id }: UserType) => await User.findById(_id),
+
+    addUser: async ({ fullName, email, role }: UserType) => {
+        if (!fullName) {
+            throw new ApolloError("Full name is required", "FULL_NAME_REQUIRED")
+        }
+
+        if (!email) {
+            throw new ApolloError("Email is required", "FULL_NAME_REQUIRED")
+        }
+
+        if (!emailRegex.test(email)) {
+            throw new ApolloError("Email is not valid.", "EMAIL_NOT_VALID")
+        }
+
+        const foundUser = await User.findOne({ email })
+
+        if (!foundUser) {
+            const password = getRandomString(10)
+            const salt = bcrypt.genSaltSync(SALT_ROUNDS)
+            const hashedPassword = bcrypt.hashSync(password, salt)
+
+            const newUser: any = new User({
+                fullName,
+                email,
+                password: hashedPassword,
+                generatedPassword: hashedPassword,
+                role,
+                approved: true,
+                imageUrl: getRandomAvatar("other")
+            })
+
+            const token = jwt.sign(
+                newUser._doc,
+                TOKEN_SECRET,
+                // @ts-expect-error
+                JWT_CONFIG
+            )
+
+            newUser.token = token
+            
+            const res = await newUser.save().then((res: any) => {
+                sendMail(
+                    email,
+                    "You were added on our blog!",
+                    `An account has been created for you on our blog. Please <a href="${process.env.ORIGIN}/login">login</a> with your email and this password: ${password}. Then change this password to fully access the dashboard.`
+                )
+
+                return res
+            })
+
+            return res
+
+        } else {
+            throw new ApolloError("A user with this email already exists", "USER_ALREADY_EXISTS")
+        }
+    },
 
     editUser: async ({ _id, fullName, bio, imageUrl }: UserType) => {
         if (!fullName) {
@@ -77,6 +135,44 @@ const UserContext = {
 
         await User.findByIdAndDelete(_id)
         return `User ${_id} was deleted successfully`
+    },
+
+    setUserRole: async ({ _id, role }: UserType) => {
+        const user = await User.findById(_id)
+
+        if (user) {
+            return await User.findByIdAndUpdate(_id, { role }, { new: true })
+        } else {
+            throw new ApolloError("User not found", "USER_NOT_FOUND")
+        }
+    },
+
+    featureUser: async ({ _id, featured }: UserType) => {
+        const user = await User.findById(_id)
+
+        if (user) {
+            return await User.findByIdAndUpdate(
+                _id,
+                { featured },
+                { new: true }
+            )
+        } else {
+            throw new ApolloError("User not found", "USER_NOT_FOUND")
+        }
+    },
+
+    approveUser: async ({ _id, approved }: UserType) => {
+        const user = await User.findById(_id)
+
+        if (user) {
+            return await User.findByIdAndUpdate(
+                _id,
+                { approved },
+                { new: true }
+            )
+        } else {
+            throw new ApolloError("User not found", "USER_NOT_FOUND")
+        }
     },
 }
 

@@ -3,7 +3,7 @@
 import { gql } from "@apollo/client"
 
 const LOGIN = gql`
-    mutation login($loginInput: LoginInput) {
+    mutation ($loginInput: LoginInput) {
         login(loginInput: $loginInput) {
             _id
             email
@@ -12,8 +12,7 @@ const LOGIN = gql`
             bio
             imageUrl
             password
-            verified
-            verifyToken
+            generatedPassword
             resetToken
             role
             approved

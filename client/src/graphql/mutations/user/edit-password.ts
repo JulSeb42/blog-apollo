@@ -6,10 +6,17 @@ const EDIT_PASSWORD = gql`
     mutation ($editPasswordInput: EditPasswordInput) {
         editPassword(editPasswordInput: $editPasswordInput) {
             _id
-            fullName
             email
-            password
+            fullName
             token
+            bio
+            imageUrl
+            password
+            generatedPassword
+            resetToken
+            role
+            approved
+            featured
         }
     }
 `
