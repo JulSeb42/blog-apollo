@@ -60,8 +60,6 @@ const PostDetail = () => {
 
     if (post?.draft && !isLoggedIn) return <Navigate to="/" />
 
-    console.log(post?.draft)
-
     return (
         <FullPage
             title={title}

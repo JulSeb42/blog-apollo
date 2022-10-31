@@ -6,11 +6,13 @@ import { useMutation, useQuery } from "@apollo/client"
 import { slugify, unslugify } from "../../utils"
 import { GraphQLErrors } from "@apollo/client/errors"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
 import ImageUploader from "./ImageUploader"
 import ErrorMessages from "../ErrorMessages"
+import CheckCircle from "../icons/CheckCircle"
 
 import { NEW_POST, EDIT_POST } from "../../graphql/mutations"
 import { ALL_CATEGORIES, POSTS_DASHBOARD } from "../../graphql/queries"
@@ -133,6 +135,9 @@ const PostForm = ({ post }: Props) => {
             }).then(res => {
                 if (!res.errors) {
                     navigate("/dashboard")
+                    toast(`You successfully added ${inputs.title}`, {
+                        icon: <CheckCircle />,
+                    })
                 }
             })
 
@@ -156,6 +161,9 @@ const PostForm = ({ post }: Props) => {
                 },
             }).then(res => {
                 if (!res.errors) {
+                    toast(`You successfully updated ${inputs.title}!`, {
+                        icon: <CheckCircle />,
+                    })
                     navigate("/dashboard")
                 }
             })

@@ -5,11 +5,13 @@ import { useQuery, useMutation } from "@apollo/client"
 import { useParams, useNavigate } from "react-router-dom"
 import { Text } from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
+import toast from "react-hot-toast"
 
 import PageDashboard from "../../../components/dashboard/PageDashboard"
 import PostForm from "../../../components/dashboard/PostForm"
 import DangerZone from "../../../components/DangerZone"
 import ErrorMessages from "../../../components/ErrorMessages"
+import CheckCircle from "../../../components/icons/CheckCircle"
 
 import { GET_POST_BY_ID, ALL_POSTS } from "../../../graphql/queries"
 import { DELETE_POST } from "../../../graphql/mutations"
@@ -49,6 +51,9 @@ const EditPost = () => {
         }).then(res => {
             if (!res.errors) {
                 navigate("/dashboard")
+                toast(`You successfully deleted ${post?.title}`, {
+                    icon: <CheckCircle />,
+                })
             }
         })
     }

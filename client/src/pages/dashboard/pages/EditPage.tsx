@@ -5,11 +5,13 @@ import { useParams, useNavigate } from "react-router-dom"
 import { useQuery, useMutation } from "@apollo/client"
 import { Text } from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
+import toast from "react-hot-toast"
 
 import PageDashboard from "../../../components/dashboard/PageDashboard"
 import PageForm from "../../../components/dashboard/PageForm"
 import DangerZone from "../../../components/DangerZone"
 import ErrorMessages from "../../../components/ErrorMessages"
+import CheckCircle from "../../../components/icons/CheckCircle"
 
 import { PAGE_BY_ID, ALL_PAGES } from "../../../graphql/queries"
 import { DELETE_PAGE } from "../../../graphql/mutations"
@@ -56,6 +58,7 @@ const EditPage = () => {
         }).then(res => {
             if (!res.errors) {
                 navigate("/dashboard/pages")
+                toast(`${page?.title} was deleted!`, { icon: <CheckCircle />})
             }
         })
     }

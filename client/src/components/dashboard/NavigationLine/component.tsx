@@ -3,6 +3,9 @@
 import React, { useState } from "react"
 import { Text, InputCheck, Input, Flexbox, Loader } from "tsx-library-julseb"
 import { useMutation } from "@apollo/client"
+import toast from "react-hot-toast"
+
+import CheckCircle from "../../icons/CheckCircle"
 
 import * as Styles from "./styles"
 import { NavigationLineProps } from "./types"
@@ -47,7 +50,14 @@ const NavigationLine = ({
                     query: PAGES_NAVIGATION,
                 },
             ],
-        })
+        }).then(() =>
+            toast(
+                `${title} is ${
+                    e.target.checked ? "now" : "not"
+                } visible in header!`,
+                { icon: <CheckCircle /> }
+            )
+        )
     }
 
     const handleOrderHeader = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +79,11 @@ const NavigationLine = ({
                     query: PAGES_NAVIGATION,
                 },
             ],
-        })
+        }).then(() =>
+            toast(`${title} order in header has been changed!`, {
+                icon: <CheckCircle />,
+            })
+        )
     }
 
     const handleFooter = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +105,16 @@ const NavigationLine = ({
                     query: PAGES_NAVIGATION,
                 },
             ],
-        })
+        }).then(() =>
+            toast(
+                `${title} is ${
+                    e.target.checked ? "now" : "not"
+                } visible in footer!`,
+                {
+                    icon: <CheckCircle />,
+                }
+            )
+        )
     }
 
     const handleOrderFooter = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -113,7 +136,11 @@ const NavigationLine = ({
                     query: PAGES_NAVIGATION,
                 },
             ],
-        })
+        }).then(() =>
+            toast(`${title} order in footer has been changed!`, {
+                icon: <CheckCircle />,
+            })
+        )
     }
 
     return (

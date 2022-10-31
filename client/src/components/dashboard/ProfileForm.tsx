@@ -4,11 +4,13 @@ import React, { useContext, useState } from "react"
 import { Form, Input } from "tsx-library-julseb"
 import { useMutation } from "@apollo/client"
 import { GraphQLErrors } from "@apollo/client/errors"
+import toast from "react-hot-toast"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
 import ImageUploader from "./ImageUploader"
 import ErrorMessages from "../ErrorMessages"
+import CheckCircle from "../icons/CheckCircle"
 
 import { EDIT_USER } from "../../graphql/mutations"
 
@@ -54,6 +56,7 @@ const ProfileForm = ({ edit }: Props) => {
             }).then(res => {
                 const user = res.data.editUser
                 setUser(user)
+                toast(`Your profile was updated`, { icon: <CheckCircle /> })
             })
         } else {
             console.log("No user id")

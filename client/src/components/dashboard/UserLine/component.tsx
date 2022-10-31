@@ -15,6 +15,9 @@ import {
 import { Link } from "react-router-dom"
 import { slugify } from "../../../utils"
 import { useMutation } from "@apollo/client"
+import toast from "react-hot-toast"
+
+import CheckCircle from "../../icons/CheckCircle"
 
 import {
     SET_USER_ROLE,
@@ -55,7 +58,11 @@ const UserLine = ({
                     query: USERS_DASHBOARD,
                 },
             ],
-        })
+        }).then(() =>
+            toast(`${fullName} role was successfully edited!`, {
+                icon: <CheckCircle />,
+            })
+        )
     }
 
     const [featured, setFeatured] = useState<boolean>(userFeatured)
@@ -77,7 +84,12 @@ const UserLine = ({
                     query: USERS_DASHBOARD,
                 },
             ],
-        })
+        }).then(() =>
+            toast(
+                `${fullName} is now ${e.target.checked ? "not " : ""}featured!`,
+                { icon: <CheckCircle /> }
+            )
+        )
     }
 
     const [approveUser, { loading: approveLoading }] = useMutation(APPROVE_USER)
@@ -96,7 +108,9 @@ const UserLine = ({
                     query: USERS_DASHBOARD,
                 },
             ],
-        })
+        }).then(() =>
+            toast(`${fullName} is now approved!`, { icon: <CheckCircle /> })
+        )
     }
 
     const [isDeleteOpen, setIsDeleteOpen] = useState(false)
@@ -112,7 +126,11 @@ const UserLine = ({
                     query: USERS_DASHBOARD,
                 },
             ],
-        })
+        }).then(() =>
+            toast(`${fullName} was successfully deleted!`, {
+                icon: <CheckCircle />,
+            })
+        )
     }
 
     return (

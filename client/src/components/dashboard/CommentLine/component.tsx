@@ -12,6 +12,9 @@ import {
 import { convertDateShort } from "../../../utils"
 import { Link } from "react-router-dom"
 import { useMutation } from "@apollo/client"
+import toast from "react-hot-toast"
+
+import CheckCircle from "../../icons/CheckCircle"
 
 import * as Styles from "./styles"
 import { CommentLineProps } from "./types"
@@ -34,7 +37,9 @@ const CommentLine = ({
                     query: ALL_COMMENTS,
                 },
             ],
-        })
+        }).then(() =>
+            toast("This comment was deleted", { icon: <CheckCircle /> })
+        )
     }
 
     const [isOpen, setIsOpen] = useState(false)

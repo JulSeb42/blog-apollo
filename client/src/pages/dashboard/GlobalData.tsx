@@ -4,12 +4,14 @@ import React, { useContext, useState } from "react"
 import { Text, Form, Input } from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
 import { useMutation } from "@apollo/client"
+import toast from "react-hot-toast"
 
 import { GlobalContext, GlobalContextType } from "../../context/global"
 
 import PageDashboard from "../../components/dashboard/PageDashboard"
 import ImageUploader from "../../components/dashboard/ImageUploader"
 import ErrorMessages from "../../components/ErrorMessages"
+import CheckCircle from "../../components/icons/CheckCircle"
 
 import { GLOBAL_DATA } from "../../graphql/queries"
 import { EDIT_GLOBAL } from "../../graphql/mutations"
@@ -86,6 +88,9 @@ const GlobalData = () => {
                     setErrorMessages(graphQLErrors)
                     return
                 },
+            }).then(() => {
+                setHasEdits(false)
+                toast("Global data was edited!", { icon: <CheckCircle /> })
             })
         } else {
             console.log("ID is missing")

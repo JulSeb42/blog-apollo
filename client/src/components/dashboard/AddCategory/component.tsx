@@ -5,8 +5,10 @@ import { Input, Button } from "tsx-library-julseb"
 import { useMutation } from "@apollo/client"
 import { GraphQLErrors } from "@apollo/client/errors"
 import { slugify } from "../../../utils"
+import toast from "react-hot-toast"
 
 import ErrorMessages from "../../ErrorMessages"
+import CheckCircle from "../../icons/CheckCircle"
 
 import { NEW_CATEGORY } from "../../../graphql/mutations"
 import { ALL_CATEGORIES } from "../../../graphql/queries"
@@ -50,7 +52,12 @@ const AddCategory = () => {
                 setErrorMessages(graphQLErrors)
                 return
             },
-        }).then(() => setCategory(""))
+        }).then(() => {
+            setCategory("")
+            toast(`${category} was successfully added!`, {
+                icon: <CheckCircle />,
+            })
+        })
     }
 
     return (

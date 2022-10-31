@@ -50,7 +50,7 @@ const NavDashboard = () => {
             icon: "file",
         },
         {
-            text: "Global dala",
+            text: "Global data",
             to: "/dashboard/global-data",
             icon: "database",
         },

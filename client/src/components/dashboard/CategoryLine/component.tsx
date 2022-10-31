@@ -12,6 +12,9 @@ import {
 import { Link } from "react-router-dom"
 import { slugify, unslugify } from "../../../utils"
 import { useMutation } from "@apollo/client"
+import toast from "react-hot-toast"
+
+import CheckCircle from "../../icons/CheckCircle"
 
 import * as Styles from "./styles"
 import { CategoryLineProps } from "./types"
@@ -59,6 +62,9 @@ const CategoryLine = ({ category: { name, _id } }: CategoryLineProps) => {
         }).then(res => {
             if (!res.errors) {
                 close()
+                toast(`You successfully updated ${name}!`, {
+                    icon: <CheckCircle />,
+                })
             }
         })
     }
@@ -79,7 +85,12 @@ const CategoryLine = ({ category: { name, _id } }: CategoryLineProps) => {
                     query: ALL_CATEGORIES,
                 },
             ],
-        }).then(() => setIsOpen(false))
+        }).then(() => {
+            setIsOpen(false)
+            toast(`You successfully deleted ${name}!`, {
+                icon: <CheckCircle />,
+            })
+        })
     }
 
     return (

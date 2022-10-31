@@ -5,10 +5,12 @@ import { Form, Input } from "tsx-library-julseb"
 import { useMutation } from "@apollo/client"
 import { GraphQLErrors } from "@apollo/client/errors"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
 
 import ErrorMessages from "../ErrorMessages"
+import CheckCircle from "../icons/CheckCircle"
 
 import { EDIT_PASSWORD } from "../../graphql/mutations"
 import { USER_BY_TOKEN } from "../../graphql/queries"
@@ -60,6 +62,9 @@ const EditPasswordForm = ({ newUser }: Props) => {
         }).then(res => {
             if (!res.errors) {
                 navigate(newUser ? "/dashboard/thank-you" : "/dashboard")
+                toast("Your password was successfully edited!", {
+                    icon: <CheckCircle />,
+                })
             }
         })
     }

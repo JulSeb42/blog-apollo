@@ -6,8 +6,10 @@ import { slugify } from "../../utils"
 import { useMutation } from "@apollo/client"
 import { GraphQLErrors } from "@apollo/client/errors"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 
 import ErrorMessages from "../ErrorMessages"
+import CheckCircle from "../icons/CheckCircle"
 
 import { PageType } from "../../types"
 
@@ -97,6 +99,7 @@ const PageForm = ({ page }: Props) => {
               }).then(res => {
                   if (!res.errors) {
                       navigate("/dashboard/pages")
+                      toast(`${inputs.title} was edited!`, { icon: <CheckCircle />})
                   }
               })
             : newPage({
@@ -115,6 +118,7 @@ const PageForm = ({ page }: Props) => {
               }).then(res => {
                   if (!res.errors) {
                       navigate("/dashboard/pages")
+                      toast(`${inputs.title} was added!`, { icon: <CheckCircle />})
                   }
               })
     }

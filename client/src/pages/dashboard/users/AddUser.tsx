@@ -5,9 +5,11 @@ import { useMutation } from "@apollo/client"
 import { Form, Input, Text } from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
 import { useNavigate } from "react-router-dom"
+import toast from "react-hot-toast"
 
 import PageDashboard from "../../../components/dashboard/PageDashboard"
 import ErrorMessages from "../../../components/ErrorMessages"
+import CheckCircle from "../../../components/icons/CheckCircle"
 
 import { ADD_USER } from "../../../graphql/mutations"
 import { USERS_DASHBOARD } from "../../../graphql/queries"
@@ -57,12 +59,19 @@ const AddUser = () => {
         }).then(res => {
             if (!res.errors) {
                 navigate("/dashboard/users")
+                toast(`${inputs.fullName} was successfully added!`, {
+                    icon: <CheckCircle />,
+                })
             }
         })
     }
 
     return (
-        <PageDashboard title="Add a new user" back="/dashboard/users" role="admin">
+        <PageDashboard
+            title="Add a new user"
+            back="/dashboard/users"
+            role="admin"
+        >
             <Text tag="h1">Add a new user</Text>
 
             <Text>
