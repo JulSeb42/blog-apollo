@@ -62,7 +62,7 @@ const AddUser = () => {
     }
 
     return (
-        <PageDashboard title="Add a new user" back="/dashboard/users">
+        <PageDashboard title="Add a new user" back="/dashboard/users" role="admin">
             <Text tag="h1">Add a new user</Text>
 
             <Text>

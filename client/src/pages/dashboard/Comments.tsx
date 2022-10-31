@@ -77,7 +77,7 @@ const Comments = () => {
     if (error) return <ErrorPage error={error.message} />
 
     return (
-        <PageDashboard title="Comments" isLoading={loading}>
+        <PageDashboard title="Comments" isLoading={loading} role="moderator">
             <Text tag="h1">All comments</Text>
 
             <FiltersContainer reset={handleReset}>

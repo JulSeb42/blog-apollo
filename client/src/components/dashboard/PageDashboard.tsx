@@ -10,13 +10,18 @@ import { AuthContext, AuthContextType } from "../../context/auth"
 import Helmet from "../layouts/Helmet"
 import NavDashboard from "./NavDashboard"
 
-const PageDashboard = ({ title, children, isLoading, back }: Props) => {
+const PageDashboard = ({ title, children, isLoading, back, role }: Props) => {
     const { user } = useContext(AuthContext) as AuthContextType
 
-    console.log(user)
+    if (user?.password === user?.generatedPassword)
+        return <Navigate to="/dashboard/change-password" />
 
-    if(user?.password === user?.generatedPassword) return <Navigate to="/dashboard/change-password" />
-    
+    if (user?.role === "writer" && role === "moderator")
+        return <Navigate to="/dashboard" />
+
+    if (user?.role === "moderator" && role === "admin")
+        return <Navigate to="/dashboard" />
+
     return (
         <>
             <Helmet title={title} />
@@ -56,6 +61,7 @@ interface Props {
     children?: any
     isLoading?: boolean
     back?: string
+    role?: "admin" | "moderator" | "writer"
 }
 
 const StyledWrapper = styled(Wrapper)`

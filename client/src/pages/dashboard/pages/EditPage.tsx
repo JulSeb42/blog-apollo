@@ -62,6 +62,7 @@ const EditPage = () => {
             title={`Edit ${page?.title}`}
             back="/dashboard/pages"
             isLoading={loading}
+            role="admin"
         >
             <Text tag="h1">Edit {page?.title}</Text>
 

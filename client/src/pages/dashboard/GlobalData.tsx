@@ -93,7 +93,7 @@ const GlobalData = () => {
     }
 
     return (
-        <PageDashboard title="Global data">
+        <PageDashboard title="Global data" role="admin">
             <Text tag="h1">Edit global data</Text>
 
             <Form

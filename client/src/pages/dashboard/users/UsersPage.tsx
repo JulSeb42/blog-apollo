@@ -75,7 +75,7 @@ const UsersPage = () => {
     if (error) return <ErrorPage error={error.message} />
 
     return (
-        <PageDashboard title="All users" isLoading={loading}>
+        <PageDashboard title="All users" isLoading={loading} role="admin">
             <Flexbox
                 alignItems="center"
                 justifyContent="space-between"

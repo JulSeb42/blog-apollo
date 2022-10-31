@@ -67,7 +67,7 @@ const AllPages = () => {
     if (error) return <ErrorPage error={error.message} />
 
     return (
-        <PageDashboard title="All pages" isLoading={loading}>
+        <PageDashboard title="All pages" isLoading={loading} role="admin">
             <Flexbox alignItems="center" justifyContent="space-between">
                 <Text tag="h1">
                     All pages ({getPaginatedData()?.length} page
