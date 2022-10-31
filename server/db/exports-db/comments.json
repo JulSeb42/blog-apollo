@@ -1,0 +1,89 @@
+[{
+  "_id": {
+    "$oid": "63601955f727a4fba5fb6531"
+  },
+  "poster": "Anna",
+  "body": "This is amazing!",
+  "post": {
+    "$oid": "635fbccc2391a88b7ca42996"
+  },
+  "date": "2022-10-31",
+  "time": "19:52",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1667242325295"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1667242325295"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6360195bf727a4fba5fb6537"
+  },
+  "poster": "Emma",
+  "body": "Yay",
+  "post": {
+    "$oid": "635fbccc2391a88b7ca42996"
+  },
+  "date": "2022-10-31",
+  "time": "19:52",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1667242331687"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1667242331687"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63601965f727a4fba5fb653d"
+  },
+  "poster": "Julien",
+  "body": "So cool",
+  "post": {
+    "$oid": "635fbccc2391a88b7ca42996"
+  },
+  "date": "2022-10-31",
+  "time": "19:52",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1667242341287"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1667242341287"
+    }
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "63601979f727a4fba5fb6547"
+  },
+  "poster": "Sile",
+  "body": "This changed my life!",
+  "post": {
+    "$oid": "635fbccc2391a88b7ca42991"
+  },
+  "date": "2022-10-31",
+  "time": "19:52",
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1667242361622"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1667242361622"
+    }
+  },
+  "__v": 0
+}]

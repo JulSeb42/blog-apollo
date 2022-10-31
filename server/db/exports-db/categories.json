@@ -1,0 +1,129 @@
+[{
+  "_id": {
+    "$oid": "635978112354bd43a6be1725"
+  },
+  "name": "lifestyle",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1666807825165"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1666807825165"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "635978112354bd43a6be1726"
+  },
+  "name": "weekend",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1666807825165"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1666807825165"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "635978112354bd43a6be1727"
+  },
+  "name": "holidays",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1666807825165"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1666807825165"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "635978112354bd43a6be1728"
+  },
+  "name": "city",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1666807825166"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1666807825166"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "635978112354bd43a6be1729"
+  },
+  "name": "party",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1666807825166"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1666807825166"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "635978112354bd43a6be172a"
+  },
+  "name": "music",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1666807825166"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1666807825166"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "635978112354bd43a6be172b"
+  },
+  "name": "event",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1666807825166"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1666807825166"
+    }
+  }
+},{
+  "_id": {
+    "$oid": "635978112354bd43a6be172c"
+  },
+  "name": "art",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1666807825166"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1667241765872"
+    }
+  }
+}]

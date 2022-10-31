@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "635b9d1e0de2860b75675848"
+  },
+  "name": "Apollo Blog",
+  "baseline": "Apollo and GraphQL are amazing!",
+  "metaDescription": "Blog made with Apollo GraphQL, TypeScript, React and MongoDB!",
+  "favicon": "https://res.cloudinary.com/dyfxmafvr/image/upload/v1666960211/blog-apollo/nrtirubrwcxdbutbrrzm.ico",
+  "email": "julien.sebag.apps@outlook.com",
+  "cover": "https://res.cloudinary.com/dyfxmafvr/image/upload/v1666960181/blog-apollo/rvwin4jrqkzuncxeuoen.jpg",
+  "keywords": [
+    "blog",
+    "react",
+    "graphql",
+    "fake project",
+    "express",
+    "apollo server",
+    "apollo client",
+    " typescript"
+  ],
+  "language": "en_EN",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1666948382962"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1667242782459"
+    }
+  }
+}]
