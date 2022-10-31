@@ -61,7 +61,9 @@ const EditPasswordForm = ({ newUser }: Props) => {
             ],
         }).then(res => {
             if (!res.errors) {
-                navigate(newUser ? "/dashboard/thank-you" : "/dashboard")
+                navigate(
+                    newUser ? "/dashboard/thank-you" : "/dashboard/edit-profile"
+                )
                 toast("Your password was successfully edited!", {
                     icon: <CheckCircle />,
                 })
