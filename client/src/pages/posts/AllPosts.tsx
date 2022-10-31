@@ -5,7 +5,6 @@ import { ComponentProps } from "tsx-library-julseb"
 import { useQuery } from "@apollo/client"
 
 import Page from "../../components/layouts/Page"
-import ErrorPage from "../../components/layouts/ErrorPage"
 import ListPosts from "../../components/posts/ListPosts"
 
 import { PUBLISHED_POSTS } from "../../graphql/queries"
@@ -21,14 +20,13 @@ const AllPosts = () => {
     const { data, loading, error } = useQuery(PUBLISHED_POSTS)
     const posts: PostType[] = data?.posts
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
         <Page
             title="Posts"
             aside={{ categories: true, authors: true }}
             breadcrumbs={breadcrumbs}
             isLoading={loading}
+            error={error?.message}
         >
             <ListPosts data={posts} />
         </Page>

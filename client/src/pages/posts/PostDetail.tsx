@@ -1,7 +1,7 @@
 /*=============================================== PostDetail ===============================================*/
 
-import React from "react"
-import { useParams } from "react-router-dom"
+import React, { useContext } from "react"
+import { useParams, Navigate } from "react-router-dom"
 import { useQuery } from "@apollo/client"
 import { unslugifyAuthor, slugify } from "../../utils"
 import {
@@ -14,8 +14,9 @@ import {
     Grid,
 } from "tsx-library-julseb"
 
+import { AuthContext, AuthContextType } from "../../context/auth"
+
 import FullPage from "../../components/layouts/FullPage"
-import ErrorPage from "../../components/layouts/ErrorPage"
 import CardAuthor from "../../components/author/CardAuthor"
 import CardComment from "../../components/comments/CardComment"
 import AddComment from "../../components/comments/AddComment"
@@ -24,6 +25,8 @@ import { GET_POST } from "../../graphql/queries"
 import { PostType } from "../../types"
 
 const PostDetail = () => {
+    const { isLoggedIn } = useContext(AuthContext) as AuthContextType
+
     const { slug } = useParams()
     const title = slug ? unslugifyAuthor(slug) : "Post"
 
@@ -55,10 +58,17 @@ const PostDetail = () => {
         },
     ]
 
-    if (error) return <ErrorPage error={error?.message || ""} />
+    if (post?.draft && !isLoggedIn) return <Navigate to="/" />
+
+    console.log(post?.draft)
 
     return (
-        <FullPage title={title} cover={post?.imageUrl} isLoading={loading}>
+        <FullPage
+            title={title}
+            cover={post?.imageUrl}
+            isLoading={loading}
+            error={error?.message}
+        >
             <Breadcrumbs items={breadcrumbs} separator="icon" />
 
             <MarkdownContainer

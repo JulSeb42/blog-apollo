@@ -20,7 +20,7 @@ export const QueryType = gql`
         post(slug: String!): Post!
         postById(_id: ID!): Post!
 
-        pages: [Page!]
+        pages(filters: FilterPagesInput): [Page!]
         page(slug: String!): Page
         pageById(_id: ID!): Page
 

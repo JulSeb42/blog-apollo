@@ -3,39 +3,24 @@
 import React from "react"
 import { Text, Flexbox } from "tsx-library-julseb"
 import { Link } from "react-router-dom"
-import { uuid } from "../../../utils"
+import { useQuery } from "@apollo/client"
 
 import * as Styles from "./styles"
-import { FooterLinkType } from "./types"
 
 import siteData from "../../../data/site-data"
+import { FOOTER_PAGES } from "../../../graphql/queries"
+import { PageType } from "../../../types"
 
 const Footer = () => {
-    const footerLinks: FooterLinkType[] = [
-        {
-            text: "About",
-            to: "#",
-        },
-        {
-            text: "Contact",
-            to: "#",
-        },
-        {
-            text: "Privacy policy",
-            to: "#",
-        },
-        {
-            text: "Impressum",
-            to: "#",
-        },
-    ]
+    const { data } = useQuery(FOOTER_PAGES)
+    const footerLinks: PageType[] = data?.pages
 
     return (
         <Styles.StyledFooter>
             <Flexbox alignItems="center" gap="xs">
-                {footerLinks.map(({ text, to }) => (
-                    <Link to={to} key={uuid()}>
-                        {text}
+                {footerLinks?.map(page => (
+                    <Link to={`/${page.slug}`} key={page._id}>
+                        {page.title}
                     </Link>
                 ))}
             </Flexbox>

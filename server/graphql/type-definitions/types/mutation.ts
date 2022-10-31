@@ -33,5 +33,7 @@ export const MutationType = gql`
         showPage(showPageInput: ShowPageInput): Page!
 
         editGlobal(globalInput: GlobalInput): GlobalData!
+
+        contact(contactInput: ContactInput): String
     }
 `

@@ -6,7 +6,6 @@ import { ComponentProps, Grid, Text } from "tsx-library-julseb"
 import { useSearchParams } from "react-router-dom"
 
 import Page from "../../components/layouts/Page"
-import ErrorPage from "../../components/layouts/ErrorPage"
 import Pagination from "../../components/Pagination"
 import CardAuthorSmall from "../../components/author/CardAuthorSmall"
 
@@ -44,14 +43,13 @@ const AllAuthors = () => {
 
     const numberOfPages = Math.ceil(length / dataLimit)
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
         <Page
             title="All authors"
             aside={{ posts: true, categories: true }}
             breadcrumbs={breadcrumbs}
             isLoading={loading}
+            error={error?.message}
         >
             <Grid col={3} gap="l">
                 {authors?.length > 0 ? (

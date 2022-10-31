@@ -9,7 +9,6 @@ import { AuthContext, AuthContextType } from "../../context/auth"
 
 import PageDashboard from "../../components/dashboard/PageDashboard"
 import CardAuthor from "../../components/author/CardAuthor"
-import ErrorPage from "../../components/layouts/ErrorPage"
 import Pagination from "../../components/Pagination"
 import PostLine from "../../components/dashboard/PostLine"
 import FiltersContainer from "../../components/dashboard/FiltersContainer"
@@ -85,13 +84,12 @@ const Dashboard = () => {
 
     const numberOfPages = Math.ceil(length / dataLimit)
 
-    if (error || authorsError)
-        return (
-            <ErrorPage error={error?.message || authorsError?.message || ""} />
-        )
-
     return user ? (
-        <PageDashboard title="Dashboard" isLoading={loading || authorsLoading}>
+        <PageDashboard
+            title="Dashboard"
+            isLoading={loading || authorsLoading}
+            error={error?.message || authorsError?.message}
+        >
             <CardAuthor author={user} dashboard />
 
             <Flexbox justifyContent="space-between" alignItems="center">

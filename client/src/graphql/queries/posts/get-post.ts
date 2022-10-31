@@ -10,6 +10,7 @@ export const GET_POST = gql`
             imageUrl
             body
             slug
+            draft
             author {
                 fullName
                 imageUrl

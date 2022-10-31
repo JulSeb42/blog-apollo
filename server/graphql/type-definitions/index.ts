@@ -9,6 +9,7 @@ import { GlobalInputs } from "./inputs/global"
 import { PageInputs } from "./inputs/page"
 import { PostInputs } from "./inputs/post"
 import { UserInputs } from "./inputs/user"
+import { ContactInput } from "./inputs/contact"
 
 import { CategoryType } from "./types/category"
 import { CommentType } from "./types/comment"
@@ -28,6 +29,7 @@ const typeDefs: any = [
     PageInputs,
     PostInputs,
     UserInputs,
+    ContactInput,
     CategoryType,
     CommentType,
     GlobalType,

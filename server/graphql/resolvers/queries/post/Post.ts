@@ -1,6 +1,6 @@
 /*=============================================== Post queries ===============================================*/
 
-import Comment from "../../../models/Comment.model"
+import Comment from "../../../../models/Comment.model"
 
 const Post = {
     category: async ({ category }: any, _: any, { categoryById }: any) =>

@@ -29,4 +29,10 @@ export const PageInputs = gql`
         footer: Boolean
         orderFooter: Int
     }
+
+    input FilterPagesInput {
+        header: Boolean
+        footer: Boolean
+        draft: Boolean
+    }
 `

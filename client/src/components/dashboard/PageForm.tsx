@@ -69,7 +69,7 @@ const PageForm = ({ page }: Props) => {
             slug: inputs.slug,
             body,
             metaDescription: inputs.metaDescription,
-            keywords: [...inputs.title, ...inputsKeywords],
+            keywords: [inputs.title, ...inputsKeywords],
             draft: inputs.draft,
         }
 
@@ -85,7 +85,11 @@ const PageForm = ({ page }: Props) => {
                           ...requestEdit,
                       },
                   },
-                  refetchQueries: [{ query: ALL_PAGES }],
+                  refetchQueries: [
+                      {
+                          query: ALL_PAGES,
+                      },
+                  ],
                   onError: ({ graphQLErrors }) => {
                       setErrorMessages(graphQLErrors)
                       return
@@ -99,7 +103,11 @@ const PageForm = ({ page }: Props) => {
                   variables: {
                       newPageInput: { ...requestNew },
                   },
-                  refetchQueries: [{ query: ALL_PAGES }],
+                  refetchQueries: [
+                      {
+                          query: ALL_PAGES,
+                      },
+                  ],
                   onError: ({ graphQLErrors }) => {
                       setErrorMessages(graphQLErrors)
                       return

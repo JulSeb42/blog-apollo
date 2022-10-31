@@ -15,6 +15,7 @@ export const ALL_POSTS = gql`
             body
             slug
             metaDescription
+            draft
         }
     }
 `

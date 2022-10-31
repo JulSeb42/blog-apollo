@@ -29,3 +29,5 @@ export * from "./pages/delete-page"
 export * from "./pages/show-page"
 
 export * from "./global/edit-global"
+
+export * from "./contact/contact"

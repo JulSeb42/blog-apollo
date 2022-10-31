@@ -11,6 +11,7 @@ export const PAGES_NAVIGATION = gql`
             footer
             orderFooter
             title
+            draft
         }
     }
 `

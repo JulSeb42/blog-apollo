@@ -7,7 +7,6 @@ import { Text } from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
 
 import PageDashboard from "../../../components/dashboard/PageDashboard"
-import ErrorPage from "../../../components/layouts/ErrorPage"
 import PageForm from "../../../components/dashboard/PageForm"
 import DangerZone from "../../../components/DangerZone"
 import ErrorMessages from "../../../components/ErrorMessages"
@@ -43,6 +42,12 @@ const EditPage = () => {
                 {
                     query: ALL_PAGES,
                 },
+                {
+                    query: PAGE_BY_ID,
+                    variables: {
+                        _id: id,
+                    },
+                },
             ],
             onError: ({ graphQLErrors }) => {
                 setErrorMessages(graphQLErrors)
@@ -55,20 +60,29 @@ const EditPage = () => {
         })
     }
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
         <PageDashboard
             title={`Edit ${page?.title}`}
             back="/dashboard/pages"
             isLoading={loading}
             role="admin"
+            error={error?.message}
         >
             <Text tag="h1">Edit {page?.title}</Text>
 
             <PageForm page={page} />
 
-            {id !== siteData.contactId ? (
+            {id === siteData.contactId ? (
+                <Text>
+                    You can not delete the contact page. If you do not want it
+                    to appear, you can add it as a draft.
+                </Text>
+            ) : id === siteData.thankYouId ? (
+                <Text>
+                    You can not delete the thank you page. If you do not want it
+                    to appear, you can add it as a draft.
+                </Text>
+            ) : (
                 <DangerZone
                     texts={{
                         buttonOpen: "Delete this page",
@@ -81,11 +95,6 @@ const EditPage = () => {
                         isLoading: deleteLoading,
                     }}
                 />
-            ) : (
-                <Text>
-                    You can not delete the contact page. If you do not want it
-                    to appear, you can add it as a draft.
-                </Text>
             )}
 
             {errorMessages && <ErrorMessages errors={errorMessages} />}

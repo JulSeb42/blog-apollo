@@ -1,7 +1,7 @@
 /*=============================================== Export queries ===============================================*/
 
 export * from "./Query"
-export * from "./Post"
-export * from "./Category"
-export * from "./User"
-export * from "./Comment"
+export * from "./post/Post"
+export * from "./category/Category"
+export * from "./user/User"
+export * from "./comment/Comment"

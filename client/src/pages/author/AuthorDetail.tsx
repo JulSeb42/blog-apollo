@@ -7,7 +7,6 @@ import { ComponentProps } from "tsx-library-julseb"
 import { unslugifyAuthor } from "../../utils"
 
 import Page from "../../components/layouts/Page"
-import ErrorPage from "../../components/layouts/ErrorPage"
 import CardAuthor from "../../components/author/CardAuthor"
 import ListPosts from "../../components/posts/ListPosts"
 
@@ -36,8 +35,6 @@ const AuthorDetail = () => {
     })
     const author: UserType = data?.user
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
         <Page
             title={authorName}
@@ -45,6 +42,7 @@ const AuthorDetail = () => {
             breadcrumbs={breadcrumbs}
             author
             isLoading={loading}
+            error={error?.message}
         >
             <CardAuthor author={author} />
 

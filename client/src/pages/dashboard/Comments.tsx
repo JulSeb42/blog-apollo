@@ -6,7 +6,6 @@ import { Text, Input } from "tsx-library-julseb"
 import { useSearchParams } from "react-router-dom"
 
 import PageDashboard from "../../components/dashboard/PageDashboard"
-import ErrorPage from "../../components/layouts/ErrorPage"
 import CommentLine from "../../components/dashboard/CommentLine"
 import Pagination from "../../components/Pagination"
 import FiltersContainer from "../../components/dashboard/FiltersContainer"
@@ -74,10 +73,13 @@ const Comments = () => {
 
     const numberOfPages = Math.ceil(comments?.length / dataLimit)
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
-        <PageDashboard title="Comments" isLoading={loading} role="moderator">
+        <PageDashboard
+            title="Comments"
+            isLoading={loading}
+            role="moderator"
+            error={error?.message}
+        >
             <Text tag="h1">All comments</Text>
 
             <FiltersContainer reset={handleReset}>

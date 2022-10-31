@@ -6,7 +6,6 @@ import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
 import PageDashboard from "../../../components/dashboard/PageDashboard"
-import ErrorPage from "../../../components/layouts/ErrorPage"
 import FiltersContainer from "../../../components/dashboard/FiltersContainer"
 import ListCards from "../../../components/dashboard/ListCards"
 import PageLine from "../../../components/dashboard/PageLine"
@@ -64,10 +63,13 @@ const AllPages = () => {
 
     const numberOfPages = Math.ceil(pages?.length / dataLimit)
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
-        <PageDashboard title="All pages" isLoading={loading} role="admin">
+        <PageDashboard
+            title="All pages"
+            isLoading={loading}
+            role="admin"
+            error={error?.message}
+        >
             <Flexbox alignItems="center" justifyContent="space-between">
                 <Text tag="h1">
                     All pages ({getPaginatedData()?.length} page

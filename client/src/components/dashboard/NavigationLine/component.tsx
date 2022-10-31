@@ -18,6 +18,7 @@ const NavigationLine = ({
         orderHeader: orderInHeader,
         footer: isInFooter,
         orderFooter: orderInFooter,
+        draft,
     },
 }: NavigationLineProps) => {
     const [header, setHeader] = useState(isInHeader)
@@ -136,6 +137,7 @@ const NavigationLine = ({
                     type="checkbox"
                     defaultChecked={header}
                     onChange={handleHeader}
+                    disabled={draft}
                 />
             </Flexbox>
 
@@ -155,7 +157,7 @@ const NavigationLine = ({
                     step={1}
                     value={orderHeader}
                     onChange={handleOrderHeader}
-                    disabled={!header}
+                    disabled={!header || draft}
                     min={0}
                 />
             </Flexbox>
@@ -177,6 +179,7 @@ const NavigationLine = ({
                     type="checkbox"
                     defaultChecked={footer}
                     onChange={handleFooter}
+                    disabled={draft}
                 />
             </Flexbox>
 
@@ -196,7 +199,7 @@ const NavigationLine = ({
                     step={1}
                     value={orderFooter}
                     onChange={handleOrderFooter}
-                    disabled={!footer}
+                    disabled={!footer || draft}
                     min={0}
                 />
             </Flexbox>

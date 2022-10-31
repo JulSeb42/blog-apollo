@@ -7,7 +7,6 @@ import { Text } from "tsx-library-julseb"
 import { GraphQLErrors } from "@apollo/client/errors"
 
 import PageDashboard from "../../../components/dashboard/PageDashboard"
-import ErrorPage from "../../../components/layouts/ErrorPage"
 import PostForm from "../../../components/dashboard/PostForm"
 import DangerZone from "../../../components/DangerZone"
 import ErrorMessages from "../../../components/ErrorMessages"
@@ -54,10 +53,13 @@ const EditPost = () => {
         })
     }
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
-        <PageDashboard title={pageTitle} isLoading={loading} back="/dashboard">
+        <PageDashboard
+            title={pageTitle}
+            isLoading={loading}
+            back="/dashboard"
+            error={error?.message}
+        >
             <Text tag="h1">{pageTitle}</Text>
 
             <PostForm post={post} />

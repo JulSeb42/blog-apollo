@@ -6,7 +6,6 @@ import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
 import Page from "../../components/layouts/Page"
-import ErrorPage from "../../components/layouts/ErrorPage"
 import CategoryCard from "../../components/posts/CategoryCard"
 import Pagination from "../../components/Pagination"
 
@@ -43,14 +42,13 @@ const AllCategories = () => {
 
     const numberOfPages = Math.ceil(length / dataLimit)
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
         <Page
             title="Categories"
             aside={{ posts: true, authors: true }}
             breadcrumbs={breadcrumbs}
             isLoading={loading}
+            error={error?.message}
         >
             <Grid col={3} gap="l">
                 {getPaginatedData()?.map(category => (

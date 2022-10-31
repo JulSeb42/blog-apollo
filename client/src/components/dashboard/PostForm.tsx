@@ -13,7 +13,7 @@ import ImageUploader from "./ImageUploader"
 import ErrorMessages from "../ErrorMessages"
 
 import { NEW_POST, EDIT_POST } from "../../graphql/mutations"
-import { ALL_CATEGORIES, ALL_POSTS } from "../../graphql/queries"
+import { ALL_CATEGORIES, POSTS_DASHBOARD } from "../../graphql/queries"
 import { PostType, CategoryType } from "../../types"
 
 const PostForm = ({ post }: Props) => {
@@ -119,11 +119,13 @@ const PostForm = ({ post }: Props) => {
                         ...newPostInput,
                     },
                 },
+
                 refetchQueries: [
                     {
-                        query: ALL_POSTS,
+                        query: POSTS_DASHBOARD,
                     },
                 ],
+
                 onError: ({ graphQLErrors }) => {
                     setErrorMessages(graphQLErrors)
                     return
@@ -141,11 +143,13 @@ const PostForm = ({ post }: Props) => {
                         ...editPostInput,
                     },
                 },
+
                 refetchQueries: [
                     {
-                        query: ALL_POSTS,
+                        query: POSTS_DASHBOARD,
                     },
                 ],
+
                 onError: ({ graphQLErrors }) => {
                     setErrorMessages(graphQLErrors)
                     return

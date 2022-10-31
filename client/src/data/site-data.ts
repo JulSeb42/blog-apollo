@@ -17,7 +17,7 @@ const siteData = {
 
     // Contact
     contactId: "635aacbed095dab5cbfa5d30",
-    thankYouId: "6244a38a0b0d58c80e6cf1d8",
+    thankYouId: "635ff1896def77ac130baa3e",
 }
 
 export default siteData

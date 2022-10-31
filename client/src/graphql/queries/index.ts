@@ -21,7 +21,10 @@ export * from "./auth/user-by-token"
 export * from "./comments/all-comments"
 
 export * from "./pages/all-pages"
+export * from "./pages/page"
 export * from "./pages/page-by-id"
 export * from "./pages/pages-navigation"
+export * from "./pages/header-pages"
+export * from "./pages/footer-pages"
 
 export * from "./global/global"

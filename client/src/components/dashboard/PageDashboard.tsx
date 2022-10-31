@@ -9,9 +9,19 @@ import { AuthContext, AuthContextType } from "../../context/auth"
 
 import Helmet from "../layouts/Helmet"
 import NavDashboard from "./NavDashboard"
+import ErrorPage from "../layouts/ErrorPage"
 
-const PageDashboard = ({ title, children, isLoading, back, role }: Props) => {
+const PageDashboard = ({
+    title,
+    children,
+    isLoading,
+    back,
+    role,
+    error,
+}: Props) => {
     const { user } = useContext(AuthContext) as AuthContextType
+
+    if (error) return <ErrorPage error={error} />
 
     if (user?.password === user?.generatedPassword)
         return <Navigate to="/dashboard/change-password" />
@@ -62,6 +72,7 @@ interface Props {
     isLoading?: boolean
     back?: string
     role?: "admin" | "moderator" | "writer"
+    error?: string
 }
 
 const StyledWrapper = styled(Wrapper)`

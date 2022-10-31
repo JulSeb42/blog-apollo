@@ -6,7 +6,6 @@ import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
 import PageDashboard from "../../../components/dashboard/PageDashboard"
-import ErrorPage from "../../../components/layouts/ErrorPage"
 import FiltersContainer from "../../../components/dashboard/FiltersContainer"
 import Pagination from "../../../components/Pagination"
 import ListCards from "../../../components/dashboard/ListCards"
@@ -72,10 +71,13 @@ const UsersPage = () => {
 
     const numberOfPages = Math.ceil(results?.length / dataLimit)
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
-        <PageDashboard title="All users" isLoading={loading} role="admin">
+        <PageDashboard
+            title="All users"
+            isLoading={loading}
+            role="admin"
+            error={error?.message}
+        >
             <Flexbox
                 alignItems="center"
                 justifyContent="space-between"
@@ -134,7 +136,11 @@ const UsersPage = () => {
                         </HeaderListUsers>
 
                         {getPaginatedData()?.map(user => (
-                            <UserLine user={user} allUsers={users} key={user?._id} />
+                            <UserLine
+                                user={user}
+                                allUsers={users}
+                                key={user?._id}
+                            />
                         ))}
                     </>
                 ) : (

@@ -6,7 +6,6 @@ import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
 import PageDashboard from "../../components/dashboard/PageDashboard"
-import ErrorPage from "../../components/layouts/ErrorPage"
 import CategoryLine from "../../components/dashboard/CategoryLine"
 import Pagination from "../../components/Pagination"
 import AddCategory from "../../components/dashboard/AddCategory"
@@ -38,10 +37,12 @@ const Categories = () => {
 
     const numberOfPages = Math.ceil(length / dataLimit)
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
-        <PageDashboard title="Categories" isLoading={loading}>
+        <PageDashboard
+            title="Categories"
+            isLoading={loading}
+            error={error?.message}
+        >
             <Text tag="h1">Categories</Text>
 
             <AddCategory />

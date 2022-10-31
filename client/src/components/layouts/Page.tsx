@@ -14,6 +14,7 @@ import styled from "styled-components/macro"
 import DefaultLayout from "./DefaultLayout"
 import Header from "./Header"
 import ListAside from "./ListAside"
+import ErrorPage from "./ErrorPage"
 
 const StyledMain = styled(Main)`
     margin-top: 56px;
@@ -35,6 +36,7 @@ const Page = ({
     breadcrumbs,
     isLoading,
     author,
+    error
 }: Props) => {
     const baseBreadcrumbs: ComponentProps.BreadcrumbsItemProps[] = [
         {
@@ -42,6 +44,8 @@ const Page = ({
             to: "/",
         },
     ]
+
+    if(error) return <ErrorPage error={error} />
 
     return (
         <DefaultLayout
@@ -107,4 +111,5 @@ interface Props {
     breadcrumbs?: ComponentProps.BreadcrumbsItemProps[]
     isLoading?: boolean
     author?: boolean
+    error?: string
 }

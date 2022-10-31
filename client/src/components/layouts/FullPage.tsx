@@ -10,6 +10,7 @@ import DefaultLayout from "./DefaultLayout"
 import Header from "./Header"
 import FeaturedPosts from "../posts/FeaturedPosts"
 import ListAside from "./ListAside"
+import ErrorPage from "./ErrorPage"
 
 const FullPage = ({
     title,
@@ -19,8 +20,11 @@ const FullPage = ({
     children,
     isHomepage,
     isLoading,
+    error,
 }: Props) => {
     const { globalData } = useContext(GlobalContext) as GlobalContextType
+
+    if (error) return <ErrorPage error={error} />
     
     return (
         <DefaultLayout
@@ -71,6 +75,7 @@ interface Props {
     children?: any
     isHomepage?: boolean
     isLoading?: boolean
+    error?: string
 }
 
 const StyledMain = styled(Main)<{ $isHomepage?: boolean }>`

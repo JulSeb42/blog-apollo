@@ -7,7 +7,6 @@ import { unslugify } from "../../utils"
 import { ComponentProps } from "tsx-library-julseb"
 
 import Page from "../../components/layouts/Page"
-import ErrorPage from "../../components/layouts/ErrorPage"
 import ListPosts from "../../components/posts/ListPosts"
 
 import { CATEGORY } from "../../graphql/queries"
@@ -35,8 +34,6 @@ const CategoryDetail = () => {
 
     const posts: PostType[] = data?.category?.posts
 
-    if (error) return <ErrorPage error={error.message} />
-
     return (
         <Page
             title={categoryTitle}
@@ -47,6 +44,7 @@ const CategoryDetail = () => {
                 authors: true,
             }}
             isLoading={loading}
+            error={error?.message}
         >
             <ListPosts data={posts} />
         </Page>
