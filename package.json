@@ -35,6 +35,7 @@
         "install": "cd client && yarn",
         "server": "nodemon --watch './**/*.ts' --exec 'ts-node' server/index.ts",
         "client": "cd client && yarn start",
-        "dev": "concurrently --kill-others 'yarn server' 'yarn client'"
+        "dev": "concurrently --kill-others 'yarn server' 'yarn client'",
+        "build": "cd client && yarn build"
     }
 }
