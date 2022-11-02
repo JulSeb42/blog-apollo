@@ -55,6 +55,8 @@ const CommentLine = ({
                         variant="transparent"
                         size={24}
                         onClick={() => setIsOpen(!isOpen)}
+                        label="Delete"
+                        showLabel
                     />
                 </Flexbox>
 

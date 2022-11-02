@@ -29,6 +29,9 @@ export const UserInputs = gql`
 
     input FilterUsersInput {
         featured: Boolean
+        role: UserRoles
+        approved: Boolean
+        hasPosts: Boolean
     }
 
     input SetUserRoleInput {

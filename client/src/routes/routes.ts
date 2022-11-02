@@ -39,6 +39,7 @@ import ChangePassword from "../pages/dashboard/users/ChangePassword"
 import ThankYou from "../pages/dashboard/users/ThankYou"
 import Navigation from "../pages/dashboard/Navigation"
 import EditPassword from "../pages/dashboard/users/EditPassword"
+import GetApproval from "../pages/dashboard/GetApproval"
 
 type RouteType = {
     path: string
@@ -203,6 +204,11 @@ const routes: RouteType[] = [
         path: "/dashboard/edit-profile/edit-password",
         protected: true,
         element: EditPassword,
+    },
+    {
+        path: "/dashboard/get-approval",
+        protected: true,
+        element: GetApproval,
     },
 ]
 

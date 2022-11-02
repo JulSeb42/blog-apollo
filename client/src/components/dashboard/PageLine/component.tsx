@@ -22,6 +22,8 @@ const PageLine = ({ page: { _id, slug, title, draft } }: PageLineProps) => {
                 icon="file"
                 variant="transparent"
                 to={slug}
+                label="See page"
+                showLabel
                 // @ts-expect-error
                 target="_blank"
                 rel="noreferrer noopener"
@@ -33,6 +35,8 @@ const PageLine = ({ page: { _id, slug, title, draft } }: PageLineProps) => {
                 variant="transparent"
                 to={`/dashboard/pages/${_id}`}
                 size={24}
+                label="Edit"
+                showLabel
             />
         </Styles.StyledPageLine>
     )

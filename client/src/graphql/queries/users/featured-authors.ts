@@ -4,9 +4,13 @@ import { gql } from "@apollo/client"
 
 export const FEATURED_AUTHORS = gql`
     query {
-        users(filters: { featured: true }) {
+        users(filters: { approved: true }) {
             _id
             fullName
+            imageUrl
+            posts {
+                _id
+            }
         }
     }
 `

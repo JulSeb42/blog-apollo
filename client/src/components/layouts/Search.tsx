@@ -71,6 +71,8 @@ const Search = () => {
                 onClick={() => setIsOpen(true)}
                 size={24}
                 variant="transparent"
+                label="Search"
+                color="white"
             />
 
             <Modal isOpen={isOpen}>

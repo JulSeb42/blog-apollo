@@ -1,18 +1,34 @@
 /*=============================================== User query ===============================================*/
 
+import { UserType } from "../../../../types"
+
 export const UserQuery = {
     users: async (_: any, { filters }: any, { users }: any) => {
-        let usersArr = await users()
+        let usersArr: UserType[] = await users()
 
-        let sortedUsers = usersArr.sort((a: any, b: any) =>
+        let sortedUsers = usersArr.sort((a, b) =>
             a.fullName < b.fullName ? -1 : 0
         )
 
         if (filters) {
-            const { featured } = filters
+            const { featured, role, approved, hasPosts } = filters
 
             if (featured) {
-                sortedUsers = sortedUsers.filter((user: any) => user.featured)
+                sortedUsers = sortedUsers.filter(user => user.featured)
+            }
+
+            if (role) {
+                sortedUsers = sortedUsers.filter(user => user.role === role)
+            }
+
+            if (approved) {
+                sortedUsers = sortedUsers.filter(
+                    user => user.approved === approved
+                )
+            }
+
+            if (hasPosts) {
+                sortedUsers = sortedUsers.filter(user => user.posts.length > 0)
             }
         }
 

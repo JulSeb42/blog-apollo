@@ -24,7 +24,7 @@ const AllCategories = () => {
     const categories: CategoryType[] = data?.categories
 
     const filteredCategories = categories.filter(
-        (category: CategoryType) => category.posts.length > 0
+        category => category.posts.length > 0
     )
 
     const [query] = useSearchParams()

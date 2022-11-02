@@ -135,6 +135,8 @@ const CategoryLine = ({ category: { name, _id } }: CategoryLineProps) => {
                             editMode ? close() : setEditMode(!editMode)
                         }
                         isLoading={loading}
+                        label={isOpen ? "Cancel" : "Edit"}
+                        showLabel
                     />
 
                     <ButtonIcon
@@ -145,6 +147,8 @@ const CategoryLine = ({ category: { name, _id } }: CategoryLineProps) => {
                         type="button"
                         isLoading={loading}
                         onClick={() => setIsOpen(!isOpen)}
+                        label="Delete"
+                        showLabel
                     />
                 </Flexbox>
             </Styles.Content>

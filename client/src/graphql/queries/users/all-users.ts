@@ -4,7 +4,7 @@ import { gql } from "@apollo/client"
 
 export const ALL_USERS = gql`
     query {
-        users {
+        users(filters: {  }) {
             _id
             fullName
             imageUrl

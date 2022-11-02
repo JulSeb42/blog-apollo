@@ -67,7 +67,7 @@ const UserLine = ({
 
     const [featured, setFeatured] = useState<boolean>(userFeatured)
     const [featureUser, { loading: featureLoading }] = useMutation(FEATURE_USER)
-
+    
     const handleFeatured = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFeatured(e.target.checked)
 
@@ -92,14 +92,16 @@ const UserLine = ({
         )
     }
 
+    const [isApproved, setIsApproved] = useState(approved)
     const [approveUser, { loading: approveLoading }] = useMutation(APPROVE_USER)
 
-    const handleApprove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const handleApprove = () => {
+        setIsApproved(!isApproved)
         approveUser({
             variables: {
                 approveUserInput: {
                     _id,
-                    approved: true,
+                    approved: !isApproved,
                 },
             },
 
@@ -109,7 +111,7 @@ const UserLine = ({
                 },
             ],
         }).then(() =>
-            toast(`${fullName} is now approved!`, { icon: <CheckCircle /> })
+            toast(`${fullName}'s access is now ${isApproved ? "revoked" : "approved"}!`, { icon: <CheckCircle /> })
         )
     }
 
@@ -218,12 +220,13 @@ const UserLine = ({
                     )}
 
                     <ButtonIcon
-                        icon="check"
-                        color="success"
+                        icon={isApproved ? "close" : "check"}
+                        color={isApproved ? "danger" : "success"}
                         size={24}
-                        disabled={approved}
                         variant="transparent"
                         onClick={handleApprove}
+                        label={`${isApproved ? "Revoke" : "Approve"} user`}
+                        showLabel
                     />
 
                     <ButtonIcon
@@ -232,6 +235,8 @@ const UserLine = ({
                         size={24}
                         variant="transparent"
                         onClick={() => setIsDeleteOpen(!isDeleteOpen)}
+                        label="Delete"
+                        showLabel
                     />
                 </Flexbox>
             </Styles.Content>

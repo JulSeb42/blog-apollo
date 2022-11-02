@@ -4,6 +4,7 @@ export * from "./users/all-users"
 export * from "./users/get-user"
 export * from "./users/featured-authors"
 export * from "./users/users-dashboard"
+export * from "./users/get-admins"
 
 export * from "./posts/all-posts"
 export * from "./posts/featured-posts"

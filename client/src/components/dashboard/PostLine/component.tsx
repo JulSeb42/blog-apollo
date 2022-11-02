@@ -39,16 +39,20 @@ const PostLine = ({
                     icon="file"
                     variant="transparent"
                     to={`/posts/${category.name}/${slug}`}
+                    label="See post"
+                    showLabel
                     // @ts-expect-error
                     target="_blank"
                     rel="noreferrer noopener"
                 />
-                
+
                 <ButtonIcon
                     size={24}
                     icon="edit"
                     variant="transparent"
                     to={`/dashboard/posts/${_id}`}
+                    label="Edit"
+                    showLabel
                 />
             </Flexbox>
         </Styles.StyledPostLine>

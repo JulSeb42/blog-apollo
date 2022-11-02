@@ -32,6 +32,8 @@ const PageDashboard = ({
     if (user?.role === "moderator" && role === "admin")
         return <Navigate to="/dashboard" />
 
+    if (!user?.approved) return <Navigate to="/dashboard/get-approval" />
+
     return (
         <>
             <Helmet title={title} />
