@@ -2,12 +2,12 @@
 
 import React from "react"
 import {
-    Wrapper,
     Main,
     Aside,
     ComponentProps,
     Breadcrumbs,
-    Text
+    Text,
+    Breakpoints
 } from "tsx-library-julseb"
 import styled from "styled-components/macro"
 
@@ -15,13 +15,27 @@ import DefaultLayout from "./DefaultLayout"
 import Header from "./Header"
 import ListAside from "./ListAside"
 import ErrorPage from "./ErrorPage"
+import StyledWrapper from "./Wrapper"
 
-const StyledMain = styled(Main)`
+const StyledMain = styled(Main)<{ $mainOnly?: boolean }>`
     margin-top: 56px;
+
+    @media ${Breakpoints.Tablet} {
+        padding-bottom: 0;
+        padding-top: 0;
+        margin-top: 0;
+        min-height: ${({ $mainOnly }) => $mainOnly && `calc(100vh - ${56 * 3}px)`}
+    }
 `
 
 const StyledAside = styled(Aside)`
     margin-top: 56px;
+
+    @media ${Breakpoints.Tablet} {
+        padding-top: 0;
+        margin-top: 0;
+        padding-bottom: 0;
+    }
 `
 
 const Page = ({
@@ -57,7 +71,7 @@ const Page = ({
         >
             <Header />
 
-            <Wrapper template={aside ? "2cols" : template}>
+            <StyledWrapper template={aside ? "2cols" : template}>
                 {template !== "1col" && !aside ? (
                     children
                 ) : aside ? (
@@ -86,9 +100,9 @@ const Page = ({
                         </StyledAside>
                     </>
                 ) : (
-                    <StyledMain size={mainWidth}>{children}</StyledMain>
+                    <StyledMain size={mainWidth} $mainOnly>{children}</StyledMain>
                 )}
-            </Wrapper>
+            </StyledWrapper>
         </DefaultLayout>
     )
 }

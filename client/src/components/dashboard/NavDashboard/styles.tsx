@@ -7,9 +7,11 @@ import {
     Mixins,
     FontWeights,
     Breakpoints,
+    Burger,
+    Transitions,
 } from "tsx-library-julseb"
 
-const StyledNavDashboard = styled.nav`
+const StyledNavDashboard = styled.nav<{ $isOpen: boolean }>`
     position: fixed;
     top: 0;
     left: 0;
@@ -49,6 +51,21 @@ const StyledNavDashboard = styled.nav`
     button {
         font-weight: ${FontWeights.Regular};
     }
+
+    @media ${Breakpoints.Tablet} {
+        transition: ${Transitions.Short};
+        z-index: 997;
+        width: ${({ $isOpen }) => ($isOpen ? "250px" : 0)};
+        padding: ${({ $isOpen }) => ($isOpen ? Spacers.L : 0)};
+        overflow: hidden;
+    }
 `
 
-export { StyledNavDashboard }
+const StyledBurger = styled(Burger)<{ isOpen: boolean }>`
+    z-index: 999;
+    position: fixed;
+    top: ${Spacers.XXL};
+    right: ${Spacers.XXL};
+`
+
+export { StyledNavDashboard, StyledBurger }

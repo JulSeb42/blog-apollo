@@ -1,7 +1,7 @@
 /*=============================================== AllPages ===============================================*/
 
 import React, { useState } from "react"
-import { Text, Button, Input, Flexbox } from "tsx-library-julseb"
+import { Text, Input } from "tsx-library-julseb"
 import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
@@ -10,6 +10,7 @@ import FiltersContainer from "../../../components/dashboard/FiltersContainer"
 import ListCards from "../../../components/dashboard/ListCards"
 import PageLine from "../../../components/dashboard/PageLine"
 import Pagination from "../../../components/Pagination"
+import TitleDashboard from "../../../components/dashboard/TitleDashboard"
 
 import { ALL_PAGES } from "../../../graphql/queries"
 import { PageType } from "../../../types"
@@ -70,14 +71,13 @@ const AllPages = () => {
             role="admin"
             error={error?.message}
         >
-            <Flexbox alignItems="center" justifyContent="space-between">
-                <Text tag="h1">
-                    All pages ({getPaginatedData()?.length} page
-                    {getPaginatedData()?.length > 1 ? "s" : ""})
-                </Text>
-
-                <Button to="/dashboard/pages/new-page">Add a new page</Button>
-            </Flexbox>
+            <TitleDashboard
+                title={`All pages (${getPaginatedData()?.length} page${
+                    getPaginatedData()?.length > 1 ? "s" : ""
+                })`}
+                buttonText="Add a new page"
+                buttonTo="/dashboard/pages/new-page"
+            />
 
             <FiltersContainer reset={handleReset}>
                 <Input

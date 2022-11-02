@@ -13,11 +13,11 @@ const StyledFooter = styled.footer`
     background-color: ${ThemeLight.Primary500};
     color: ${ThemeLight.White};
 
-    @media ${Breakpoints.Hover} {
-        a {
-            color: ${ThemeLight.ColorsHoverDefault({ $color: "white" })};
-            text-decoration: none;
+    a {
+        color: ${ThemeLight.ColorsHoverDefault({ $color: "white" })};
+        text-decoration: none;
 
+        @media ${Breakpoints.Hover} {
             &:hover {
                 color: ${ThemeLight.ColorsHoverHover({ $color: "primary" })};
             }
@@ -26,6 +26,11 @@ const StyledFooter = styled.footer`
                 color: ${ThemeLight.ColorsHoverActive({ $color: "primary" })};
             }
         }
+    }
+
+    @media ${Breakpoints.Mobile} {
+        flex-direction: column;
+        gap: ${Spacers.M};
     }
 `
 

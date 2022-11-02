@@ -1,7 +1,7 @@
 /*=============================================== AddCategory styles ===============================================*/
 
 import styled from "styled-components/macro"
-import { Mixins } from "tsx-library-julseb"
+import { Mixins, Breakpoints } from "tsx-library-julseb"
 
 const StyledAddCategory = styled.form<{ $hasError: boolean }>`
     ${({ $hasError }) =>
@@ -17,6 +17,10 @@ const StyledAddCategory = styled.form<{ $hasError: boolean }>`
 
     & > div {
         flex-grow: 1;
+    }
+
+    @media ${Breakpoints.Tablet} {
+        flex-wrap: wrap;
     }
 `
 

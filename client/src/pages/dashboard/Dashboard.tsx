@@ -1,7 +1,7 @@
 /*=============================================== Dashboard ===============================================*/
 
 import React, { useContext, useState } from "react"
-import { Text, Flexbox, Button, Input } from "tsx-library-julseb"
+import { Text, Input } from "tsx-library-julseb"
 import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
@@ -13,6 +13,7 @@ import Pagination from "../../components/Pagination"
 import PostLine from "../../components/dashboard/PostLine"
 import FiltersContainer from "../../components/dashboard/FiltersContainer"
 import ListCards from "../../components/dashboard/ListCards"
+import TitleDashboard from "../../components/dashboard/TitleDashboard"
 
 import { POSTS_DASHBOARD, ALL_USERS } from "../../graphql/queries"
 import { PostType, UserType } from "../../types"
@@ -92,13 +93,12 @@ const Dashboard = () => {
         >
             <CardAuthor author={user} dashboard />
 
-            <Flexbox justifyContent="space-between" alignItems="center">
-                <Text tag="h2">
-                    Posts ({length} post{length > 1 ? "s" : ""})
-                </Text>
-
-                <Button to="/dashboard/posts/new-post">New post</Button>
-            </Flexbox>
+            <TitleDashboard
+                title={`Posts (${length} post${length > 1 ? "s" : ""})`}
+                buttonText="New post"
+                buttonTo="/dashboard/posts/new-post"
+                tag="h2"
+            />
 
             <FiltersContainer reset={resetFilters}>
                 <Input

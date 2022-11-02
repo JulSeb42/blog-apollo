@@ -65,6 +65,7 @@ const Header = ({ isTransparent }: Props) => {
             hideOnScroll={400}
             position="fixed"
             backgroundColor={isTransparent ? "transparent" : "primary"}
+            navMobileVariant="drawer"
         >
             {navLinks(baseLinks)}
 

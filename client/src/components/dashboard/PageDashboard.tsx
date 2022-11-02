@@ -1,8 +1,15 @@
 /*=============================================== PageDashboard ===============================================*/
 
-import React, { useContext } from "react"
+import React, { useContext, useState } from "react"
 import styled from "styled-components/macro"
-import { Wrapper, Main, PageLoading, Button } from "tsx-library-julseb"
+import {
+    Wrapper,
+    Main,
+    PageLoading,
+    Button,
+    Breakpoints,
+    Transitions
+} from "tsx-library-julseb"
 import { Navigate } from "react-router-dom"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
@@ -19,6 +26,8 @@ const PageDashboard = ({
     role,
     error,
 }: Props) => {
+    const [isOpen, setIsOpen] = useState(false)
+
     const { user } = useContext(AuthContext) as AuthContextType
 
     if (error) return <ErrorPage error={error} />
@@ -42,9 +51,9 @@ const PageDashboard = ({
                 <PageLoading loaderVariant={4} />
             ) : (
                 <>
-                    <NavDashboard />
+                    <NavDashboard isOpen={isOpen} setIsOpen={setIsOpen} />
 
-                    <StyledWrapper>
+                    <StyledWrapper $isOpen={isOpen}>
                         <Main size="large">
                             {back && (
                                 <Button
@@ -77,8 +86,14 @@ interface Props {
     error?: string
 }
 
-const StyledWrapper = styled(Wrapper)`
+const StyledWrapper = styled(Wrapper)<{ $isOpen?: boolean }>`
     width: calc(100% - 250px);
     left: 250px;
     position: relative;
+
+    @media ${Breakpoints.Tablet} {
+        width: ${({ $isOpen }) => ($isOpen ? `calc(100% - 250px)` : "100%")};
+        left: ${({ $isOpen }) => ($isOpen ? "250px" : 0)};
+        transition: ${Transitions.Short};
+    }
 `

@@ -21,6 +21,16 @@ const StyledFeaturedPosts = styled.div`
     background-color: ${ThemeLight.Background};
     position: relative;
     z-index: 10;
+
+    @media ${Breakpoints.Tablet} {
+        & > div:last-child > a:first-child {
+            grid-column: span 2;
+
+            @media ${Breakpoints.Mobile} {
+                grid-column: inherit;
+            }
+        }
+    }
 `
 
 const Card = styled(Link)`
@@ -54,6 +64,11 @@ const Card = styled(Link)`
         &:hover img {
             transform: scale(1.05);
         }
+    }
+
+    @media ${Breakpoints.Tablet} {
+        height: inherit;
+        aspect-ratio: 16/9;
     }
 `
 

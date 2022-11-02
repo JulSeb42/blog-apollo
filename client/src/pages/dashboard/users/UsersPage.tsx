@@ -1,7 +1,7 @@
 /*=============================================== UsersPage ===============================================*/
 
 import React, { useState } from "react"
-import { Text, Flexbox, Button, Input } from "tsx-library-julseb"
+import { Text, Input } from "tsx-library-julseb"
 import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
@@ -11,6 +11,7 @@ import Pagination from "../../../components/Pagination"
 import ListCards from "../../../components/dashboard/ListCards"
 import UserLine from "../../../components/dashboard/UserLine"
 import HeaderListUsers from "../../../components/dashboard/HeaderListUsers"
+import TitleDashboard from "../../../components/dashboard/TitleDashboard"
 
 import { USERS_DASHBOARD } from "../../../graphql/queries"
 import { UserType } from "../../../types"
@@ -78,18 +79,13 @@ const UsersPage = () => {
             role="admin"
             error={error?.message}
         >
-            <Flexbox
-                alignItems="center"
-                justifyContent="space-between"
-                gap="xs"
-            >
-                <Text tag="h1">
-                    All users ({results?.length} user
-                    {results?.length > 1 ? "s" : ""})
-                </Text>
-
-                <Button to="/dashboard/users/new-user">Add a new user</Button>
-            </Flexbox>
+            <TitleDashboard
+                title={`All users (${results?.length} user${
+                    results?.length > 1 ? "s" : ""
+                })`}
+                buttonText="Add a new user"
+                buttonTo="/dashboard/users/new-user"
+            />
 
             <FiltersContainer reset={handleReset}>
                 <Input

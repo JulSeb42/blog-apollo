@@ -12,7 +12,7 @@ import * as Styles from "./styles"
 
 import { NavItemType } from "../../../types"
 
-const NavDashboard = () => {
+const NavDashboard = ({ isOpen, setIsOpen }: Props) => {
     const { user, logoutUser } = useContext(AuthContext) as AuthContextType
     const { globalData } = useContext(GlobalContext) as GlobalContextType
 
@@ -106,28 +106,32 @@ const NavDashboard = () => {
         ))
 
     return (
-        <Styles.StyledNavDashboard>
-            <Grid gap="xxs">
-                <Text tag="h4" linkColor="white">
-                    <NavLink
-                        to="/"
-                        target="_blank"
-                        rel="noreferrer noopener"
-                        end
-                    >
-                        {globalData?.name}
-                    </NavLink>
-                </Text>
+        <>
+            <Styles.StyledNavDashboard $isOpen={isOpen}>
+                <Grid gap="xxs">
+                    <Text tag="h4" linkColor="white">
+                        <NavLink
+                            to="/"
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            end
+                        >
+                            {globalData?.name}
+                        </NavLink>
+                    </Text>
 
-                {navLinks(navItems)}
+                    {navLinks(navItems)}
 
-                {user?.role !== "writer" && navLinks(modeItems)}
+                    {user?.role !== "writer" && navLinks(modeItems)}
 
-                {user?.role === "admin" && navLinks(adminItems)}
-            </Grid>
+                    {user?.role === "admin" && navLinks(adminItems)}
+                </Grid>
 
-            <Grid gap="xxs">{navLinks(bottomItems)}</Grid>
-        </Styles.StyledNavDashboard>
+                <Grid gap="xxs">{navLinks(bottomItems)}</Grid>
+            </Styles.StyledNavDashboard>
+
+            <Styles.StyledBurger isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+        </>
     )
 }
 
@@ -136,4 +140,9 @@ export default NavDashboard
 type NavItem = NavItemType & {
     icon: string
     blank?: boolean
+}
+
+interface Props {
+    isOpen: boolean
+    setIsOpen: (isOpen: boolean) => void
 }
