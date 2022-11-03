@@ -62,10 +62,15 @@ const StyledNavDashboard = styled.nav<{ $isOpen: boolean }>`
 `
 
 const StyledBurger = styled(Burger)<{ isOpen: boolean }>`
-    z-index: 999;
-    position: fixed;
-    top: ${Spacers.XXL};
-    right: ${Spacers.XXL};
+    display: none;
+
+    @media ${Breakpoints.Tablet} {
+        display: inherit;
+        z-index: 999;
+        position: fixed;
+        top: ${Spacers.XXL};
+        right: ${Spacers.XXL};
+    }
 `
 
 export { StyledNavDashboard, StyledBurger }

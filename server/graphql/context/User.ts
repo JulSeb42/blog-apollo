@@ -2,7 +2,12 @@
 
 import { ApolloError } from "apollo-server"
 import bcrypt from "bcryptjs"
-import { passwordRegex, emailRegex, getRandomString, getRandomAvatar } from "ts-utils-julseb"
+import {
+    passwordRegex,
+    emailRegex,
+    getRandomString,
+    getRandomAvatar,
+} from "ts-utils-julseb"
 import jwt from "jsonwebtoken"
 
 import User from "../../models/User.model"
@@ -59,7 +64,7 @@ const UserContext = {
                 generatedPassword: hashedPassword,
                 role,
                 approved: true,
-                imageUrl: getRandomAvatar("other")
+                imageUrl: getRandomAvatar("other"),
             })
 
             const token = jwt.sign(
@@ -70,7 +75,7 @@ const UserContext = {
             )
 
             newUser.token = token
-            
+
             const res = await newUser.save().then((res: any) => {
                 sendMail(
                     email,
@@ -82,11 +87,15 @@ const UserContext = {
             })
 
             return res
-
         } else {
-            throw new ApolloError("A user with this email already exists", "USER_ALREADY_EXISTS")
+            throw new ApolloError(
+                "A user with this email already exists",
+                "USER_ALREADY_EXISTS"
+            )
         }
     },
+
+   
 
     editUser: async ({ _id, fullName, bio, imageUrl }: UserType) => {
         if (!fullName) {

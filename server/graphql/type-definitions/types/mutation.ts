@@ -35,5 +35,8 @@ export const MutationType = gql`
         editGlobal(globalInput: GlobalInput): GlobalData!
 
         contact(contactInput: ContactInput): String
+
+        createFirstAccount(firstUserInput: FirstUserInput): User!
+        createGlobal(createGlobalInput: CreateGlobalInput): GlobalData!
     }
 `

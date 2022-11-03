@@ -7,6 +7,7 @@ import { CategoryContext } from "./Category"
 import { CommentContext } from "./Comment"
 import { PageContext } from "./Page"
 import { GlobalContext } from "./GlobalData"
+import { SetupContext } from "./Setup"
 
 const context = {
     ...AuthContext,
@@ -16,6 +17,7 @@ const context = {
     ...CommentContext,
     ...PageContext,
     ...GlobalContext,
+    ...SetupContext,
 }
 
 export default context

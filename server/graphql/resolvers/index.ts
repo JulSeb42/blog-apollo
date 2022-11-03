@@ -10,6 +10,7 @@ import {
     PageMutation,
     GlobalMutation,
     ContactMutation,
+    SetupMutation,
 } from "./mutations"
 
 const resolvers = {
@@ -30,6 +31,7 @@ const resolvers = {
         ...PageMutation,
         ...GlobalMutation,
         ...ContactMutation,
+        ...SetupMutation,
     },
 }
 

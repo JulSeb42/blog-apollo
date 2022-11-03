@@ -1,6 +1,6 @@
 /*=============================================== UserLine component ===============================================*/
 
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import {
     Flexbox,
     Badge,
@@ -16,6 +16,8 @@ import { Link } from "react-router-dom"
 import { slugify } from "../../../utils"
 import { useMutation } from "@apollo/client"
 import toast from "react-hot-toast"
+
+import { AuthContext, AuthContextType } from "../../../context/auth"
 
 import CheckCircle from "../../icons/CheckCircle"
 
@@ -34,6 +36,8 @@ const UserLine = ({
     user: { fullName, approved, _id, role: userRole, featured: userFeatured },
     allUsers,
 }: UserLineProps) => {
+    const { user } = useContext(AuthContext) as AuthContextType
+
     const admins = allUsers.filter(user => user.role === "admin")
     const disableOneAdmin =
         userRole === "admin" && admins.length === 1 ? true : false
@@ -67,7 +71,7 @@ const UserLine = ({
 
     const [featured, setFeatured] = useState<boolean>(userFeatured)
     const [featureUser, { loading: featureLoading }] = useMutation(FEATURE_USER)
-    
+
     const handleFeatured = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFeatured(e.target.checked)
 
@@ -111,7 +115,12 @@ const UserLine = ({
                 },
             ],
         }).then(() =>
-            toast(`${fullName}'s access is now ${isApproved ? "revoked" : "approved"}!`, { icon: <CheckCircle /> })
+            toast(
+                `${fullName}'s access is now ${
+                    isApproved ? "revoked" : "approved"
+                }!`,
+                { icon: <CheckCircle /> }
+            )
         )
     }
 
@@ -227,6 +236,7 @@ const UserLine = ({
                         onClick={handleApprove}
                         label={`${isApproved ? "Revoke" : "Approve"} user`}
                         showLabel
+                        disabled={user?._id === _id}
                     />
 
                     <ButtonIcon
@@ -237,6 +247,7 @@ const UserLine = ({
                         onClick={() => setIsDeleteOpen(!isDeleteOpen)}
                         label="Delete"
                         showLabel
+                        disabled={user?._id === _id}
                     />
                 </Flexbox>
             </Styles.Content>

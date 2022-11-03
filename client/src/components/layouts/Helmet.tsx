@@ -17,7 +17,9 @@ const Helmet = ({ title, description, keywords, cover }: Props) => {
 
     return (
         <Container
-            title={`${title} | ${globalData?.name}`}
+            title={`${title}${
+                globalData?.name ? ` | ${globalData?.name}` : ""
+            }`}
             description={description}
             keywords={[globalKeywords, keywords]}
             favicon={globalData?.favicon}

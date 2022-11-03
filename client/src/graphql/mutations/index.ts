@@ -4,6 +4,7 @@ export * from "./auth/login"
 export * from "./auth/forgot-password"
 export * from "./auth/reset-password"
 
+export * from "./user/create-first-account"
 export * from "./user/edit-user"
 export * from "./user/edit-password"
 export * from "./user/delete-user"
@@ -29,5 +30,6 @@ export * from "./pages/delete-page"
 export * from "./pages/show-page"
 
 export * from "./global/edit-global"
+export * from "./global/create-global"
 
 export * from "./contact/contact"

@@ -41,6 +41,10 @@ import Navigation from "../pages/dashboard/Navigation"
 import EditPassword from "../pages/dashboard/users/EditPassword"
 import GetApproval from "../pages/dashboard/GetApproval"
 
+import CreateFirstAccount from "../pages/setup/CreateFirstAccount"
+import CreateGlobalData from "../pages/setup/CreateGlobalData"
+import CreateFirstCategory from "../pages/setup/CreateFirstCategory"
+
 type RouteType = {
     path: string
     element: FC | any
@@ -209,6 +213,19 @@ const routes: RouteType[] = [
         path: "/dashboard/get-approval",
         protected: true,
         element: GetApproval,
+    },
+
+    {
+        path: "/create-first-account",
+        element: CreateFirstAccount,
+    },
+    {
+        path: "/create-global-data",
+        element: CreateGlobalData,
+    },
+    {
+        path: "/create-first-category",
+        element: CreateFirstCategory,
     },
 ]
 
