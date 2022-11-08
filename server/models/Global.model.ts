@@ -15,6 +15,7 @@ const globalSchema = new Schema(
         cover: String,
         keywords: Array,
         language: String,
+        isGlobalSetup: Boolean,
     },
     {
         timestamps: true,

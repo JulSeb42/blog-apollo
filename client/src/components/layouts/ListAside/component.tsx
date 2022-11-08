@@ -2,7 +2,7 @@
 
 import React from "react"
 import { Text, Flexbox, Loader } from "tsx-library-julseb"
-import { capitalize, slugify, unslugify } from "../../../utils"
+import { slugify, unslugify } from "../../../utils"
 import { useQuery } from "@apollo/client"
 import { Link } from "react-router-dom"
 
@@ -13,6 +13,7 @@ import {
     ALL_CATEGORIES,
     PUBLISHED_POSTS,
     FEATURED_AUTHORS,
+    ALL_USERS,
 } from "../../../graphql/queries"
 
 import { UserType, CategoryType, PostType } from "../../../types"
@@ -36,17 +37,34 @@ const ListAside = ({ content }: ListAsideProps) => {
         loading: postsLoading,
     } = useQuery(PUBLISHED_POSTS)
 
+    const {
+        data: allUsersData,
+        error: allUsersError,
+        loading: allUsersLoading,
+    } = useQuery(ALL_USERS)
+
     const featuredAuthors: UserType[] = authorsData?.users.slice(0, 5)
-    const categories: CategoryType[] = categoriesData?.categories.slice(0, 5)
+    const allUsers: UserType[] = allUsersData?.users
+    const categories: CategoryType[] = categoriesData?.categories
+        .filter((category: CategoryType) => category.posts.length > 0)
+        .slice(0, 5)
     const posts: PostType[] = postsData?.posts.slice(0, 5)
 
     return (
         <Styles.StyledListAside>
-            <Text tag="h4">
-                {content === "posts" ? "Latest posts" : capitalize(content)}
-            </Text>
+            {content === "authors" && allUsers?.length > 1 ? (
+                <Text tag="h4">Authors</Text>
+            ) : content === "categories" && categories?.length > 0 ? (
+                <Text tag="h4">Categories</Text>
+            ) : (
+                content === "posts" &&
+                posts?.length > 0 && <Text tag="h4">Latest posts</Text>
+            )}
 
-            {(authorsLoading || categoryLoading || postsLoading) && (
+            {(authorsLoading ||
+                categoryLoading ||
+                postsLoading ||
+                allUsersLoading) && (
                 <Flexbox
                     alignItems="center"
                     justifyContent="center"
@@ -57,10 +75,13 @@ const ListAside = ({ content }: ListAsideProps) => {
             )}
 
             {content === "authors" ? (
-                authorsError ? (
-                    <Text>{authorsError.message}</Text>
+                authorsError || allUsersError ? (
+                    <Text>
+                        {authorsError?.message || allUsersError?.message}
+                    </Text>
                 ) : (
-                    authorsData && (
+                    authorsData &&
+                    allUsers?.length > 1 && (
                         <>
                             {featuredAuthors.map(author => (
                                 <Styles.Text
@@ -79,7 +100,7 @@ const ListAside = ({ content }: ListAsideProps) => {
                         </>
                     )
                 )
-            ) : content === "categories" ? (
+            ) : content === "categories" && categories?.length > 0 ? (
                 categoryError ? (
                     <Text>{categoryError.message}</Text>
                 ) : (
@@ -98,14 +119,29 @@ const ListAside = ({ content }: ListAsideProps) => {
                 postsData &&
                 posts.map(post => (
                     <Styles.Text icon="chevron-right" key={post._id}>
-                        <Link to={`/posts/${post.category.name}/${post.slug}`}>{post.title}</Link>
+                        <Link to={`/posts/${post.category.name}/${post.slug}`}>
+                            {post.title}
+                        </Link>
                     </Styles.Text>
                 ))
             )}
 
-            <Styles.Text icon="chevron-right">
-                <Link to={`/${content}`}>All {content}</Link>
-            </Styles.Text>
+            {content === "authors" && allUsers?.length > 1 ? (
+                <Styles.Text icon="chevron-right">
+                    <Link to="authors">All authors</Link>
+                </Styles.Text>
+            ) : content === "categories" && categories?.length > 0 ? (
+                <Styles.Text icon="chevron-right">
+                    <Link to="/categories">All categories</Link>
+                </Styles.Text>
+            ) : (
+                content === "posts" &&
+                posts?.length > 0 && (
+                    <Styles.Text icon="chevron-right">
+                        <Link to="/posts">All posts</Link>
+                    </Styles.Text>
+                )
+            )}
         </Styles.StyledListAside>
     )
 }

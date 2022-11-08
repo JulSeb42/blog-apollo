@@ -33,3 +33,5 @@ export * from "./global/edit-global"
 export * from "./global/create-global"
 
 export * from "./contact/contact"
+
+export * from "./setup/setup-global"

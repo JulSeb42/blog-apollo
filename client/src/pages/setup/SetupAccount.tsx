@@ -1,11 +1,11 @@
-/*=============================================== CreateFirstAccount ===============================================*/
+/*=============================================== SetupAccount ===============================================*/
 
 import React, { useState, useContext } from "react"
 import { Text, Form, Input, ComponentProps } from "tsx-library-julseb"
-import { useMutation } from "@apollo/client"
+import { useMutation, useQuery } from "@apollo/client"
 import { emailRegex, passwordRegex } from "../../utils"
 import { GraphQLErrors } from "@apollo/client/errors"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Navigate } from "react-router-dom"
 import { getRandomAvatar } from "../../utils"
 
 import { AuthContext, AuthContextType } from "../../context/auth"
@@ -15,8 +15,10 @@ import ErrorMessages from "../../components/ErrorMessages"
 import ImageUploader from "../../components/dashboard/ImageUploader"
 
 import { CREATE_FIRST_ACCOUNT } from "../../graphql/mutations"
+import { ALL_USERS } from "../../graphql/queries"
+import { UserType } from "../../types"
 
-const CreateFirstAccount = () => {
+const SetupAccount = () => {
     const navigate = useNavigate()
     const { loginUser } = useContext(AuthContext) as AuthContextType
 
@@ -82,6 +84,12 @@ const CreateFirstAccount = () => {
                 setErrorMessages(graphQLErrors)
                 return
             },
+
+            refetchQueries: [
+                {
+                    query: ALL_USERS,
+                },
+            ],
         })
             .then(res => {
                 if (!res.errors) {
@@ -89,12 +97,25 @@ const CreateFirstAccount = () => {
                 }
             })
             .then(() => {
-                navigate("/create-global-data")
+                navigate("/setup/create-global-data")
             })
     }
 
+    const {
+        data: usersData,
+        loading: usersLoading,
+        error: usersError,
+    } = useQuery(ALL_USERS)
+    const users: UserType[] = usersData?.users
+
+    if (users?.length > 0) return <Navigate to="/setup/create-global-data" />
+
     return (
-        <PageSetup title="Create admin account">
+        <PageSetup
+            title="Create admin account"
+            isLoading={usersLoading}
+            error={usersError?.message}
+        >
             <Text>
                 To fully access this blog, you need first to create an admin
                 account.
@@ -185,13 +206,13 @@ const CreateFirstAccount = () => {
                     setIsLoading={setIsLoading}
                 />
             </Form>
-            
+
             {errorMessages && <ErrorMessages errors={errorMessages} />}
         </PageSetup>
     )
 }
 
-export default CreateFirstAccount
+export default SetupAccount
 
 type ValidationProps = {
     fullName: undefined | ComponentProps.ValidationStatusProps

@@ -25,6 +25,7 @@ const Content = styled.div`
 const Form = styled.form`
     ${Mixins.Flexbox({
         $gap: "xs",
+        $flexWrap: "wrap",
     })};
 
     & > input {

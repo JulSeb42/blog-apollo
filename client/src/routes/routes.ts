@@ -41,16 +41,16 @@ import Navigation from "../pages/dashboard/Navigation"
 import EditPassword from "../pages/dashboard/users/EditPassword"
 import GetApproval from "../pages/dashboard/GetApproval"
 
-import CreateFirstAccount from "../pages/setup/CreateFirstAccount"
-import CreateGlobalData from "../pages/setup/CreateGlobalData"
-import CreateFirstCategory from "../pages/setup/CreateFirstCategory"
+import SetupAccount from "../pages/setup/SetupAccount"
+import SetupGlobalData from "../pages/setup/SetupGlobalData"
+import SetupUsers from "../pages/setup/SetupUsers"
+import SetupCategories from "../pages/setup/SetupCategories"
 
 type RouteType = {
     path: string
     element: FC | any
     protected?: boolean
     anon?: boolean
-    edit?: boolean
 }
 
 const routes: RouteType[] = [
@@ -152,7 +152,6 @@ const routes: RouteType[] = [
         path: "/dashboard/edit-profile",
         element: EditProfile,
         protected: true,
-        edit: true,
     },
     {
         path: "/dashboard/comments",
@@ -216,16 +215,20 @@ const routes: RouteType[] = [
     },
 
     {
-        path: "/create-first-account",
-        element: CreateFirstAccount,
+        path: "/setup/new-account",
+        element: SetupAccount,
     },
     {
-        path: "/create-global-data",
-        element: CreateGlobalData,
+        path: "/setup/create-global-data",
+        element: SetupGlobalData,
     },
     {
-        path: "/create-first-category",
-        element: CreateFirstCategory,
+        path: "/setup/create-users",
+        element: SetupUsers,
+    },
+    {
+        path: "/setup/create-categories",
+        element: SetupCategories,
     },
 ]
 

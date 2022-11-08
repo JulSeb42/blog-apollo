@@ -10,9 +10,9 @@ import { ThemeLight, Shadows, Spacers } from "tsx-library-julseb"
 import { AuthProviderWrapper } from "./context/auth"
 import client from "./graphql/apollo-client"
 import { GlobalProviderWrapper } from "./context/global"
-import Accounts from "./routes/Accounts"
 
 import App from "./App"
+import SetupRoutes from "./routes/SetupRoutes"
 
 import reportWebVitals from "./tests/reportWebVitals"
 
@@ -26,9 +26,9 @@ root.render(
             <BrowserRouter>
                 <AuthProviderWrapper>
                     <GlobalProviderWrapper>
-                        <Accounts>
+                        <SetupRoutes>
                             <App />
-                        </Accounts>
+                        </SetupRoutes>
                     </GlobalProviderWrapper>
                 </AuthProviderWrapper>
             </BrowserRouter>

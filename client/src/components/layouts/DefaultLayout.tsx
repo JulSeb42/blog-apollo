@@ -24,7 +24,7 @@ const DefaultLayout = ({
             />
 
             {isLoading ? (
-                <PageLoading loaderVariant={4} />
+                <PageLoading />
             ) : (
                 <>
                     {children}

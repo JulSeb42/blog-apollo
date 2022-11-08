@@ -1,6 +1,6 @@
 /*=============================================== App ===============================================*/
 
-import React, { useState } from "react"
+import React from "react"
 import { Routes, Route, Navigate } from "react-router-dom"
 import { uuid } from "./utils"
 
@@ -11,8 +11,6 @@ import routes from "./routes/routes"
 import redirects from "./routes/redirects"
 
 const App = () => {
-    const [edited, setEdited] = useState(false)
-
     return (
         <Routes>
             {routes.map(route => (
@@ -21,23 +19,14 @@ const App = () => {
                     element={
                         route.protected ? (
                             <ProtectedRoutes>
-                                <route.element
-                                    edited={route.edit && edited}
-                                    setEdited={route.edit && setEdited}
-                                />
+                                <route.element />
                             </ProtectedRoutes>
                         ) : route.anon ? (
                             <AnonRoutes>
-                                <route.element
-                                    edited={route.edit && edited}
-                                    setEdited={route.edit && setEdited}
-                                />
+                                <route.element />
                             </AnonRoutes>
                         ) : (
-                            <route.element
-                                edited={route.edit && edited}
-                                setEdited={route.edit && setEdited}
-                            />
+                            <route.element />
                         )
                     }
                     key={uuid()}

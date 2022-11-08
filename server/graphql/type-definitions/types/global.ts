@@ -13,5 +13,6 @@ export const GlobalType = gql`
         cover: String
         keywords: [String]
         language: String
+        isGlobalSetup: Boolean
     }
 `

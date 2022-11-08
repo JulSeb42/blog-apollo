@@ -1,7 +1,7 @@
 /*=============================================== AllCategories ===============================================*/
 
 import React, { useState } from "react"
-import { ComponentProps, Grid } from "tsx-library-julseb"
+import { ComponentProps, Grid, Text } from "tsx-library-julseb"
 import { useQuery } from "@apollo/client"
 import { useSearchParams } from "react-router-dom"
 
@@ -23,7 +23,7 @@ const AllCategories = () => {
     const { data, loading, error } = useQuery(ALL_CATEGORIES)
     const categories: CategoryType[] = data?.categories
 
-    const filteredCategories = categories.filter(
+    const filteredCategories = categories?.filter(
         category => category.posts.length > 0
     )
 
@@ -52,19 +52,27 @@ const AllCategories = () => {
             isLoading={loading}
             error={error?.message}
         >
-            <Grid col={3} gap="l">
-                {getPaginatedData()?.map(category => (
-                    <CategoryCard category={category} key={category._id} />
-                ))}
-            </Grid>
-
-            {numberOfPages > 1 && (
-                <Pagination
-                    currentPage={currentPage}
-                    setCurrentPage={setCurrentPage}
-                    totalPages={numberOfPages}
-                    pageLimit={pageLimit}
-                />
+            {getPaginatedData()?.length > 0 ? (
+                <>
+                    <Grid col={3} gap="l">
+                        {getPaginatedData()?.map(category => (
+                            <CategoryCard
+                                category={category}
+                                key={category._id}
+                            />
+                        ))}
+                    </Grid>
+                    {numberOfPages > 1 && (
+                        <Pagination
+                            currentPage={currentPage}
+                            setCurrentPage={setCurrentPage}
+                            totalPages={numberOfPages}
+                            pageLimit={pageLimit}
+                        />
+                    )}
+                </>
+            ) : (
+                <Text>No category yet.</Text>
             )}
         </Page>
     )

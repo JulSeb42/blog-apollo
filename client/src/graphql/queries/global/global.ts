@@ -14,6 +14,7 @@ export const GLOBAL_DATA = gql`
             cover
             keywords
             language
+            isGlobalSetup
         }
     }
 `

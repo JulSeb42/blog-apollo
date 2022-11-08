@@ -65,6 +65,7 @@ const UserContext = {
                 role,
                 approved: true,
                 imageUrl: getRandomAvatar("other"),
+                featured: false,
             })
 
             const token = jwt.sign(
@@ -94,8 +95,6 @@ const UserContext = {
             )
         }
     },
-
-   
 
     editUser: async ({ _id, fullName, bio, imageUrl }: UserType) => {
         if (!fullName) {

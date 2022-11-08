@@ -12,4 +12,7 @@ export const SetupMutation = {
         { createGlobalInput }: any,
         { createGlobal }: any
     ) => await createGlobal(createGlobalInput),
+
+    setupGlobal: async (_: any, { _id }: any, { setupGlobal }: any) =>
+        setupGlobal({ _id }),
 }

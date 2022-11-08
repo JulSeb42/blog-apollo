@@ -15,7 +15,7 @@ import { ALL_CATEGORIES } from "../../../graphql/queries"
 
 import * as Styles from "./styles"
 
-const AddCategory = () => {
+const AddCategory = ({ isSetup }: Props) => {
     const [category, setCategory] = useState("")
     const [error, setError] = useState<undefined | string>(undefined)
     const [errorMessages, setErrorMessages] = useState<
@@ -54,9 +54,12 @@ const AddCategory = () => {
             },
         }).then(() => {
             setCategory("")
-            toast(`${category} was successfully added!`, {
-                icon: <CheckCircle />,
-            })
+
+            if (!isSetup) {
+                toast(`${category} was successfully added!`, {
+                    icon: <CheckCircle />,
+                })
+            }
         })
     }
 
@@ -89,3 +92,7 @@ const AddCategory = () => {
 }
 
 export default AddCategory
+
+interface Props {
+    isSetup?: boolean
+}

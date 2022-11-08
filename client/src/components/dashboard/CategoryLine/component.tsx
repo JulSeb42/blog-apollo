@@ -22,7 +22,10 @@ import { CategoryLineProps } from "./types"
 import { UPDATE_CATEGORY, DELETE_CATEGORY } from "../../../graphql/mutations"
 import { ALL_CATEGORIES } from "../../../graphql/queries"
 
-const CategoryLine = ({ category: { name, _id } }: CategoryLineProps) => {
+const CategoryLine = ({
+    category: { name, _id },
+    isSetup,
+}: CategoryLineProps) => {
     const [editMode, setEditMode] = useState(false)
 
     const [input, setInput] = useState(name)
@@ -62,9 +65,12 @@ const CategoryLine = ({ category: { name, _id } }: CategoryLineProps) => {
         }).then(res => {
             if (!res.errors) {
                 close()
-                toast(`You successfully updated ${name}!`, {
-                    icon: <CheckCircle />,
-                })
+
+                if (!isSetup) {
+                    toast(`You successfully updated ${name}!`, {
+                        icon: <CheckCircle />,
+                    })
+                }
             }
         })
     }
@@ -87,9 +93,11 @@ const CategoryLine = ({ category: { name, _id } }: CategoryLineProps) => {
             ],
         }).then(() => {
             setIsOpen(false)
-            toast(`You successfully deleted ${name}!`, {
-                icon: <CheckCircle />,
-            })
+            if (!isSetup) {
+                toast(`You successfully deleted ${name}!`, {
+                    icon: <CheckCircle />,
+                })
+            }
         })
     }
 

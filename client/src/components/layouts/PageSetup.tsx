@@ -1,35 +1,52 @@
 /*=============================================== PageSetup ===============================================*/
 
 import React from "react"
-import { Text, Wrapper, Main, Button } from "tsx-library-julseb"
+import { Text, Wrapper, Main, Button, PageLoading } from "tsx-library-julseb"
 
 import Helmet from "./Helmet"
 import Stepper from "../Stepper"
+import ErrorPage from "./ErrorPage"
 
-const PageSetup = ({ title, children, prev, next, active }: Props) => {
+const PageSetup = ({
+    title,
+    children,
+    prev,
+    next,
+    active,
+    isLoading,
+    error,
+}: Props) => {
+    if (error) return <ErrorPage error={error} />
+
     return (
         <>
             <Helmet title={title} />
 
-            <Wrapper>
-                <Main size="form">
-                    {active && <Stepper active={active} />}
-                    <Text tag="h1">{title}</Text>
+            {isLoading ? (
+                <PageLoading />
+            ) : (
+                <>
+                    <Wrapper>
+                        <Main size="form">
+                            {active && <Stepper active={active} />}
+                            <Text tag="h1">{title}</Text>
 
-                    {children}
+                            {children}
 
-                    {next && (
-                        <Button
-                            to={next}
-                            icons={{ right: "chevron-right" }}
-                            variant="text"
-                            noPadding
-                        >
-                            Skip this step
-                        </Button>
-                    )}
-                </Main>
-            </Wrapper>
+                            {next && (
+                                <Button
+                                    to={next}
+                                    icons={{ right: "chevron-right" }}
+                                    variant="text"
+                                    noPadding
+                                >
+                                    Next step
+                                </Button>
+                            )}
+                        </Main>
+                    </Wrapper>
+                </>
+            )}
         </>
     )
 }
@@ -42,4 +59,6 @@ interface Props {
     prev?: string
     next?: string
     active?: 1 | 2 | 3
+    isLoading?: boolean
+    error?: string
 }

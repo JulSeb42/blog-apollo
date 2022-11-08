@@ -48,7 +48,7 @@ const PageDashboard = ({
             <Helmet title={title} />
 
             {isLoading ? (
-                <PageLoading loaderVariant={4} />
+                <PageLoading  />
             ) : (
                 <>
                     <NavDashboard isOpen={isOpen} setIsOpen={setIsOpen} />

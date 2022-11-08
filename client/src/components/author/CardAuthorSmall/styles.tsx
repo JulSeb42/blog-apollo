@@ -1,6 +1,6 @@
 /*=============================================== CardAuthor styles ===============================================*/
 
-import styled from "styled-components/macro"
+import styled, { css } from "styled-components/macro"
 import { Link } from "react-router-dom"
 import {
     Mixins,
@@ -9,7 +9,7 @@ import {
     Breakpoints,
 } from "tsx-library-julseb"
 
-const StyledCardAuthorSmall = styled(Link)`
+const StyledCardAuthorSmall = styled(Link)<{ $readOnly?: boolean }>`
     text-decoration: none;
     ${Mixins.Grid({
         $gap: "xxs",
@@ -26,11 +26,15 @@ const StyledCardAuthorSmall = styled(Link)`
         }
     }
 
-    @media ${Breakpoints.Hover} {
-        &:hover > span img {
-            scale: 1.02;
-        }
-    }
+    ${({ $readOnly }) =>
+        !$readOnly &&
+        css`
+            @media ${Breakpoints.Hover} {
+                &:hover > span img {
+                    scale: 1.02;
+                }
+            }
+        `}
 `
 
 export { StyledCardAuthorSmall }

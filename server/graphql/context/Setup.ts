@@ -74,10 +74,6 @@ export const SetupContext = {
             throw new ApolloError("Language is required", "LANGUAGE_REQUIRED")
         }
 
-        if (!emailRegex.test(email || "")) {
-            throw new ApolloError("Email is not valid", "EMAIL_NOT_VALID")
-        }
-
         const newGlobal = new Global({
             name,
             cover,
@@ -86,5 +82,23 @@ export const SetupContext = {
         })
 
         return newGlobal.save()
+    },
+
+    setupGlobal: async ({ _id }: GlobalType) => {
+        const global = await Global.findById(_id)
+
+        if (global) {
+            const updatedGlobal = await Global.findByIdAndUpdate(
+                _id,
+                {
+                    isGlobalSetup: true,
+                },
+                { new: true }
+            )
+
+            return updatedGlobal?.save()
+        } else {
+            throw new ApolloError("Global data not found", "GLOBAL_NOT_FOUND")
+        }
     },
 }

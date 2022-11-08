@@ -3,7 +3,7 @@
 import React, { useState } from "react"
 import { useQuery } from "@apollo/client"
 import { ComponentProps, Grid, Text } from "tsx-library-julseb"
-import { useSearchParams } from "react-router-dom"
+import { useSearchParams, Navigate } from "react-router-dom"
 
 import Page from "../../components/layouts/Page"
 import Pagination from "../../components/Pagination"
@@ -44,6 +44,8 @@ const AllAuthors = () => {
     const length = filteredAuthors?.length || 0
 
     const numberOfPages = Math.ceil(length / dataLimit)
+
+    if (authors?.length === 1) return <Navigate to="/posts" />
 
     return (
         <Page

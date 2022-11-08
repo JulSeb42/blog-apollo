@@ -38,5 +38,6 @@ export const MutationType = gql`
 
         createFirstAccount(firstUserInput: FirstUserInput): User!
         createGlobal(createGlobalInput: CreateGlobalInput): GlobalData!
+        setupGlobal(_id: ID!): GlobalData!
     }
 `

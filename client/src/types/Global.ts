@@ -10,4 +10,5 @@ export type GlobalType = {
     cover?: string
     keywords?: string[] | string
     language?: string
+    isGlobalSetup: boolean
 }
