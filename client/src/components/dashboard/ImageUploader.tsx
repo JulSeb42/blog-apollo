@@ -13,6 +13,8 @@ const ImageUploader = ({
     cover,
     id,
     setHasEdits,
+    helperBottom,
+    validation,
 }: Props) => {
     const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault()
@@ -61,6 +63,8 @@ const ImageUploader = ({
                 empty: cover ? "image-add" : "user",
             }}
             borderRadius="m"
+            helperBottom={helperBottom}
+            validation={validation}
         />
     )
 }
@@ -75,4 +79,6 @@ interface Props {
     cover?: boolean
     id?: string
     setHasEdits?: (hasEdits: boolean) => void
+    helperBottom?: any
+    validation?: any
 }

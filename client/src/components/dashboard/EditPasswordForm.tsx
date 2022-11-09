@@ -26,12 +26,15 @@ const EditPasswordForm = ({ newUser }: Props) => {
     const [errorMessages, setErrorMessages] = useState<
         undefined | GraphQLErrors
     >(undefined)
+    const [hasEdits, setHasEdits] = useState(false)
 
-    const handleInputs = (e: React.ChangeEvent<HTMLInputElement>) =>
+    const handleInputs = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputs({
             ...inputs,
             [e.target.id]: e.target.value,
         })
+        setHasEdits(true)
+    }
 
     const [editPassword, { loading }] = useMutation(EDIT_PASSWORD)
 
@@ -77,6 +80,7 @@ const EditPasswordForm = ({ newUser }: Props) => {
                 buttonPrimary="Save your new password"
                 isLoading={loading}
                 onSubmit={handleSubmit}
+                disabled={newUser ? false : !hasEdits}
             >
                 <Input
                     id="oldPassword"

@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { useQuery } from "@apollo/client"
 import { ComponentProps, Grid, Text } from "tsx-library-julseb"
 import { useSearchParams, Navigate } from "react-router-dom"
+import { slugify } from "../../utils"
 
 import Page from "../../components/layouts/Page"
 import Pagination from "../../components/Pagination"
@@ -45,7 +46,8 @@ const AllAuthors = () => {
 
     const numberOfPages = Math.ceil(length / dataLimit)
 
-    if (authors?.length === 1) return <Navigate to="/posts" />
+    if (authors?.length === 1)
+        return <Navigate to={`/authors/${slugify(authors[0].fullName)}`} />
 
     return (
         <Page

@@ -1,7 +1,15 @@
 /*=============================================== NewPost ===============================================*/
 
 import React, { useState, useContext } from "react"
-import { Form, Input, MarkdownEditor, InputCheck } from "tsx-library-julseb"
+import {
+    Form,
+    Input,
+    MarkdownEditor,
+    InputCheck,
+    Grid,
+    Button,
+    ComponentProps,
+} from "tsx-library-julseb"
 import { useMutation, useQuery } from "@apollo/client"
 import { slugify, unslugify } from "../../utils"
 import { GraphQLErrors } from "@apollo/client/errors"
@@ -13,6 +21,7 @@ import { AuthContext, AuthContextType } from "../../context/auth"
 import ImageUploader from "./ImageUploader"
 import ErrorMessages from "../ErrorMessages"
 import CheckCircle from "../icons/CheckCircle"
+import AddCategory from "./AddCategory"
 
 import { NEW_POST, EDIT_POST } from "../../graphql/mutations"
 import { ALL_CATEGORIES, POSTS_DASHBOARD } from "../../graphql/queries"
@@ -48,6 +57,15 @@ const PostForm = ({ post }: Props) => {
         undefined | GraphQLErrors
     >(undefined)
 
+    const [validation, setValidation] = useState<ValidationProps>({
+        title: undefined,
+        metaDescription: undefined,
+        slug: undefined,
+        category: undefined,
+        body: undefined,
+        imageUrl: undefined,
+    })
+
     const handleTitle = (e: React.ChangeEvent<HTMLInputElement>) =>
         setInputs({
             ...inputs,
@@ -77,6 +95,28 @@ const PostForm = ({ post }: Props) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
+        if (
+            !inputs.title ||
+            !inputs.metaDescription ||
+            !inputs.slug ||
+            inputs.category === "none" ||
+            !body ||
+            !imageUrl
+        ) {
+            setValidation({
+                title: !inputs.title ? "not-passed" : undefined,
+                metaDescription: !inputs.metaDescription
+                    ? "not-passed"
+                    : undefined,
+                slug: !inputs.slug ? "not-passed" : undefined,
+                category: inputs.category === "none" ? "not-passed" : undefined,
+                body: !body ? "not-passed" : undefined,
+                imageUrl: !imageUrl ? "not-passed" : undefined,
+            })
+
+            return
+        }
+
         let inputsTags = inputs.tags.includes(",")
             ? inputs.tags.split(",")
             : inputs.tags
@@ -88,7 +128,7 @@ const PostForm = ({ post }: Props) => {
         const categoryId = inputs.category.split(" ")[0]
         const categoryName = inputs.category.split(" ")[1]
 
-        const newPostInput = {
+        const baseInputs = {
             title: inputs.title,
             tags: [inputs.title, categoryName, ...inputsTags],
             draft: inputs.draft,
@@ -98,19 +138,15 @@ const PostForm = ({ post }: Props) => {
             category: categoryId,
             body,
             imageUrl,
+        }
+
+        const newPostInput = {
+            ...baseInputs,
             author: user?._id,
         }
 
         const editPostInput = {
-            title: inputs.title,
-            tags: [inputs.title, categoryName, ...inputsTags],
-            draft: inputs.draft,
-            metaDescription: inputs.metaDescription,
-            featured: inputs.featured,
-            slug: inputs.slug,
-            category: categoryId,
-            body,
-            imageUrl,
+            ...baseInputs,
             _id: post?._id,
         }
 
@@ -171,6 +207,8 @@ const PostForm = ({ post }: Props) => {
         return post ? saveEditPost() : saveNewPost()
     }
 
+    const [isCategoryOpen, setIsCategoryOpen] = useState(false)
+
     return (
         <>
             <Form
@@ -186,6 +224,14 @@ const PostForm = ({ post }: Props) => {
                     label="Title"
                     onChange={handleTitle}
                     value={inputs.title}
+                    helperBottom={{
+                        text: validation.title
+                            ? "Title is required"
+                            : undefined,
+                        icon: validation.title ? "close-circle" : undefined,
+                        iconColor: "danger",
+                    }}
+                    validation={{ status: validation.title }}
                 />
 
                 <Input
@@ -193,26 +239,54 @@ const PostForm = ({ post }: Props) => {
                     label="Slug"
                     onChange={handleInputs}
                     value={inputs.slug}
+                    helperBottom={{
+                        text: validation.slug ? "Slug is required" : undefined,
+                        icon: validation.slug ? "close-circle" : undefined,
+                        iconColor: "danger",
+                    }}
+                    validation={{ status: validation.slug }}
                 />
 
-                <Input
-                    id="category"
-                    label="Category"
-                    value={inputs.category}
-                    onChange={handleInputs}
-                    type="select"
-                >
-                    <option value="none">---</option>
+                <Grid gap="xs">
+                    <Input
+                        id="category"
+                        label="Category"
+                        value={inputs.category}
+                        onChange={handleInputs}
+                        type="select"
+                        helperBottom={{
+                            text: validation.category
+                                ? "Category is required"
+                                : undefined,
+                            icon: validation.category
+                                ? "close-circle"
+                                : undefined,
+                            iconColor: "danger",
+                        }}
+                    >
+                        <option value="none">---</option>
 
-                    {categories?.map(category => (
-                        <option
-                            value={`${category._id} ${category.name}`}
-                            key={category._id}
+                        {categories?.map(category => (
+                            <option
+                                value={`${category._id} ${category.name}`}
+                                key={category._id}
+                            >
+                                {unslugify(category.name)}
+                            </option>
+                        ))}
+                    </Input>
+
+                    {isCategoryOpen ? (
+                        <AddCategory setIsOpen={setIsCategoryOpen} isPostForm />
+                    ) : (
+                        <Button
+                            style={{ justifySelf: "start" }}
+                            onClick={() => setIsCategoryOpen(true)}
                         >
-                            {unslugify(category.name)}
-                        </option>
-                    ))}
-                </Input>
+                            Add a new category
+                        </Button>
+                    )}
+                </Grid>
 
                 <Input
                     id="tags"
@@ -230,6 +304,16 @@ const PostForm = ({ post }: Props) => {
                     value={inputs.metaDescription}
                     maxLength={160}
                     counter
+                    helperBottom={{
+                        text: validation.metaDescription
+                            ? "Meta description is required"
+                            : undefined,
+                        icon: validation.metaDescription
+                            ? "close-circle"
+                            : undefined,
+                        iconColor: "danger",
+                    }}
+                    validation={{ status: validation.metaDescription }}
                 />
 
                 <ImageUploader
@@ -238,6 +322,14 @@ const PostForm = ({ post }: Props) => {
                     setImageUrl={setImageUrl}
                     setIsLoading={setIsLoading}
                     cover
+                    helperBottom={{
+                        text: validation.imageUrl
+                            ? "Cover is required"
+                            : undefined,
+                        icon: validation.imageUrl ? "close-circle" : undefined,
+                        iconColor: "danger",
+                    }}
+                    validation={validation.imageUrl}
                 />
 
                 <MarkdownEditor
@@ -247,6 +339,12 @@ const PostForm = ({ post }: Props) => {
                     label="Body"
                     preview="edit"
                     backgroundColor="light"
+                    helperBottom={{
+                        text: validation.body ? "Body is required" : undefined,
+                        icon: validation.body ? "close-circle" : undefined,
+                        iconColor: "danger",
+                    }}
+                    validation={validation.body}
                 />
 
                 <InputCheck
@@ -277,4 +375,13 @@ export default PostForm
 
 interface Props {
     post?: PostType
+}
+
+type ValidationProps = {
+    title: ComponentProps.ValidationStatusProps
+    metaDescription: ComponentProps.ValidationStatusProps
+    slug: ComponentProps.ValidationStatusProps
+    category: ComponentProps.ValidationStatusProps
+    body: ComponentProps.ValidationStatusProps
+    imageUrl: ComponentProps.ValidationStatusProps
 }

@@ -3,6 +3,7 @@
 import React from "react"
 import { Text } from "tsx-library-julseb"
 import { useQuery } from "@apollo/client"
+import { Link } from "react-router-dom"
 
 import PageDashboard from "../../components/dashboard/PageDashboard"
 import HeaderListUsers from "../../components/dashboard/HeaderListUsers"
@@ -28,19 +29,28 @@ const Navigation = () => {
         >
             <Text tag="h1">Navigation items</Text>
 
-            <HeaderListUsers $isNavigation>
-                <Text tag="h6">Page title</Text>
-                <Text tag="h6">In header</Text>
-                <Text tag="h6">Position in header</Text>
-                <Text tag="h6">In footer</Text>
-                <Text tag="h6">Position in footer</Text>
-            </HeaderListUsers>
+            {pages?.length > 0 ? (
+                <>
+                    <HeaderListUsers $isNavigation>
+                        <Text tag="h6">Page title</Text>
+                        <Text tag="h6">In header</Text>
+                        <Text tag="h6">Position in header</Text>
+                        <Text tag="h6">In footer</Text>
+                        <Text tag="h6">Position in footer</Text>
+                    </HeaderListUsers>
 
-            <ListCards>
-                {pages?.map(page => (
-                    <NavigationLine page={page} key={page._id} />
-                ))}
-            </ListCards>
+                    <ListCards>
+                        {pages?.map(page => (
+                            <NavigationLine page={page} key={page._id} />
+                        ))}
+                    </ListCards>
+                </>
+            ) : (
+                <Text>
+                    There is no page yet.{" "}
+                    <Link to="/dashboard/pages/new-page">Add one.</Link>
+                </Text>
+            )}
         </PageDashboard>
     )
 }

@@ -15,7 +15,7 @@ import { ALL_CATEGORIES } from "../../../graphql/queries"
 
 import * as Styles from "./styles"
 
-const AddCategory = ({ isSetup }: Props) => {
+const AddCategory = ({ isSetup, isPostForm, setIsOpen }: Props) => {
     const [category, setCategory] = useState("")
     const [error, setError] = useState<undefined | string>(undefined)
     const [errorMessages, setErrorMessages] = useState<
@@ -24,6 +24,14 @@ const AddCategory = ({ isSetup }: Props) => {
 
     const handleCategory = (e: React.ChangeEvent<HTMLInputElement>) =>
         setCategory(e.target.value)
+
+    const handleReset = () => {
+        setCategory("")
+
+        if (isPostForm && setIsOpen) {
+            setIsOpen(false)
+        }
+    }
 
     const [newCategory, { loading }] = useMutation(NEW_CATEGORY)
 
@@ -53,7 +61,7 @@ const AddCategory = ({ isSetup }: Props) => {
                 return
             },
         }).then(() => {
-            setCategory("")
+            handleReset()
 
             if (!isSetup) {
                 toast(`${category} was successfully added!`, {
@@ -67,6 +75,7 @@ const AddCategory = ({ isSetup }: Props) => {
         <>
             <Styles.StyledAddCategory
                 onSubmit={handleSubmit}
+                as={isPostForm ? "div" : "form"}
                 $hasError={!!error}
             >
                 <Input
@@ -81,9 +90,21 @@ const AddCategory = ({ isSetup }: Props) => {
                     }}
                 />
 
-                <Button type="submit" isLoading={loading}>
+                <Button
+                    type={isPostForm ? "button" : "submit"}
+                    isLoading={loading}
+                    // @ts-expect-error
+                    onClick={isPostForm ? handleSubmit : undefined}
+                    disabled={category === ""}
+                >
                     Add a new category
                 </Button>
+
+                {isPostForm && (
+                    <Button variant="text" onClick={handleReset}>
+                        Cancel
+                    </Button>
+                )}
             </Styles.StyledAddCategory>
 
             {errorMessages && <ErrorMessages errors={errorMessages} />}
@@ -95,4 +116,6 @@ export default AddCategory
 
 interface Props {
     isSetup?: boolean
+    isPostForm?: boolean
+    setIsOpen?: (isOpen: boolean) => void
 }

@@ -2,7 +2,6 @@
 
 import { ApolloError } from "apollo-server"
 import { getToday, getTimeNow, slugify } from "ts-utils-julseb"
-import { GraphQLError } from "graphql"
 
 import Post from "../../models/Post.model"
 import { PostType } from "../../types"
@@ -135,7 +134,7 @@ const PostContext = {
                 metaDescription,
                 featured,
                 imageUrl,
-                slug,
+                slug: slugify(slug),
                 category,
             }
 

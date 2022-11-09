@@ -1,6 +1,7 @@
 /*=============================================== Page context ===============================================*/
 
 import { ApolloError } from "apollo-server"
+import { slugify } from "ts-utils-julseb"
 
 import Page from "../../models/Page.model"
 import { PageType } from "../../types"
@@ -50,7 +51,7 @@ export const PageContext = {
         if (!foundPage) {
             const newPage = new Page({
                 title,
-                slug,
+                slug: slugify(slug),
                 body,
                 metaDescription,
                 keywords,
@@ -108,7 +109,7 @@ export const PageContext = {
         if (foundPage) {
             const updatedPage = {
                 title,
-                slug,
+                slug: slugify(slug),
                 body,
                 metaDescription,
                 keywords,

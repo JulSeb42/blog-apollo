@@ -1,7 +1,13 @@
 /*=============================================== PageForm ===============================================*/
 
 import React, { useState } from "react"
-import { Form, Input, MarkdownEditor, InputCheck } from "tsx-library-julseb"
+import {
+    Form,
+    Input,
+    MarkdownEditor,
+    InputCheck,
+    ComponentProps,
+} from "tsx-library-julseb"
 import { slugify } from "../../utils"
 import { useMutation } from "@apollo/client"
 import { GraphQLErrors } from "@apollo/client/errors"
@@ -27,6 +33,12 @@ const PageForm = ({ page }: Props) => {
         draft: page ? page?.draft : false,
     })
     const [body, setBody] = useState(page ? page?.body : "")
+    const [validation, setValidation] = useState<ValidationProps>({
+        title: undefined,
+        slug: undefined,
+        metaDescription: undefined,
+        body: undefined,
+    })
     const [errorMessages, setErrorMessages] = useState<
         undefined | GraphQLErrors
     >(undefined)
@@ -57,6 +69,19 @@ const PageForm = ({ page }: Props) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+
+        if (!inputs.title || !inputs.slug || !inputs.metaDescription || !body) {
+            setValidation({
+                title: !inputs.title ? "not-passed" : undefined,
+                slug: !inputs.slug ? "not-passed" : undefined,
+                metaDescription: !inputs.metaDescription
+                    ? "not-passed"
+                    : undefined,
+                body: !body ? "not-passed" : undefined,
+            })
+
+            return
+        }
 
         let inputsKeywords = inputs.keywords.includes(",")
             ? inputs.keywords.split(",")
@@ -99,7 +124,9 @@ const PageForm = ({ page }: Props) => {
               }).then(res => {
                   if (!res.errors) {
                       navigate("/dashboard/pages")
-                      toast(`${inputs.title} was edited!`, { icon: <CheckCircle />})
+                      toast(`${inputs.title} was edited!`, {
+                          icon: <CheckCircle />,
+                      })
                   }
               })
             : newPage({
@@ -118,7 +145,9 @@ const PageForm = ({ page }: Props) => {
               }).then(res => {
                   if (!res.errors) {
                       navigate("/dashboard/pages")
-                      toast(`${inputs.title} was added!`, { icon: <CheckCircle />})
+                      toast(`${inputs.title} was added!`, {
+                          icon: <CheckCircle />,
+                      })
                   }
               })
     }
@@ -136,6 +165,16 @@ const PageForm = ({ page }: Props) => {
                     label="Title"
                     value={inputs.title}
                     onChange={handleTitle}
+                    helperBottom={{
+                        text: validation.title
+                            ? "Title is required"
+                            : undefined,
+                        icon: validation.title ? "close-circle" : undefined,
+                        iconColor: "danger",
+                    }}
+                    validation={{
+                        status: validation.title,
+                    }}
                 />
 
                 <Input
@@ -143,6 +182,14 @@ const PageForm = ({ page }: Props) => {
                     label="Slug"
                     value={inputs.slug}
                     onChange={handleInputs}
+                    helperBottom={{
+                        text: validation.slug ? "Slug is required" : undefined,
+                        icon: validation.slug ? "close-circle" : undefined,
+                        iconColor: "danger",
+                    }}
+                    validation={{
+                        status: validation.slug,
+                    }}
                 />
 
                 <Input
@@ -153,6 +200,18 @@ const PageForm = ({ page }: Props) => {
                     type="textarea"
                     maxLength={140}
                     counter
+                    helperBottom={{
+                        text: validation.metaDescription
+                            ? "Meta description is required"
+                            : undefined,
+                        icon: validation.metaDescription
+                            ? "close-circle"
+                            : undefined,
+                        iconColor: "danger",
+                    }}
+                    validation={{
+                        status: validation.metaDescription,
+                    }}
                 />
 
                 <Input
@@ -169,6 +228,12 @@ const PageForm = ({ page }: Props) => {
                     setValue={setBody}
                     preview="edit"
                     backgroundColor="light"
+                    helperBottom={{
+                        text: validation.body ? "Body is required" : undefined,
+                        icon: validation.body ? "close-circle" : undefined,
+                        iconColor: "danger",
+                    }}
+                    validation={validation.body}
                 />
 
                 <InputCheck
@@ -189,4 +254,11 @@ export default PageForm
 
 interface Props {
     page?: PageType
+}
+
+type ValidationProps = {
+    title: ComponentProps.ValidationStatusProps
+    slug: ComponentProps.ValidationStatusProps
+    metaDescription: ComponentProps.ValidationStatusProps
+    body: ComponentProps.ValidationStatusProps
 }

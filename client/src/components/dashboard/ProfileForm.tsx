@@ -27,14 +27,18 @@ const ProfileForm = ({ edit }: Props) => {
     const [errorMessages, setErrorMessages] = useState<
         GraphQLErrors | undefined
     >(undefined)
+    const [hasEdits, setHasEdits] = useState(false)
 
     const handleInputs = (
         e: React.ChangeEvent<HTMLInputElement & HTMLTextAreaElement>
-    ) =>
+    ) => {
+        setHasEdits(true)
+
         setInputs({
             ...inputs,
             [e.target.id]: e.target.value,
         })
+    }
 
     const [editUser, { loading }] = useMutation(EDIT_USER)
 
@@ -69,6 +73,7 @@ const ProfileForm = ({ edit }: Props) => {
                 buttonPrimary={edit ? "Save changes" : "Save new user"}
                 isLoading={isLoading || loading}
                 onSubmit={handleSubmit}
+                disabled={!hasEdits}
             >
                 <Input
                     id="fullName"
@@ -99,6 +104,7 @@ const ProfileForm = ({ edit }: Props) => {
                     imageUrl={imageUrl || ""}
                     setImageUrl={setImageUrl}
                     setIsLoading={setIsLoading}
+                    setHasEdits={setHasEdits}
                 />
             </Form>
 
