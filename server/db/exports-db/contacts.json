@@ -1,0 +1,29 @@
+[{
+  "_id": {
+    "$oid": "6388b81974e1052ada575bd5"
+  },
+  "title": "Contact",
+  "body": "You can contact us by using this contact form.",
+  "hideContact": false,
+  "showForm": true,
+  "labelName": "Your name",
+  "labelEmail": "Your email",
+  "labelSubject": "Subject of the message",
+  "labelMessage": "Your message",
+  "labelButton": "Send message",
+  "header": true,
+  "orderHeader": 1,
+  "footer": true,
+  "orderFooter": 1,
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1669904409828"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1669909318111"
+    }
+  }
+}]

@@ -25,5 +25,9 @@ export const QueryType = gql`
         pageById(_id: ID!): Page
 
         globalData: GlobalData
+
+        contactPage: Contact!
+
+        thankYouPage: ThankYou!
     }
 `

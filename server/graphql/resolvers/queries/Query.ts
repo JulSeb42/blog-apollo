@@ -9,6 +9,8 @@ import { PostQuery } from "./post/PostQuery"
 import { CommentQuery } from "./comment/CommentQuery"
 import { PageQuery } from "./page/PageQuery"
 import { GlobalQuery } from "./global/GlobalQuery"
+import { ContactQuery } from "./contact/ContactQuery"
+import { ThankYouQuery } from "./thank-you/ThankYouQuery"
 
 const Query = {
     ...UserQuery,
@@ -17,6 +19,8 @@ const Query = {
     ...CommentQuery,
     ...PageQuery,
     ...GlobalQuery,
+    ...ContactQuery,
+    ...ThankYouQuery,
 }
 
 export { Query }

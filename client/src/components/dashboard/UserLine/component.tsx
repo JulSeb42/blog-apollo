@@ -218,7 +218,7 @@ const UserLine = ({
                     />
                 </Flexbox>
 
-                <Flexbox alignItems="center" gap="xs">
+                <Flexbox alignItems="flex-start" gap="xs">
                     {approveLoading && (
                         <Loader
                             size={24}

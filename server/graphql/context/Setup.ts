@@ -7,6 +7,8 @@ import jwt from "jsonwebtoken"
 
 import User from "../../models/User.model"
 import Global from "../../models/Global.model"
+import Contact from "../../models/Contact.model"
+import ThankYou from "../../models/ThankYou.model"
 import { UserType, GlobalType } from "../../types"
 
 import { SALT_ROUNDS, TOKEN_SECRET, JWT_CONFIG } from "../../utils/consts"
@@ -81,7 +83,34 @@ export const SetupContext = {
             email,
         })
 
-        return newGlobal.save()
+        return await newGlobal.save().then(() => {
+            const newContact = new Contact({
+                title: "Contact",
+                body: "You can contact us here.",
+                hideContact: true,
+                showForm: false,
+
+                labelName: "Your name",
+                labelEmail: "Your email",
+                labelSubject: "Subject of the message",
+                labelMessage: "Your message",
+                labelButton: "Send message",
+
+                header: false,
+                orderHeader: 0,
+                footer: false,
+                orderFooter: 0,
+            })
+
+            return newContact?.save().then(() => {
+                const newThankYou = new ThankYou({
+                    title: "Thank you for your message!",
+                    body: "Your message has been sent.",
+                })
+
+                return newThankYou.save()
+            })
+        })
     },
 
     setupGlobal: async ({ _id }: GlobalType) => {

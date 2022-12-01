@@ -17,8 +17,8 @@ import { GlobalContext, GlobalContextType } from "../../context/global"
 import Search from "./Search"
 
 import { NavItemType } from "../../types"
-import { PageType } from "../../types"
-import { HEADER_PAGES } from "../../graphql/queries"
+import { PageType, ContactPagesType } from "../../types"
+import { HEADER_PAGES, GET_CONTACT_PAGE } from "../../graphql/queries"
 
 const Header = ({ isTransparent }: Props) => {
     const { isLoggedIn } = useContext(AuthContext) as AuthContextType
@@ -26,6 +26,23 @@ const Header = ({ isTransparent }: Props) => {
 
     const { data } = useQuery(HEADER_PAGES)
     const headerPages: PageType[] = data?.pages
+
+    const { data: contactData } = useQuery(GET_CONTACT_PAGE)
+    const contactPage: ContactPagesType = contactData?.contactPage
+
+    const pagesArr: NavItemType[] = headerPages?.map(page => ({
+        text: page.title,
+        to: page.slug,
+        order: page.orderHeader,
+    }))
+
+    if (contactPage?.header && !contactPage?.hideContact) {
+        pagesArr?.push({
+            text: contactPage?.title,
+            to: "contact",
+            order: contactPage?.orderHeader,
+        })
+    }
 
     const baseLinks: NavItemType[] = [
         {
@@ -69,11 +86,14 @@ const Header = ({ isTransparent }: Props) => {
         >
             {navLinks(baseLinks)}
 
-            {headerPages?.map(page => (
-                <NavLink to={`/${page.slug}`} key={page._id}>
-                    {page.title}
-                </NavLink>
-            ))}
+            {pagesArr
+                // @ts-expect-error
+                ?.sort((a, b) => (a.order < b.order ? -1 : 0))
+                .map(page => (
+                    <NavLink to={`/${page.to}`} key={uuid()}>
+                        {page.text}
+                    </NavLink>
+                ))}
 
             {isLoggedIn && navLinks(protectedLinks)}
 

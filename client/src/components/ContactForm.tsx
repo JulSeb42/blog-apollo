@@ -10,8 +10,17 @@ import { useNavigate } from "react-router-dom"
 import ErrorMessages from "./ErrorMessages"
 
 import { CONTACT } from "../graphql/mutations"
+import { ContactPagesType } from "../types"
 
-const ContactForm = () => {
+const ContactForm = ({
+    contactPage: {
+        labelButton,
+        labelName,
+        labelEmail,
+        labelSubject,
+        labelMessage,
+    },
+}: Props) => {
     const navigate = useNavigate()
 
     const [inputs, setInputs] = useState({
@@ -82,13 +91,13 @@ const ContactForm = () => {
     return (
         <>
             <Form
-                buttonPrimary="Send message"
+                buttonPrimary={labelButton}
                 onSubmit={handleSubmit}
                 isLoading={loading}
             >
                 <Input
                     id="name"
-                    label="Your name"
+                    label={labelName}
                     value={inputs.name}
                     onChange={handleInputs}
                     validation={{
@@ -109,7 +118,7 @@ const ContactForm = () => {
 
                 <Input
                     id="email"
-                    label="Your email"
+                    label={labelEmail}
                     value={inputs.email}
                     onChange={handleInputs}
                     validation={{
@@ -130,7 +139,7 @@ const ContactForm = () => {
 
                 <Input
                     id="subject"
-                    label="Subject of the message"
+                    label={labelSubject}
                     value={inputs.subject}
                     onChange={handleInputs}
                     validation={{
@@ -151,7 +160,7 @@ const ContactForm = () => {
 
                 <Input
                     id="message"
-                    label="Your message"
+                    label={labelMessage}
                     value={inputs.message}
                     onChange={handleInputs}
                     validation={{
@@ -184,4 +193,8 @@ type ValidationType = {
     email: ComponentProps.ValidationStatusProps
     subject: ComponentProps.ValidationStatusProps
     message: ComponentProps.ValidationStatusProps
+}
+
+interface Props {
+    contactPage: ContactPagesType
 }

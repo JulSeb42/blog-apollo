@@ -8,6 +8,8 @@ import { CommentContext } from "./Comment"
 import { PageContext } from "./Page"
 import { GlobalContext } from "./GlobalData"
 import { SetupContext } from "./Setup"
+import { ContactContext } from "./Contact"
+import { ThankYouContext } from "./ThankYou"
 
 const context = {
     ...AuthContext,
@@ -18,6 +20,8 @@ const context = {
     ...PageContext,
     ...GlobalContext,
     ...SetupContext,
+    ...ContactContext,
+    ...ThankYouContext,
 }
 
 export default context

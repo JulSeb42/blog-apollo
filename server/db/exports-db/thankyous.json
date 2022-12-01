@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "6388b81974e1052ada575bd6"
+  },
+  "title": "Thank you for your email!",
+  "body": "Your email has been sent. We will respond as soon as possible.\n    \n    [Back to homepage.](/)",
+  "__v": 0,
+  "createdAt": {
+    "$date": {
+      "$numberLong": "1669904409828"
+    }
+  },
+  "updatedAt": {
+    "$date": {
+      "$numberLong": "1669904409828"
+    }
+  }
+}]

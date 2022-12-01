@@ -58,12 +58,12 @@ const AllAuthors = () => {
             error={error?.message}
         >
             <Grid col={3} gap="l">
-                {authors?.length > 0 ? (
+                {filteredAuthors?.length > 0 ? (
                     getPaginatedData()?.map(author => (
                         <CardAuthorSmall author={author} key={author._id} />
                     ))
                 ) : (
-                    <Text>No author</Text>
+                    <Text>No author.</Text>
                 )}
             </Grid>
 

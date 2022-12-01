@@ -20,4 +20,19 @@ export const ContactMutation = {
 
         return `Message sent to ${appEmail}!`
     },
+
+    editContact: async (
+        _: any,
+        { contactPageInput }: any,
+        { editContact }: any
+    ) => {
+        console.log("Hello")
+        return await editContact(contactPageInput)
+    },
+
+    showContact: async (
+        _: any,
+        { showContactInput }: any,
+        { showContact }: any
+    ) => await showContact(showContactInput),
 }

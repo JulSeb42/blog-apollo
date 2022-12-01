@@ -1,7 +1,15 @@
 /*=============================================== NavigationLine types ===============================================*/
 
-import { PageType } from "../../../types"
+import { PageType, ContactPagesType } from "../../../types"
 
-export interface NavigationLineProps {
+interface Possible1 {
     page: PageType
+    contact?: never
 }
+
+interface Possible2 {
+    page?: never
+    contact: ContactPagesType
+}
+
+export type NavigationLineProps = Possible1 | Possible2

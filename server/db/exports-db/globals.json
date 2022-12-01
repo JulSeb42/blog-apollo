@@ -1,13 +1,13 @@
 [{
   "_id": {
-    "$oid": "635b9d1e0de2860b75675848"
+    "$oid": "6388b8164ac2cfd15dd5c20c"
   },
-  "name": "Apollo Blog",
-  "baseline": "Apollo and GraphQL are amazing!",
-  "metaDescription": "Blog made with Apollo GraphQL, TypeScript, React and MongoDB!",
-  "favicon": "https://res.cloudinary.com/dyfxmafvr/image/upload/v1666960211/blog-apollo/nrtirubrwcxdbutbrrzm.ico",
+  "name": "Amazing blog",
+  "baseline": "The best blog in the world!",
+  "metaDescription": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vel lacus viverra, aliquam eros sed, accumsan purus. Aliquam urna dolor, hendrerit.",
+  "favicon": "https://res.cloudinary.com/dyfxmafvr/image/upload/v1666948257/blog-apollo/favicon_g4fm6t.ico",
   "email": "julien.sebag.apps@outlook.com",
-  "cover": "https://res.cloudinary.com/dyfxmafvr/image/upload/v1666960181/blog-apollo/rvwin4jrqkzuncxeuoen.jpg",
+  "cover": "https://res.cloudinary.com/dyfxmafvr/image/upload/v1666616969/blog-apollo/gqumn7c2ictoq3we8h1t.jpg",
   "keywords": [
     "blog",
     "react",
@@ -15,19 +15,19 @@
     "fake project",
     "express",
     "apollo server",
-    "apollo client",
-    " typescript"
+    "apollo client"
   ],
-  "language": "en_EN",
+  "language": "en",
+  "isGlobalSetup": true,
   "__v": 0,
   "createdAt": {
     "$date": {
-      "$numberLong": "1666948382962"
+      "$numberLong": "1669904406248"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1667242782459"
+      "$numberLong": "1669904406248"
     }
   }
 }]

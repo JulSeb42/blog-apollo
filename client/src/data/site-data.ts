@@ -14,10 +14,6 @@ const siteData = {
     type: "blog",
     language: "en_EN",
     keywords: [],
-
-    // Contact
-    contactId: "635aacbed095dab5cbfa5d30",
-    thankYouId: "635ff1896def77ac130baa3e",
 }
 
 export default siteData

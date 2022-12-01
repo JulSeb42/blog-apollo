@@ -3,6 +3,7 @@
 interface NavItem {
     text: string
     end?: boolean
+    order?: number
 }
 
 interface PossibleItem1 extends NavItem {

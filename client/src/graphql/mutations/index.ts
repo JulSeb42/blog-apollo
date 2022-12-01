@@ -32,6 +32,9 @@ export * from "./pages/show-page"
 export * from "./global/edit-global"
 export * from "./global/create-global"
 
-export * from "./contact/contact"
-
 export * from "./setup/setup-global"
+
+export * from "./contact/contact"
+export * from "./contact/edit-contact"
+export * from "./contact/edit-thank-you"
+export * from "./contact/show-contact"

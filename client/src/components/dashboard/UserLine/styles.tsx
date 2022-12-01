@@ -1,12 +1,13 @@
 /*=============================================== UserLine styles ===============================================*/
 
 import styled from "styled-components/macro"
-import { Mixins, Breakpoints } from "tsx-library-julseb"
+import { Mixins, Breakpoints, Spacers } from "tsx-library-julseb"
 
 const StyledUserLine = styled.div`
     ${Mixins.Grid({
         $gap: "xs",
     })};
+    padding: 0 ${Spacers.XS};
 `
 
 const Content = styled.div`

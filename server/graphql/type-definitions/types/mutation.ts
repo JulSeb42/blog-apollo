@@ -35,6 +35,10 @@ export const MutationType = gql`
         editGlobal(globalInput: GlobalInput): GlobalData!
 
         contact(contactInput: ContactInput): String
+        editContact(contactPageInput: ContactPageInput): Contact!
+        showContact(showContactInput: ShowContactInput): Contact!
+
+        editThankYou(thankYouInput: ThankYouInput): ThankYou!
 
         createFirstAccount(firstUserInput: FirstUserInput): User!
         createGlobal(createGlobalInput: CreateGlobalInput): GlobalData!

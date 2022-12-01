@@ -10,6 +10,7 @@ import { PageInputs } from "./inputs/page"
 import { PostInputs } from "./inputs/post"
 import { UserInputs } from "./inputs/user"
 import { ContactInput } from "./inputs/contact"
+import { ThankYouInput } from "./inputs/thank-you"
 import { SetupInputs } from "./inputs/setup"
 
 import { CategoryType } from "./types/category"
@@ -20,6 +21,8 @@ import { PageType } from "./types/page"
 import { PostType } from "./types/post"
 import { QueryType } from "./types/query"
 import { UserType } from "./types/user"
+import { ContactType } from "./types/contact"
+import { ThankYouType } from "./types/thank-you"
 
 const typeDefs: any = [
     EnumRoles,
@@ -31,6 +34,7 @@ const typeDefs: any = [
     PostInputs,
     UserInputs,
     ContactInput,
+    ThankYouInput,
     SetupInputs,
     CategoryType,
     CommentType,
@@ -40,6 +44,8 @@ const typeDefs: any = [
     PostType,
     QueryType,
     UserType,
+    ContactType,
+    ThankYouType,
 ]
 
 export default typeDefs

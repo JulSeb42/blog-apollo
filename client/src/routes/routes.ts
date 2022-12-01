@@ -7,6 +7,9 @@ import NotFound from "../pages/NotFound"
 import GlobalPage from "../pages/GlobalPage"
 import SearchResults from "../pages/SearchResults"
 
+import Contact from "../pages/contact/Contact"
+import ThankYouContact from "../pages/contact/ThankYou"
+
 import AllAuthors from "../pages/author/AllAuthors"
 import AuthorDetail from "../pages/author/AuthorDetail"
 
@@ -33,6 +36,9 @@ import AllPages from "../pages/dashboard/pages/AllPages"
 import NewPage from "../pages/dashboard/pages/NewPage"
 import EditPage from "../pages/dashboard/pages/EditPage"
 import GlobalData from "../pages/dashboard/GlobalData"
+import ContactDashboard from "../pages/dashboard/contact/Contact"
+import EditContact from "../pages/dashboard/contact/EditContact"
+import EditThankYou from "../pages/dashboard/contact/EditThankYou"
 import UsersPage from "../pages/dashboard/users/UsersPage"
 import AddUser from "../pages/dashboard/users/AddUser"
 import ChangePassword from "../pages/dashboard/users/ChangePassword"
@@ -69,6 +75,15 @@ const routes: RouteType[] = [
     {
         path: "/search",
         element: SearchResults,
+    },
+
+    {
+        path: "/contact",
+        element: Contact,
+    },
+    {
+        path: "/contact/thank-you",
+        element: ThankYouContact,
     },
 
     {
@@ -176,6 +191,21 @@ const routes: RouteType[] = [
     {
         path: "/dashboard/global-data",
         element: GlobalData,
+        protected: true,
+    },
+    {
+        path: "/dashboard/contact",
+        element: ContactDashboard,
+        protected: true,
+    },
+    {
+        path: "/dashboard/contact/edit-contact",
+        element: EditContact,
+        protected: true,
+    },
+    {
+        path: "/dashboard/contact/edit-thank-you",
+        element: EditThankYou,
         protected: true,
     },
     {

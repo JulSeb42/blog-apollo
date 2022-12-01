@@ -55,6 +55,11 @@ const NavDashboard = ({ isOpen, setIsOpen }: Props) => {
             icon: "database",
         },
         {
+            text: "Contact pages",
+            to: "/dashboard/contact",
+            icon: "paperplane",
+        },
+        {
             text: "Users",
             to: "/dashboard/users",
             icon: "user",

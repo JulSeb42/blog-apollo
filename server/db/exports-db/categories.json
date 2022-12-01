@@ -1,129 +1,129 @@
 [{
   "_id": {
-    "$oid": "635978112354bd43a6be1725"
+    "$oid": "6388b81d65bab48a6a701448"
   },
   "name": "lifestyle",
   "__v": 0,
   "createdAt": {
     "$date": {
-      "$numberLong": "1666807825165"
+      "$numberLong": "1669904413909"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1666807825165"
+      "$numberLong": "1669904413909"
     }
   }
 },{
   "_id": {
-    "$oid": "635978112354bd43a6be1726"
+    "$oid": "6388b81d65bab48a6a701449"
   },
   "name": "weekend",
   "__v": 0,
   "createdAt": {
     "$date": {
-      "$numberLong": "1666807825165"
+      "$numberLong": "1669904413910"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1666807825165"
+      "$numberLong": "1669904413910"
     }
   }
 },{
   "_id": {
-    "$oid": "635978112354bd43a6be1727"
+    "$oid": "6388b81d65bab48a6a70144a"
   },
   "name": "holidays",
   "__v": 0,
   "createdAt": {
     "$date": {
-      "$numberLong": "1666807825165"
+      "$numberLong": "1669904413910"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1666807825165"
+      "$numberLong": "1669904413910"
     }
   }
 },{
   "_id": {
-    "$oid": "635978112354bd43a6be1728"
+    "$oid": "6388b81d65bab48a6a70144b"
   },
   "name": "city",
   "__v": 0,
   "createdAt": {
     "$date": {
-      "$numberLong": "1666807825166"
+      "$numberLong": "1669904413910"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1666807825166"
+      "$numberLong": "1669904413910"
     }
   }
 },{
   "_id": {
-    "$oid": "635978112354bd43a6be1729"
+    "$oid": "6388b81d65bab48a6a70144c"
   },
   "name": "party",
   "__v": 0,
   "createdAt": {
     "$date": {
-      "$numberLong": "1666807825166"
+      "$numberLong": "1669904413910"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1666807825166"
+      "$numberLong": "1669904413910"
     }
   }
 },{
   "_id": {
-    "$oid": "635978112354bd43a6be172a"
+    "$oid": "6388b81d65bab48a6a70144d"
   },
   "name": "music",
   "__v": 0,
   "createdAt": {
     "$date": {
-      "$numberLong": "1666807825166"
+      "$numberLong": "1669904413910"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1666807825166"
+      "$numberLong": "1669904413910"
     }
   }
 },{
   "_id": {
-    "$oid": "635978112354bd43a6be172b"
+    "$oid": "6388b81d65bab48a6a70144e"
   },
   "name": "event",
   "__v": 0,
   "createdAt": {
     "$date": {
-      "$numberLong": "1666807825166"
+      "$numberLong": "1669904413910"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1666807825166"
+      "$numberLong": "1669904413910"
     }
   }
 },{
   "_id": {
-    "$oid": "635978112354bd43a6be172c"
+    "$oid": "6388b81d65bab48a6a70144f"
   },
   "name": "art",
   "__v": 0,
   "createdAt": {
     "$date": {
-      "$numberLong": "1666807825166"
+      "$numberLong": "1669904413910"
     }
   },
   "updatedAt": {
     "$date": {
-      "$numberLong": "1667241765872"
+      "$numberLong": "1669904413910"
     }
   }
 }]

@@ -11,6 +11,7 @@ import {
     GlobalMutation,
     ContactMutation,
     SetupMutation,
+    ThankYouMutation,
 } from "./mutations"
 
 const resolvers = {
@@ -32,6 +33,7 @@ const resolvers = {
         ...GlobalMutation,
         ...ContactMutation,
         ...SetupMutation,
+        ...ThankYouMutation,
     },
 }
 

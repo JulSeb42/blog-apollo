@@ -17,8 +17,6 @@ import { PAGE_BY_ID, ALL_PAGES } from "../../../graphql/queries"
 import { DELETE_PAGE } from "../../../graphql/mutations"
 import { PageType } from "../../../types"
 
-import siteData from "../../../data/site-data"
-
 const EditPage = () => {
     const { id } = useParams()
     const navigate = useNavigate()
@@ -75,30 +73,18 @@ const EditPage = () => {
 
             <PageForm page={page} />
 
-            {id === siteData.contactId ? (
-                <Text>
-                    You can not delete the contact page. If you do not want it
-                    to appear, you can add it as a draft.
-                </Text>
-            ) : id === siteData.thankYouId ? (
-                <Text>
-                    You can not delete the thank you page. If you do not want it
-                    to appear, you can add it as a draft.
-                </Text>
-            ) : (
-                <DangerZone
-                    texts={{
-                        buttonOpen: "Delete this page",
-                        body: `Are you sure you want to delete ${page?.title}?`,
-                        buttonSecondary: "No, cancel",
-                    }}
-                    buttonPrimary={{
-                        text: "Yes, delete this page",
-                        onClick: handleDelete,
-                        isLoading: deleteLoading,
-                    }}
-                />
-            )}
+            <DangerZone
+                texts={{
+                    buttonOpen: "Delete this page",
+                    body: `Are you sure you want to delete ${page?.title}?`,
+                    buttonSecondary: "No, cancel",
+                }}
+                buttonPrimary={{
+                    text: "Yes, delete this page",
+                    onClick: handleDelete,
+                    isLoading: deleteLoading,
+                }}
+            />
 
             {errorMessages && <ErrorMessages errors={errorMessages} />}
         </PageDashboard>

@@ -29,3 +29,6 @@ export * from "./pages/header-pages"
 export * from "./pages/footer-pages"
 
 export * from "./global/global"
+
+export * from "./contact/contact-page"
+export * from "./contact/thank-you"
