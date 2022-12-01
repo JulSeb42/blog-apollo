@@ -20,7 +20,7 @@ const SetupRoutes = ({ children }: Props) => {
 
     return loading || isLoading ? (
         <PageLoading />
-    ) : globalData?.isGlobalSetup === true || location.includes("/setup") ? (
+    ) : globalData?.isGlobalSetup === true || location.includes("/setup") || location.includes("/graphql") ? (
         children
     ) : (
         <Navigate to="/setup/new-account" />
